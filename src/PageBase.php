@@ -71,7 +71,7 @@ abstract class PageBase
 	 */
 	private function standardMenu()
 	{
-		$linkBase = Request::getScriptName();
+		$linkBase = WebRequest::getScriptName();
 		
 		$pages = array(
 				'Home' => $linkBase,

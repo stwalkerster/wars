@@ -1,33 +1,41 @@
 <?php
+/**************************************************************************
+*                     Wikipedia Account Request System                    *
+***************************************************************************
+*                                                                         *
+* Conceptualised by Incubez (author: X!) and ACC (author: SQL and others) *
+*                                                                         *
+* Please refer to /LICENCE for more info.                                 *
+*                                                                         *
+**************************************************************************/
 
-/********************************************************************************************
-* Farm Claims Subsidy System																*
-* 																							*
-* Written by Simon Walker ( 090931545 ) for module F27DB: Introduction to Database Systems	*
-* Lecturer: Brian Palmer and Adil Ibrahim													*
-* 																							*
-* Main configuration file.																	*
-*********************************************************************************************/
+/**************************************************************************
+* Please note: This file was originally written by Simon Walker for a     *
+* university assignment, and may need adapting for purpose.               *
+*                                                                         *
+* DO NOT CHANGE THE EXISTING INTERFACE OF THIS CLASS unless you really    *
+* know what you're doing.                                                 *
+**************************************************************************/
 
 // check that this code is being called from a valid entry point. 
-if(!defined("FARMSYSTEM"))
+if(!defined("WARS"))
 	die("Invalid code entry point!");
 
 // show errors, for debugging purposes only. Disable on a live system for security
 ini_set('display_errors',1);
 
 // Database connection info
-$db_host = "anubis";
-$db_user = "stw3";
-$db_pass = file_get_contents(".xcalibur"); // grab the password from this file.
-$db_name = 'stw3';
+$db_host = "localhost";
+$db_user = "stwalkerster";
+$db_pass = file_get_contents(".dbpw"); // grab the password from this file.
+$db_name = 'louriepieterse_acc_2';
 
 // the web-accessible folder where index.php is stored
-$baseFilePath = "/~stw3/farm/dbcoursework/";
+$baseFilePath = "/~stwalkerster/newacc/";
 
 // session configuration options
 ini_set('session.cookie_path', $baseFilePath); // limit this session's scope to the base path of the site.
-ini_set('session.name', 'FARM|090931545|FARM'); // set a (theoretically) unique session name
+ini_set('session.name', 'WARSystem'); // set a (theoretically) unique session name
 
 // disallow writes to database if this is set to 1, for debugging.
 $readOnlyDb = 0;
@@ -40,5 +48,5 @@ $readOnlyDb = 0;
 // http://php.net/manual/en/language.oop5.autoload.php
 function __autoload($class)
 {
-	require_once($class.".php");
+	require_once('src/'.$class.".php");
 }

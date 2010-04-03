@@ -1,15 +1,25 @@
 <?php
-/********************************************************************************************
-* Farm Claims Subsidy System																*
-* 																							*
-* Written by Simon Walker ( 090931545 ) for module F27DB: Introduction to Database Systems	*
-* Lecturer: Brian Palmer and Adil Ibrahim													*
-* 																							*
-* Database connection class, simplifies access to the database for the rest of the code.	*
-*********************************************************************************************/
+/**************************************************************************
+*                     Wikipedia Account Request System                    *
+***************************************************************************
+*                                                                         *
+* Conceptualised by Incubez (author: X!) and ACC (author: SQL and others) *
+*                                                                         *
+* Please refer to /LICENCE for more info.                                 *
+*                                                                         *
+**************************************************************************/
+
+/**************************************************************************
+* Please note: This file was originally written by Simon Walker for a     *
+* university assignment, and may need adapting for purpose.               *
+*                                                                         *
+* DO NOT CHANGE THE EXISTING INTERFACE OF THIS CLASS unless you really    *
+* know what you're doing.                                                 *
+**************************************************************************/
+
 
 // check that this code is being called from a valid entry point. 
-if(!defined("FARMSYSTEM"))
+if(!defined("WARS"))
 	die("Invalid code entry point!");
 
 /**
@@ -20,13 +30,7 @@ if(!defined("FARMSYSTEM"))
  */
 class Database
 {
-	/**
-	 * Singleton instance of class.
-	 * 
-	 * @var Database
-	 */
-	private static $instance;
-	
+
 	/**
 	 * @var MySQL link resource
 	 */
@@ -35,7 +39,7 @@ class Database
 	/**
 	 * Constructor. Creates the instance of the class using the global coniguration data
 	 */
-	protected function __construct()
+	public function __construct()
 	{
 		// use the global values of these variables.
 		global $db_host, $db_user, $db_name;
@@ -43,22 +47,6 @@ class Database
 		// connect to mysql, and select the database
 		$this->link = mysql_connect($db_host, $db_user, Request::sessionOrBlank('dbPassword'));
 		mysql_select_db($db_name, $this->link);
-	}
-	
-	/**
-	 * Get the singleton instance of this class. If a singleton instance doesn't exist yet, create it.
-	 * 
-	 * @return Database 
-	 */
-	public static function instance()
-	{
-		// is the value of static variable Database::$instance an object?
-		if(! is_object(Database::$instance))
-			// no, create a new instance of Database there.
-			Database::$instance = new Database();
-		
-		// return the only instance
-		return Database::$instance;
 	}
 	
 	/**

@@ -62,6 +62,8 @@ class OutputPage
 	 */
 	private $cache = array();
 			
+	public $stylesheets = array();
+	
 	/**
 	 * Constructor, protected to ensure nothing can instantiate it
 	 * 
@@ -294,15 +296,20 @@ class OutputPage
 	private function getHeader()
 	{
 		global $baseFilePath;
-		// what time is it? Use the current time as a little hack to stop caching of the stylesheet
-		// think about it, every request uses a different timestamp. hence every request is calling a "different" stylesheet.
-		$time = time();
+
 		$header = <<<HTML
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
 	<title>{$this->title}</title>
-	<link rel="stylesheet" type="text/css" href="{$baseFilePath}style.css?{$time}" />
+HTML;
+		foreach ($this->stylesheets as $style) {
+			$header .= <<<HTML
+	<link rel="stylesheet" type="text/css" href="{$baseFilePath}/{$style}" />
+HTML;
+		}
+		
+		$header .= <<<HTML
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>

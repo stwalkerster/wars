@@ -13,15 +13,7 @@
 if(!defined("WARS"))
 	die("Invalid code entry point!");
 
-class RequestPage extends PageBase
+class PageLogin extends PageBase
 {
-	function __construct()
-	{
-		$this->subtitle = "Request an account on the English Wikipedia";
-	}
-	
-	function runPage()
-	{
-		
-	}
+
 }

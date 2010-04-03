@@ -41,16 +41,24 @@ abstract class PageBase
 	{
 		$out = OutputPage::getInstance();
 		
-		$out->title = "Simon's Farm Subsidy Claims System";
+		$out->title = "Wikipedia Internal Account Creation";
 		
 		$out->tagStart("div", array("id" => "header"));
-		$out->tagStart("h1");
-		$out->output("Farm Subsidy Claims System");
+		
+		$out->tagStart('div', array('id' => 'headertitle'));
+		$out->tagStart("h1");		
+		$out->output($out->title);
 		$out->tagEnd();
+		$out->tagEnd();
+		
+		$out->tagStart('div', array('id' => 'pagetitle'));
 		$out->tagStart("h2");
 		$out->output($this->subtitle);
 		$out->tagEnd();
+		$out->tagStart('div', array('id' => 'headertitle'));
+		
 		$this->standardMenu();
+		
 		$out->tagEnd();
 	}
 	
@@ -75,11 +83,14 @@ abstract class PageBase
 		
 		$pages = array(
 				'Home' => $linkBase,
-				'New' => $linkBase . '/Claim',
-				'Add' => $linkBase . '/AddClaim',
-				'Find' => $linkBase . '/View',
-				'List' => $linkBase . '/List',
-				'Logout' => $linkBase . '/SessionDestroy'
+				'Logs' => $linkBase . '/Logs',
+				'Users' => $linkBase . '/Users',
+				'Bans' => $linkBase . '/Bans',
+				'Messages' => $linkBase . '/Messages',
+				'Search' => $linkBase . '/Search',
+				'Statistics' => $linkBase . '/Stats',
+				'Preferences' => $linkBase . '/Preferences',
+				'Documentation' => $linkBase . '/Documentation'
 		);
 		
 		$this->showMenu('menu', $pages);
@@ -146,15 +157,15 @@ abstract class PageBase
 			$pageName = "PageLogin";
 		
 		// check the page definition actually exists...
-		if(file_exists( $pageName . ".php"))
+		if(file_exists( 'page/' . $pageName . ".php"))
 		{	// ... and include it. If I'd not checked it existed, all code from this point on would fail.
-			require_once( $pageName . ".php");
+			require_once( 'page/' . $pageName . ".php");
 		}
 		else
 		{
 			// page definition doesn't exist, let's continue but showing the main page instead.
 			$pageName = "PageMain";
-			require_once( $pageName . ".php");
+			require_once( 'page/' . $pageName . ".php");
 		}
 	
 		// now I've brought the page definition class file into the script, let's actually check that 

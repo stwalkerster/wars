@@ -27,8 +27,8 @@ require_once("config.inc.php");
 // Start the session
 session_start();
 
-// create the request page
-$page = new RequestPage();
+// create the page
+$page = PageBase::create();
 
 // execute the page
 $page->execute();

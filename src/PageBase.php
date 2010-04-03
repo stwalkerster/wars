@@ -90,7 +90,7 @@ abstract class PageBase
 				'Search' => $linkBase . '/Search',
 				'Statistics' => $linkBase . '/Stats',
 				'Preferences' => $linkBase . '/Preferences',
-				'Documentation' => $linkBase . '/Documentation'
+				'Documentation' => $linkBase . '/Forward?link=http://en.wikipedia.org/wiki/Wikipedia:Request_an_account/Guide'
 		);
 		
 		$this->showMenu('menu', $pages);

@@ -18,10 +18,22 @@ class RequestPage extends PageBase
 	function __construct()
 	{
 		$this->subtitle = "Request an account on the English Wikipedia";
+		OutputPage::getInstance()->title = "Account Creation Assistance";
 	}
 	
 	function runPage()
 	{
 		
+	}
+	
+	function standardMenu()
+	{
+		$linkBase = WebRequest::getScriptName();
+		
+		$pages = array(
+				'Wikipedia' => $linkBase . '/Forward?link=http://en.wikipedia.org/'
+		);
+		
+		$this->showMenu('menu', $pages);
 	}
 }

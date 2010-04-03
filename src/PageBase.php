@@ -140,9 +140,9 @@ abstract class PageBase
 	static function create()
 	{
 		// calculate the name that the page definition should be at.
-		$pageName = "Page" . Request::getPageName();
+		$pageName = "Page" . WebRequest::getPageName();
 		
-		if(Request::sessionOrBlank("dbPassword") == '')
+		if(WebRequest::sessionOrBlank("dbPassword") == '')
 			$pageName = "PageLogin";
 		
 		// check the page definition actually exists...

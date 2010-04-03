@@ -38,14 +38,16 @@ class Database
 	
 	/**
 	 * Constructor. Creates the instance of the class using the global coniguration data
+	 * 
+	 * @param string $db_host
+	 * @param string $db_user
+	 * @param string $db_pass
+	 * @param string $db_name
 	 */
-	public function __construct()
+	public function __construct( $db_host, $db_user, $db_pass, $db_name)
 	{
-		// use the global values of these variables.
-		global $db_host, $db_user, $db_name;
-
 		// connect to mysql, and select the database
-		$this->link = mysql_connect($db_host, $db_user, Request::sessionOrBlank('dbPassword'));
+		$this->link = mysql_connect($db_host, $db_user, $db_pass);
 		mysql_select_db($db_name, $this->link);
 	}
 	

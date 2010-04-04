@@ -41,7 +41,7 @@ abstract class PageBase
 	{
 		$out = OutputPage::getInstance();
 		
-		$out->title = "Wikipedia Internal Account Creation";
+		$out->title = "Wikipedia Internal Account Creation System";
 		
 		$out->tagStart("div", array("id" => "header"));
 		
@@ -53,7 +53,7 @@ abstract class PageBase
 		$out->wrap($this->subtitle, 'h2');
 		$out->tagEnd();
 		
-
+		$out->tagEnd();
 	}
 	
 	/**

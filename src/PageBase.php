@@ -45,8 +45,8 @@ abstract class PageBase
 		
 		$out->tagStart("div", array("id" => "header"));
 		
-		$out->tagStart('div', array('id' => 'headertitle'));
-		$out->wrap($out->title, 'h1');
+		$out->tagStart('div', array('id' => 'header-title'));
+		$out->output($out->title);
 		$out->tagEnd();
 		
 		$out->tagEnd();

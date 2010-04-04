@@ -336,4 +336,19 @@ HTML;
 		return $footer;
 	}
 	
+	
+	public function wrap($text, $tag, $params = null)
+	{
+		$this->tagStart($tag, $params);
+		$this->output($text);
+		$this->tagEnd();
+	}
+	
+	public function anchor($target, $text)
+	{
+		$this->tagStart('a', array('href' => $target));
+		$this->output($text);
+		$this->tagEnd();
+	}
+	
 }

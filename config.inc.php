@@ -25,10 +25,15 @@ if(!defined("WARS"))
 ini_set('display_errors',1);
 
 // Database connection info
-$db_host = "localhost";
-$db_user = "stwalkerster";
-$db_pass = file_get_contents(".dbpw"); // grab the password from this file.
-$db_name = 'louriepieterse_acc_2';
+$db_host_a = "localhost";
+$db_user_a = "stwalkerster";
+$db_pass_a = file_get_contents(".dbpw"); // grab the password from this file.
+$db_name_a = 'louriepieterse_acc_2';
+
+$db_host_w = "localhost";
+$db_user_w = "stwalkerster";
+$db_pass_w = file_get_contents(".dbpw"); // grab the password from this file.
+$db_name_w = 'louriepieterse_acc_2';
 
 // the web-accessible folder where index.php is stored
 $baseFilePath = "/~stwalkerster/newacc/";
@@ -39,6 +44,19 @@ ini_set('session.name', 'WARSystem'); // set a (theoretically) unique session na
 
 // disallow writes to database if this is set to 1, for debugging.
 $readOnlyDb = 0;
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// DO NOT EDIT PAST THIS LINE, unless you know what you are doing.
+
+include_once('localconfig.inc.php');
+
+// set up the environment
+$databases = array( 
+		'acc' => new Database($db_host_a, $db_user_a, $db_pass_a, $db_name_a),
+		'wiki' => new Database($db_host_w, $db_user_w, $db_pass_w, $db_name_w)
+);
 
 // autoload classes that have not been defined in the current script.
 // I therefore don't have to write a long list of require()s.

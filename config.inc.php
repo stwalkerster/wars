@@ -55,7 +55,7 @@ include_once('localconfig.inc.php');
 // set up the environment
 $databases = array( 
 		'acc' => new Database($db_host_a, $db_user_a, $db_pass_a, $db_name_a),
-		'wiki' => new Database($db_host_w, $db_user_w, $db_pass_w, $db_name_w)
+		#'wiki' => new Database($db_host_w, $db_user_w, $db_pass_w, $db_name_w)
 );
 
 // autoload classes that have not been defined in the current script.

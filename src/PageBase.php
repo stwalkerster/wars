@@ -49,10 +49,12 @@ abstract class PageBase
 		$out->wrap($out->title, 'h1');
 		$out->tagEnd();
 		
-		$out->tagStart('div', array('id' => 'pagetitle'));
-		$out->wrap($this->subtitle, 'h2');
 		$out->tagEnd();
 		
+		$out->tagStart("div", array('id'=>'content'));
+		
+		$out->tagStart('div', array('id' => 'pagetitle'));
+		$out->wrap($this->subtitle, 'h2');
 		$out->tagEnd();
 	}
 	
@@ -63,8 +65,13 @@ abstract class PageBase
 	{
 		$out = OutputPage::getInstance();
 		
+		$out->tagEnd(); // end div#content
+		$out->tag('br', array('class' => 'clearall'));
+		
 		// print the menu after the page content, adjust with CSS
 		$this->standardMenu();
+		
+		$out->tag('br', array('class' => 'clearall'));
 		
 		$out->tagStart('div', array('id'=>'footer'));
 		$out->outputHtml("Copyright &copy; 2010 Simon Walker");
@@ -130,14 +137,13 @@ abstract class PageBase
 	{
 		$out = OutputPage::getInstance();
 		$this->standardHeader();
-		$out->tagStart("div", array('id'=>'content'));
+
 		
 		$this->runPage();
 		
-		$out->tagStart('br', array('class' => 'clearall'));
-		$out->tagEnd();
 		
-		$out->tagEnd();
+		
+		
 		$this->standardFooter();
 		$out->sendPage();
 	}

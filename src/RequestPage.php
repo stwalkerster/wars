@@ -18,13 +18,14 @@ class RequestPage extends PageBase
 	function __construct()
 	{
 		$this->subtitle = "Request an account on the English Wikipedia";
-		OutputPage::getInstance()->title = "Account Creation Assistance";
 	}
 	
 	function runPage()
 	{
 		global $databases;
 		$out = OutputPage::getInstance();
+		
+		$out->title = "Account Creation Assistance";
 		
 		$out->wrap('Welcome!', 'h3');
 		$out->output('We need a few bits of information to create your account. The first is a username, and secondly, a ');

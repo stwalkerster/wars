@@ -274,7 +274,8 @@ class OutputPage
 	}
 
 	/**
-	 * Retrieve the standard header.
+	 * Retrieve the xhtml header, for the entire site. 
+	 * This provides JUST the head section, and starts the body
 	 * 
 	 * @return HTML Standard header
 	 */

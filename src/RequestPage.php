@@ -38,7 +38,7 @@ class RequestPage extends PageBase
 		$out->tagStart('span', array('class' => 'reallyImportant'));
 		$out->output('WE DO NOT HAVE ACCESS TO EXISTING ACCOUNT DATA. If you have lost your password, please reset it using ');
 		$out->anchor('http://en.wikipedia.org/wiki/Special:UserLogin', 'this form');
-		$out->output('at Wikipedia. If you are trying to \'take over\' an account that already exists, please use ');
+		$out->output(' at wikipedia.org. If you are trying to \'take over\' an account that already exists, please use ');
 		$out->anchor('http://en.wikipedia.org/wiki/WP:CHU/U', '"Changing usernames/Usurpation"');
 		$out->output(' at wikipedia.org. We cannot do either of these things for you.');
 		$out->tagEnd();

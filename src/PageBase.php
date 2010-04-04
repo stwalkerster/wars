@@ -46,20 +46,14 @@ abstract class PageBase
 		$out->tagStart("div", array("id" => "header"));
 		
 		$out->tagStart('div', array('id' => 'headertitle'));
-		$out->tagStart("h1");		
-		$out->output($out->title);
-		$out->tagEnd();
+		$out->wrap($out->title, 'h1');
 		$out->tagEnd();
 		
 		$out->tagStart('div', array('id' => 'pagetitle'));
-		$out->tagStart("h2");
-		$out->output($this->subtitle);
+		$out->wrap($this->subtitle, 'h2');
 		$out->tagEnd();
-		$out->tagStart('div', array('id' => 'headertitle'));
 		
-		$this->standardMenu();
-		
-		$out->tagEnd();
+
 	}
 	
 	/**
@@ -68,6 +62,9 @@ abstract class PageBase
 	private function standardFooter()
 	{
 		$out = OutputPage::getInstance();
+		
+		// print the menu after the page content, adjust with CSS
+		$this->standardMenu();
 		
 		$out->tagStart('div', array('id'=>'footer'));
 		$out->outputHtml("Copyright &copy; 2010 Simon Walker");

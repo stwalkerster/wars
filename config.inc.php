@@ -56,7 +56,7 @@ include_once('localconfig.inc.php');
 $accDatabase = new Database($db_host_a, $db_user_a, $db_pass_a, $db_name_a);
 	
 // stylesheets
-OutputPage::getInstance()->stylesheets[] = $baseFilePath . 'style-cmelbye.css';
+OutputPage::getInstance()->stylesheets[] = 'style-cmelbye.css';
 
 // autoload classes that have not been defined in the current script.
 // I therefore don't have to write a long list of require()s.

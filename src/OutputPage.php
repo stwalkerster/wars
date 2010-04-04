@@ -108,14 +108,7 @@ class OutputPage
 		// nothing to output? no need for this function to continue
 		if($text == "") return;
 		
-		// has a tag been stored in the cache instead of written out?
-		if(sizeof($this->cache) != 0)
-		{
-			// write out this tag to the output, not closing the tag
-			$this->storeTag($this->cache[0], false, $this->cache[1]);
-			// empty the cache
-			$this->cache = array();
-		}
+		$this->forceWriteOut();
 		
 		// write the output, passing through htmlentities, so html tags passed through here will not be
 		// parsed by the web browser (closing the cross-site scripting security holes)
@@ -135,11 +128,7 @@ class OutputPage
 	{
 		if($html == "") return;
 		
-		if(sizeof($this->cache) != 0)
-		{
-			$this->storeTag($this->cache[0], false, $this->cache[1]);
-			$this->cache = array();
-		}
+		$this->forceWriteOut();
 		
 		$this->data .= $html;
 	}
@@ -152,13 +141,9 @@ class OutputPage
 	 */
 	public function tagStart($name, $params = array())
 	{
-		//Is there something in the cache already?
-		if(sizeof($this->cache) != 0)
-		{ 
-			//Write out the existing tag
-			$this->storeTag($this->cache[0], false, $this->cache[1]);
-			$this->cache = array();
-		}
+		
+		$this->forceWriteOut();
+		
 		// Add the new tag to the cache.
 		$this->cache[0] = $name;
 		$this->cache[1] = $params;
@@ -343,6 +328,12 @@ HTML;
 		$this->output($text);
 		$this->tagEnd();
 	}
+
+	public function tag($tag, $params = null)
+	{
+		$this->tagStart($tag, $params);
+		$this->tagEnd();
+	}
 	
 	public function anchor($target, $text)
 	{
@@ -351,4 +342,15 @@ HTML;
 		$this->tagEnd();
 	}
 	
+	public function forceWriteOut()
+	{
+		// has a tag been stored in the cache instead of written out?
+		if(sizeof($this->cache) != 0)
+		{
+			// write out this tag to the output, not closing the tag
+			$this->storeTag($this->cache[0], false, $this->cache[1]);
+			// empty the cache
+			$this->cache = array();
+		}
+	}
 }

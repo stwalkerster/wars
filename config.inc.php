@@ -55,6 +55,9 @@ include_once('localconfig.inc.php');
 // set up the environment
 $accDatabase = new Database($db_host_a, $db_user_a, $db_pass_a, $db_name_a);
 	
+// stylesheets
+OutputPage::getInstance()->stylesheets[] = $baseFilePath . 'style-cmelbye.css';
+
 // autoload classes that have not been defined in the current script.
 // I therefore don't have to write a long list of require()s.
 // This will be called each time an unknown class is referenced, with the 

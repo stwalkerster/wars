@@ -74,7 +74,7 @@ abstract class PageBase
 	/**
 	 * Write the standard menu
 	 */
-	private function standardMenu()
+	public function standardMenu()
 	{
 		$linkBase = WebRequest::getScriptName();
 		
@@ -99,7 +99,7 @@ abstract class PageBase
 	 * @param string $menuName
 	 * @param array $pages
 	 */
-	function showMenu($menuName, $pages)
+	public function showMenu($menuName, $pages)
 	{
 		$out = OutputPage::getInstance();
 		

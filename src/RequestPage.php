@@ -90,7 +90,7 @@ class RequestPage extends PageBase
 	 * 
 	 * @see PageBase::standardMenu
 	 */
-	function standardMenu()
+	public function standardMenu()
 	{
 		$linkBase = WebRequest::getScriptName();
 		

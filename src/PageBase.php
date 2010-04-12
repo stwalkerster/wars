@@ -54,7 +54,7 @@ abstract class PageBase
 		$out->tagStart("div", array('id'=>'content'));
 		
 		$out->tagStart('div', array('id' => 'pagetitle'));
-		$out->wrap($this->subtitle, 'h2');
+		$out->wrap($this->subtitle, 'h1');
 		$out->tagEnd();
 	}
 	

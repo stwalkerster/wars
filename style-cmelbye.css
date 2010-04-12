@@ -62,6 +62,11 @@ div#menu {
 	top: 3.2em;
 }
 
+div#menu ul {
+	margin-top: 0px;
+	padding-left:10px;
+}
+
 div#menu li
 {
 	list-style:none;

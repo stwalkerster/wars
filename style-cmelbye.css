@@ -57,7 +57,7 @@ div#header #header-title {
 div#menu {
 	color: #fff;
 	background-color: #1A4F85;
-	position: fixed;
+	position: absolute;
 	width: 100%;
 	top: 3.2em;
 }

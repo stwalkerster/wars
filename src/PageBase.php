@@ -86,15 +86,15 @@ abstract class PageBase
 		$linkBase = WebRequest::getScriptName();
 		
 		$pages = array(
-				'Home' => $linkBase,
-				'Logs' => $linkBase . '/Logs',
-				'Users' => $linkBase . '/Users',
-				'Bans' => $linkBase . '/Bans',
-				'Messages' => $linkBase . '/Messages',
-				'Search' => $linkBase . '/Search',
-				'Statistics' => $linkBase . '/Stats',
-				'Preferences' => $linkBase . '/Preferences',
-				'Documentation' => $linkBase . '/Forward?link=http://en.wikipedia.org/wiki/Wikipedia:Request_an_account/Guide'
+				'Home' => '',
+				'Logs' =>   'Logs',
+				'Users' =>   'Users',
+				'Bans' =>   'Bans',
+				'Messages' =>   'Messages',
+				'Search' =>   'Search',
+				'Statistics' =>   'Stats',
+				'Preferences' =>   'Preferences',
+				'Documentation' =>   'Forward?link=http://en.wikipedia.org/wiki/Wikipedia:Request_an_account/Guide'
 		);
 		
 		$this->showMenu('menu', $pages);
@@ -110,12 +110,14 @@ abstract class PageBase
 	{
 		$out = OutputPage::getInstance();
 		
+		$linkBase = WebRequest::getScriptName();
+		
 		$out->tagStart('div', array('id' => $menuName));
 		$out->tagStart('ul');
 		
 		foreach ($pages as $key => $value) {
 			$out->tagStart('li', array('id' => $menuName . $key));
-			$out->tagStart('a', array('href' => $value));
+			$out->tagStart('a', array('href' => $linkBase . '/' . $value));
 			$out->output($key);
 			$out->tagEnd();
 			$out->tagEnd();

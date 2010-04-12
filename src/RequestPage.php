@@ -37,7 +37,7 @@ class RequestPage extends PageBase
 		$out->output(', and we will try to deal with your requests that way.');
 		
 		$out->tagStart('span', array('class' => 'reallyImportant'));
-		$out->output('WE DO NOT HAVE ACCESS TO EXISTING ACCOUNT DATA. If you have lost your password, please reset it using ');
+		$out->output(' WE DO NOT HAVE ACCESS TO EXISTING ACCOUNT DATA. If you have lost your password, please reset it using ');
 		$out->anchor('http://en.wikipedia.org/wiki/Special:UserLogin', 'this form');
 		$out->output(' at wikipedia.org. If you are trying to \'take over\' an account that already exists, please use ');
 		$out->anchor('http://en.wikipedia.org/wiki/WP:CHU/U', '"Changing usernames/Usurpation"');
@@ -96,7 +96,9 @@ class RequestPage extends PageBase
 		$linkBase = WebRequest::getScriptName();
 		
 		$pages = array(
-				'Wikipedia' => $linkBase . '/Forward?link=http://en.wikipedia.org/'
+				'Wikipedia' => $linkBase . 'Forward?link=http://en.wikipedia.org/',
+				'Wikipedia2' => $linkBase . 'Forward?link=http://en.wikipedia.org/',
+				'Wikipedia3' => $linkBase . 'Forward?link=http://en.wikipedia.org/'
 		);
 		
 		$this->showMenu('menu', $pages);

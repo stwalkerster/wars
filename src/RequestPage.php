@@ -51,6 +51,8 @@ class RequestPage extends PageBase
 	
 	function showRequestForm()
 	{
+		$out = OutputPage::getInstance();
+		
 		$out->wrap('Welcome!', 'h2');
 		$out->output('We need a few bits of information to create your account. The first is a username, and secondly, a ');
 		$out->wrap('valid email address that we can send your password to', 'strong');

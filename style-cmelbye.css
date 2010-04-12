@@ -187,6 +187,8 @@ div#footer {
 	text-align: right;
 	padding: 3px;
 	color: #666;
+	position:relative;
+	top:-3.4em;
 }
 div#footer a {
 	color: #666;

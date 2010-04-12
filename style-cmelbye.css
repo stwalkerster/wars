@@ -17,7 +17,7 @@
 */
 body {
 	font-family: "frutiger linotype","lucida grande",helvetica,arial,sans-serif;
-	font-size: 76%; /* 76% LOOKS BETTER! -charlie */
+	font-size: 76%; /* 76% LOOKS BETTER! -charlie */;
 	margin: 0;
 	padding: 0;
 	background-color: #e5e5e5;
@@ -36,7 +36,7 @@ div#header {
 	background-color: #036;
 	padding: 8px 10px 8px 12px;
 }
-div#header #header-title {
+div#header #headertitle {
 	color: #fc0;
 	font-size: 1.7em;
 }
@@ -54,19 +54,30 @@ div#header #header-title {
 	text-decoration: none;
 }
 
-div#navigation {
+div#menu {
 	color: #fff;
 	background-color: #1A4F85;
-	padding: 7px;
+	position: fixed;
+	width: 100%;
+	top: 3.2em;
 }
 
-div#navigation a {
+div#menu li
+{
+	list-style:none;
+float:left;
+}
+
+div#menu a {
 	color: #fff;
 	text-decoration: none;
 	padding: 7px;
+	display:block;
+	margin:0px;
+	
 }
 
-div#navigation a:hover {
+div#menu a:hover {
 	background-color: #1D64AD;
 	padding: 7px;
 }
@@ -96,6 +107,7 @@ div#content {
 	background-color: #F8FCFF;
 	padding: 20px;
 	border-bottom: 1px solid #666;
+	margin-top: 2em;
 }
 
 div#content h1 {
@@ -280,4 +292,14 @@ a.topcreators-suspended{
 
 a.topcreators-admin{
 	font-weight: bold;
+}
+.semiimportant {
+	text-decoration: underline;
+}
+.reallyImportant {
+	color: #FF0000;
+	text-align: center;
+}
+
+div#menu {
 }

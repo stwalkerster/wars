@@ -94,13 +94,11 @@ class RequestPage extends PageBase
 	 * @see PageBase::standardMenu
 	 */
 	public function standardMenu()
-	{
-		$linkBase = WebRequest::getScriptName();
-		
+	{		
 		$pages = array(
-				'Wikipedia' => $linkBase . 'Forward?link=http://en.wikipedia.org/',
-				'Wikipedia2' => $linkBase . 'Forward?link=http://en.wikipedia.org/',
-				'Wikipedia3' => $linkBase . 'Forward?link=http://en.wikipedia.org/'
+				'Wikipedia' => 'Forward?link=http://en.wikipedia.org/',
+				'Wikipedia2' => 'Forward?link=http://en.wikipedia.org/',
+				'Wikipedia3' => 'Forward?link=http://en.wikipedia.org/'
 		);
 		
 		$this->showMenu('menu', $pages);

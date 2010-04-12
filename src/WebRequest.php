@@ -142,4 +142,13 @@ class WebRequest {
 		header("Location: $baseFilePath/index.php/$page");
 		die();
 	}
+	
+	public static function redirectUrl($url)
+	{
+		header("Location: $url");
+		die();
+		
+	}
+	
+	
 }

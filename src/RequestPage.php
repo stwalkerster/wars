@@ -13,6 +13,14 @@
 if(!defined("WARS"))
 	die("Invalid code entry point!");
 
+/**
+ * RequestPage class
+ * 
+ * THIS IS OUTSIDE THE PAGE SEARCH DIRECTORY FOR A REASON.
+ *  
+ * @author stwalkerster
+ *
+ */
 class RequestPage extends PageBase
 {
 	function __construct()
@@ -29,6 +37,19 @@ class RequestPage extends PageBase
 		
 		$out->title = "Account Creation Assistance";
 		
+		if(WebRequest::wasPosted())
+		{
+			
+		}
+		else
+		{	
+			$this->showRequestForm();
+		}
+		
+	}
+	
+	function showRequestForm()
+	{
 		$out->wrap('Welcome!', 'h2');
 		$out->output('We need a few bits of information to create your account. The first is a username, and secondly, a ');
 		$out->wrap('valid email address that we can send your password to', 'strong');
@@ -96,9 +117,7 @@ class RequestPage extends PageBase
 	public function standardMenu()
 	{		
 		$pages = array(
-				'Wikipedia' => 'Forward?link=http://en.wikipedia.org/',
-				'Wikipedia2' => 'Forward?link=http://en.wikipedia.org/',
-				'Wikipedia3' => 'Forward?link=http://en.wikipedia.org/'
+				'Wikipedia' => 'Forward?link=http://en.wikipedia.org/'
 		);
 		
 		$this->showMenu('menu', $pages);

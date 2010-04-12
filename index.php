@@ -27,8 +27,18 @@ require_once("config.inc.php");
 // Start the session
 session_start();
 
-// create the request page
-$page = new RequestPage();
+// is this a forwarding request?
+if(WebRequest::getPageName() == "Forward")
+{
+	// perform the forward
+	require('src/page/PageForward.php');
+	$page = new PageForward();
+}
+else
+{
+	// create the request page
+	$page = new RequestPage();
+}
 
 // execute the page
 $page->execute();

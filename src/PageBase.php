@@ -156,8 +156,8 @@ abstract class PageBase
 		// calculate the name that the page definition should be at.
 		$pageName = "Page" . WebRequest::getPageName();
 		
-		if(WebRequest::sessionOrBlank("dbPassword") == '')
-			$pageName = "PageLogin";
+		//if(WebRequest::sessionOrBlank("dbPassword") == '')
+		//	$pageName = "PageLogin";
 		
 		// check the page definition actually exists...
 		if(file_exists( 'src/page/' . $pageName . ".php"))

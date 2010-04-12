@@ -15,12 +15,17 @@ if(!defined("WARS"))
 
 class PageTeapot extends PageBase
 {
-
-	function runPage()
+	
+	function __construct()
 	{
 		$out = OutputPage::getInstance();
 		$out->title = "I'm a teapot!";
 		$this->subtitle = "HyperText Coffee Pot Control Protocol";
+	}
+
+	function runPage()
+	{
+		$out = OutputPage::getInstance();
 		$teapot = 
 "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@

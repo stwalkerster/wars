@@ -160,15 +160,15 @@ abstract class PageBase
 			$pageName = "PageLogin";
 		
 		// check the page definition actually exists...
-		if(file_exists( 'page/' . $pageName . ".php"))
+		if(file_exists( 'src/page/' . $pageName . ".php"))
 		{	// ... and include it. If I'd not checked it existed, all code from this point on would fail.
-			require_once( 'page/' . $pageName . ".php");
+			require_once( 'src/page/' . $pageName . ".php");
 		}
 		else
 		{
 			// page definition doesn't exist, let's continue but showing the main page instead.
 			$pageName = "PageMain";
-			require_once( 'page/' . $pageName . ".php");
+			require_once( 'src/page/' . $pageName . ".php");
 		}
 	
 		// now I've brought the page definition class file into the script, let's actually check that 

@@ -35,6 +35,9 @@ class WebRequest {
 	 */
 	public static function getPageName()
 	{
+		if(!isset($_SERVER['PATH_INFO']))
+			return 'Main';
+			
 		$pathInfo = $_SERVER['PATH_INFO'];
 		$page = trim($pathInfo ,'/');
 		if($page == "")

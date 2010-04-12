@@ -36,7 +36,7 @@ div#header {
 	background-color: #036;
 	padding: 8px 10px 8px 12px;
 }
-div#header #headertitle {
+div#header #header-title {
 	color: #fc0;
 	font-size: 1.7em;
 }
@@ -196,12 +196,6 @@ div#footer a:hover {
 tr.even, tr.alternate		{			/* .alternate is a nicer method, but some instances of .even still exist (where?) */
 		background:#e9f5ff; /* #f2f4ff; */
 		}
-
-/*					IF YOU HAPPEN TO SEE THIS ANYWHERE IN THE CODE, feel free to remove it. 
-tr.odd		{
-		background:white;
-		}
-*/
 
 tr:hover	{
 		background:#c4ceff; /*  #abdbff;*/

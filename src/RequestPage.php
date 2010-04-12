@@ -27,6 +27,8 @@ class RequestPage extends PageBase
 	{
 		$this->subtitle = "Request an account on the English Wikipedia";
 		$out = OutputPage::getInstance();
+		
+		$out->title = "Account Creation Assistance";
 	}
 	
 	function runPage()

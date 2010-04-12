@@ -40,9 +40,7 @@ abstract class PageBase
 	private function standardHeader()
 	{
 		$out = OutputPage::getInstance();
-		
-		$out->title = "Wikipedia Internal Account Creation System";
-		
+				
 		$out->tagStart("div", array("id" => "header"));
 		
 		$out->tagStart('div', array('id' => 'header-title'));

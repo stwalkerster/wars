@@ -15,5 +15,9 @@ if(!defined("WARS"))
 
 class PageMain extends PageBase
 {
-	
+	function runPage()
+	{
+		$out = OutputPage::getInstance();
+		$out->output('pagemain');
+	}
 }

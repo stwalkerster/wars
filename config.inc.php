@@ -43,8 +43,10 @@ ini_set('session.cookie_path', $baseFilePath); // limit this session's scope to 
 ini_set('session.name', 'WARSystem'); // set a (theoretically) unique session name
 
 // disallow writes to database if this is set to 1, for debugging.
-$readOnlyDb = 0;
+$confReadOnlyDb = 0;
 
+// reserve to one person by default?
+$confDefaultReserver = 0;
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
 

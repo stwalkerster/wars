@@ -105,8 +105,8 @@ class Database
 		$query .= ');';
 		
 		// am I allowed to write to the database according to the config file?
-		global $readOnlyDb;
-		if(! $readOnlyDb )
+		global $confReadOnlyDb;
+		if(! $confReadOnlyDb )
 			// yep, execute the query as normal, unless there's a problem, in which case tell me, and tell me where.
 			mysql_query($query, $this->link) or die(mysql_error() . "<br />" . debug_print_backtrace() );
 		else
@@ -154,8 +154,8 @@ class Database
 		$query .= ';';
 		
 		// am I allowed to write to the database according to the config file?
-		global $readOnlyDb;
-		if(! $readOnlyDb )
+		global $confReadOnlyDb;
+		if(! $confReadOnlyDb )
 			// yep, execute the query as normal, unless there's a problem, in which case tell me, and tell me where.
 			mysql_query($query, $this->link) or die(mysql_error() . "<br />" . debug_print_backtrace() );
 		else

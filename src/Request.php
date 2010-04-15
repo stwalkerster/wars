@@ -125,10 +125,20 @@ class Request implements DataObject
 	
 	public function getId()
 	{
-		
+		return $this->id;	
 	}
-	public function getEmail();
-	public function getIp();
+	public function getEmail()
+	{
+		return $this->email;
+	}
+	public function getIp()
+	{
+		$user = unserialize(WebRequest::sessionOrBlank('currentUser'));
+		if($user->isAllowedPrivateData() || $this->isOpen() )
+		{
+			return $this->ip;
+		}
+	}
 	public function getName();
 	public function getComment();
 	public function getStatus();
@@ -138,4 +148,10 @@ class Request implements DataObject
 	public function getMailconfirm();
 	public function getReserved();
 	public function getUseragent();
+	
+	/**
+	 * Is the current request in an open state?
+	 * @return boolean
+	 */
+	public function isOpen();
 }

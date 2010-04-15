@@ -26,5 +26,9 @@ class User implements DataObject
 	
 	public function __construct();
 	
+	public function getId();
+	
+	public function isAllowedPrivateData();
+	
 	public function save();
 }

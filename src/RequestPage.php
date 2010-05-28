@@ -27,16 +27,12 @@ class RequestPage extends PageBase
 	{
 		$this->subtitle = "Request an account on the English Wikipedia";
 		
-		
 		$this->title = "Account Creation Assistance";
 	}
 	
 	function runPage()
 	{
 		global $databases;
-		$out = OutputPage::getInstance();
-		
-		$out->title = "Account Creation Assistance";
 		
 		if(WebRequest::wasPosted())
 		{
@@ -44,14 +40,8 @@ class RequestPage extends PageBase
 		}
 		else
 		{	
-			$this->showRequestForm();
+			$this->smarty->assign('subpage', 'page/RequestForm.tpl');
 		}
 		
 	}
-	
-	function showRequestForm()
-	{
-		
-	}
-
 }

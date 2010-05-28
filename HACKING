@@ -1,0 +1,23 @@
+Hey! Read this now if you want to edit any code!
+
+Firstly a word on file locations (where $APPROOT is the base directory):
+
+Smarty templates (the user interface) are stored in $APPROOT/template
+Templates for a specific page are filed away in $APPROOT/template/page
+
+$APPROOT/smartycache and $APPROOT/smartycompile should be *empty*
+
+$APPROOT/smartyconfig is where the config file for smarty is stored.
+
+$APPROOT/style should contain ONLY stylesheets. Anything else in here may be
+"used" as a stylesheet.
+
+Classes placed in $APPROOT/src will be automatically included by the
+autoloader, you don't need to put includes/requires in the code for these, just
+put the class in it's own file named the same as the class, and then just use
+it.
+
+New pages should be declared as a subclass of PageBase, and saved in 
+$APPROOT/src/page, and implement the function runPage() to do anything. See 
+$APPROOT/src/page/PageTeapot.php as an example. The new page will be available
+at internal.php/Teapot (for example)

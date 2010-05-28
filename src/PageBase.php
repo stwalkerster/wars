@@ -88,14 +88,17 @@ abstract class PageBase
 	{
 		$this->smarty = new Smarty();
 
-		global $baseScriptPath;
-		$this->smarty->template_dir = $baseScriptPath . '/template/';
-		$this->smarty->compile_dir = $baseScriptPath . '/smartycompile/';
-		$this->smarty->config_dir = $baseScriptPath . '/smartyconfig/';
-		$this->smarty->cache_dir = $baseScriptPath . '/smartycache/';
+		global $s_templateDir, $s_compileDir, $s_configDir, $s_cacheDir, $s_configFile;
+		
+		$this->smarty->template_dir = $s_templateDir;
+		$this->smarty->compile_dir = $s_compileDir;
+		$this->smarty->config_dir = $s_configDir;
+		$this->smarty->cache_dir = $s_cacheDir;
 
+		$this->smarty->config_load($s_configFile);
+		
 		$this->smarty->assign('menu', $this->menu);
-		$this->smarty->assign('stylesheet', "style-cmelbye.css");
+		$this->smarty->assign('stylesheet', "style/cmelbye.css");
 		$this->smarty->assign('headertitle', $this->title);
 		$this->smarty->assign('pagetitle', $this->subtitle);
 
@@ -118,15 +121,15 @@ abstract class PageBase
 		//	$pageName = "PageLogin";
 
 		// check the page definition actually exists...
-		if(file_exists( $baseScriptPath . 'src/page/' . $pageName . ".php"))
+		if(file_exists( $baseIncludePath .'page/' . $pageName . ".php"))
 		{	// ... and include it. If I'd not checked it existed, all code from this point on would fail.
-			require_once( $baseScriptPath . 'src/page/' . $pageName . ".php");
+			require_once( $baseIncludePath .'page/' . $pageName . ".php");
 		}
 		else
 		{
 			// page definition doesn't exist, let's continue but showing the main page instead.
 			$pageName = "PageMain";
-			require_once( $baseScriptPath . 'src/page/' . $pageName . ".php");
+			require_once( $baseIncludePath .'page/' . $pageName . ".php");
 		}
 
 		// now I've brought the page definition class file into the script, let's actually check that

@@ -100,7 +100,7 @@ abstract class PageBase
 
 		$this->runPage();
 		
-		$smarty->display('Page.tpl');
+		$this->smarty->display('Page.tpl');
 	}
 
 	/**

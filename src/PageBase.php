@@ -97,8 +97,8 @@ abstract class PageBase
 
 		$smarty->assign('content', $content);
 		$smarty->assign('menu', $this->menu);
-		$smarty->assign('title', $this->title);
-		$smarty->assign('subtitle', $this->subtitle);
+		$smarty->assign('headertitle', $this->title);
+		$smarty->assign('pagetitle', $this->subtitle);
 
 		$smarty->display('Page.tpl');
 	}

@@ -7,7 +7,9 @@
 <body> 
 	<div id="globalwrapper">
 		<div id="header">
-			<div id="header-title" />
+			<div id="header-title">
+				{$headertitle}
+			</div>
 		</div>
 		
 		<div id="content">

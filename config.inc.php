@@ -25,12 +25,12 @@ if(!defined("WARS"))
 ini_set('display_errors',1);
 
 // Database connection info
-$db_host_a = "localhost";
+$db_host_a = "helpmebot.org.uk";
 $db_user_a = "stwalkerster";
 $db_pass_a = file_get_contents(".dbpw"); // grab the password from this file.
 $db_name_a = 'louriepieterse_acc_2';
 
-$db_host_w = "localhost";
+$db_host_w = "helpmebot.org.uk";
 $db_user_w = "stwalkerster";
 $db_pass_w = file_get_contents(".dbpw"); // grab the password from this file.
 $db_name_w = 'louriepieterse_acc_2';

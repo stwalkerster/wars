@@ -95,6 +95,7 @@ abstract class PageBase
 		$this->smarty->cache_dir = $baseScriptPath . '/smartycache/';
 
 		$this->smarty->assign('menu', $this->menu);
+		$this->smarty->assign('stylesheet', "style-cmelbye.css");
 		$this->smarty->assign('headertitle', $this->title);
 		$this->smarty->assign('pagetitle', $this->subtitle);
 

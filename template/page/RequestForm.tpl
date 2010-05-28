@@ -1,10 +1,10 @@
 <h2>Welcome!</h2> 
 <p>We need a few bits of information to create your account. 
 However, you do not need an account to read the encyclopedia or look up information - that can be done by anyone with or without an account. 
-
-The first is a username, and secondly, a <strong>valid email address that we can send your password to</strong> (please don't use temporary inboxes, or email aliasing, as this may cause your request to be rejected). 
-If you want to leave any comments, feel free to do so. Note that if you use this form, your IP address will be recorded, and displayed to <a href="{$smarty.config.publicbaselink}userlist.php">those who review account requests</a>. 
-When you are done, click the "Submit" button. If you have difficulty using this tool, send an email containing your account request (but not password) to {mailto address=$smarty.config.toolemail}, and we will try to deal with your requests that way.
+</p>
+<p>The first is a username, and secondly, a <strong>valid email address that we can send your password to</strong> (please don't use temporary inboxes, or email aliasing, as this may cause your request to be rejected). If you want to leave any comments, feel free to do so. 
+<strong>Note that if you use this form, your IP address will be recorded, and displayed to <a href="{$smarty.config.publicbaselink}userlist.php">those who review account requests</a>. </strong>
+</p><p>When you are done, click the "Submit" button. If you have difficulty using this tool, send an email containing your account request (but not password) to {mailto address=$smarty.config.toolemail}, and we will try to deal with your requests that way.
 </p>
 
 

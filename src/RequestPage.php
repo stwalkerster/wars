@@ -34,6 +34,8 @@ class RequestPage extends PageBase
 	
 	function runPage()
 	{
+		$this->smarty->assign('showHeaderInfo', 0);
+		
 		global $databases;
 		
 		if(WebRequest::wasPosted())

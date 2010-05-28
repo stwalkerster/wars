@@ -150,8 +150,13 @@ class WebRequest {
 	{
 		header("Location: $url");
 		die();
-		
 	}
 	
-	
+	public static function getCurrentUser()
+	{
+		if(isset($_SESSION['currUser']))
+			return unserialize($_SESSION['currUser']);
+		else
+			return false;
+	}
 }

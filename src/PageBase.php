@@ -97,6 +97,18 @@ abstract class PageBase
 
 		$this->smarty->config_load("wars.config","global");
 		
+		$curUser = WebRequest::getCurrentUser();
+		$curuserid = 0;
+		$curusername = "";
+		if($curUser != false)
+		{
+			$curuserid = $curUser->getId();
+			$curusername = $curUser->getUsername();
+		}
+		
+		$this->smarty->assign('showHeaderInfo', 1);
+		$this->smarty->assign('userid', $curuserid );
+		$this->smarty->assign('username', $curusername ); 
 		$this->smarty->assign('menu', $this->menu);
 		$this->smarty->assign('stylesheet', "cmelbye.css");
 		$this->smarty->assign('headertitle', $this->title);
@@ -117,8 +129,8 @@ abstract class PageBase
 		// calculate the name that the page definition should be at.
 		$pageName = "Page" . WebRequest::getPageName();
 
-		//if(WebRequest::sessionOrBlank("dbPassword") == '')
-		//	$pageName = "PageLogin";
+		if(WebRequest::getCurrentUser == false)
+			$pageName = "PageLogin";
 
 		// check the page definition actually exists...
 		if(file_exists( $baseIncludePath .'page/' . $pageName . ".php"))

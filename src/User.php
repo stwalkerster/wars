@@ -28,6 +28,8 @@ class User implements DataObject
 	
 	public function getId();
 	
+	public function getUsername();
+	
 	public function isAllowedPrivateData();
 	
 	public function save();

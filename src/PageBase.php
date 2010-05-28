@@ -112,7 +112,7 @@ abstract class PageBase
 	 */
 	static function create()
 	{
-		global $baseScriptPath;
+		global $baseIncludePath;
 
 		// calculate the name that the page definition should be at.
 		$pageName = "Page" . WebRequest::getPageName();

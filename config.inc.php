@@ -53,6 +53,9 @@ $baseScriptPath = "/home/stwalkerster/public_helpmebot_html/newacc/";
 // the real file path where all the logic code files are stored.
 $baseIncludePath = "/home/stwalkerster/public_helpmebot_html/newacc/src/";
 
+// the path which stores all the stylesheets
+$baseStylePath = "/home/stwalkerster/public_helpmebot_html/newacc/style/";
+
 /*
  * Session data
  */
@@ -71,6 +74,9 @@ $confReadOnlyDb = 0;
 // reserve to one person by default?
 $confDefaultReserver = 0;
 
+// tool contact email address
+$toolEmailAddress = "accounts-enwiki-l@lists.wikimedia.org";
+
 /*
  * Smarty configuration
  */
@@ -83,7 +89,29 @@ $s_configDir = $baseScriptPath . '/smartyconfig/';
 // DO NOT EDIT PAST THIS LINE, unless you know what you are doing.
 
 @ include_once('localconfig.inc.php');
-$s_configFile = file_exists($s_configDir . 'local.config') ? 'local.config' : 'wars.config';
+
+// see if the smarty config file needs to be updated
+if( // if it doesn't exist, OR
+	(! fileexists($s_configDir . 'wars.config'))
+	|| // the config file was modified more recently, OR
+	filectime($s_configDir . 'wars.config') < filectime($baseScriptPath . 'config.inc.php')
+	||
+	(	// the local config file exists AND
+		fileexists($baseScriptPath . 'localconfig.inc.php')
+		&& // it was modified more recently
+		filectime($s_configDir . 'wars.config') < filectime($baseScriptPath . 'localconfig.inc.php')
+	)
+) // the config file needs re-creating.
+{
+	$handle = fopen($s_configDir . 'wars.config', "w");
+	fwrite($handle, "baselink = \"{$baseFilePath}internal.php\"\n");
+	fwrite($handle, "publicbaselink = \"{$baseScriptPath}\"\n");
+	fwrite($handle, "toolemail = \"{$toolEmailAddress}\"\n");
+	fwrite($handle, "stylepath = \"{$baseStylePath}\"\n");
+	
+	fclose($handle);
+}
+
 
 // set up the environment
 $accDatabase = new Database($db_host_a, $db_user_a, $db_pass_a, $db_name_a);

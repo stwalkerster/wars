@@ -17,7 +17,6 @@ class PageLogin extends PageBase
 {
 	function runPage()
 	{
-		$out = OutputPage::getInstance();
-		$out->output("loginpage");
+		return "pagelogin";
 	}
 }

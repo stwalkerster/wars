@@ -15,10 +15,8 @@ if(!defined("WARS"))
 
 class PageForward extends PageBase
 {
-
 	function runPage()
 	{
 		WebRequest::redirectUrl(WebRequest::getString('link'));
 	}
-	
 }

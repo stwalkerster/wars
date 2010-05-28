@@ -38,6 +38,9 @@ $db_name_w = 'louriepieterse_acc_2';
 // the web-accessible folder where index.php is stored
 $baseFilePath = "/~stwalkerster/newacc/";
 
+// the real file path where index.php is stored
+$baseScriptPath = "/home/stwalkerster/public_helpmebot_html/newacc/";
+
 // session configuration options
 ini_set('session.cookie_path', $baseFilePath); // limit this session's scope to the base path of the site.
 ini_set('session.name', 'WARSystem'); // set a (theoretically) unique session name
@@ -68,5 +71,9 @@ OutputPage::getInstance()->stylesheets[] = 'style-cmelbye.css';
 // http://php.net/manual/en/language.oop5.autoload.php
 function __autoload($class)
 {
-	require_once('src/'.$class.".php");
+	global $baseScriptPath;
+	require_once($baseScriptPath . 'src/'.$class.".php");
 }
+
+// include the smarty class, as it's not caught by the above function
+require_once($baseScriptPath . 'src/smarty/Smarty.class.php');

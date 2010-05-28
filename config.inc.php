@@ -54,7 +54,7 @@ $baseScriptPath = "/home/stwalkerster/public_helpmebot_html/newacc/";
 $baseIncludePath = "/home/stwalkerster/public_helpmebot_html/newacc/src/";
 
 // the path which stores all the stylesheets
-$baseStylePath = "/home/stwalkerster/public_helpmebot_html/newacc/style/";
+$baseStylePath = "/~stwalkerster/newacc/style/";
 
 /*
  * Session data

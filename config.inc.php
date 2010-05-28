@@ -92,12 +92,12 @@ $s_configDir = $baseScriptPath . '/smartyconfig/';
 
 // see if the smarty config file needs to be updated
 if( // if it doesn't exist, OR
-	(! fileexists($s_configDir . 'wars.config'))
+	(! file_exists($s_configDir . 'wars.config'))
 	|| // the config file was modified more recently, OR
 	filectime($s_configDir . 'wars.config') < filectime($baseScriptPath . 'config.inc.php')
 	||
 	(	// the local config file exists AND
-		fileexists($baseScriptPath . 'localconfig.inc.php')
+		file_exists($baseScriptPath . 'localconfig.inc.php')
 		&& // it was modified more recently
 		filectime($s_configDir . 'wars.config') < filectime($baseScriptPath . 'localconfig.inc.php')
 	)

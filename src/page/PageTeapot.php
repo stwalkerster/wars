@@ -25,6 +25,6 @@ class PageTeapot extends PageBase
 	function runPage()
 	{
 		header("HTTP/1.1 418 I'm a teapot");
-		return "teapot";
+		$this->smarty->assign('subpage', 'page/Teapot.tpl');
 	}
 }

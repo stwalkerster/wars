@@ -75,6 +75,7 @@ abstract class PageBase
 	),
 	);
 
+	var $smarty;
 	/**
 	 * Page-specific code, performing the logic required on a page-specific level.
 	 */
@@ -85,21 +86,20 @@ abstract class PageBase
 	 */
 	function execute()
 	{
-		$content = $this->runPage();
-
-		$smarty = new Smarty();
+		$this->smarty = new Smarty();
 
 		global $baseScriptPath;
-		$smarty->template_dir = $baseScriptPath . '/template/';
-		$smarty->compile_dir = $baseScriptPath . '/smartycompile/';
-		$smarty->config_dir = $baseScriptPath . '/smartyconfig/';
-		$smarty->cache_dir = $baseScriptPath . '/smartycache/';
+		$this->smarty->template_dir = $baseScriptPath . '/template/';
+		$this->smarty->compile_dir = $baseScriptPath . '/smartycompile/';
+		$this->smarty->config_dir = $baseScriptPath . '/smartyconfig/';
+		$this->smarty->cache_dir = $baseScriptPath . '/smartycache/';
 
-		$smarty->assign('content', $content);
-		$smarty->assign('menu', $this->menu);
-		$smarty->assign('headertitle', $this->title);
-		$smarty->assign('pagetitle', $this->subtitle);
+		$this->smarty->assign('menu', $this->menu);
+		$this->smarty->assign('headertitle', $this->title);
+		$this->smarty->assign('pagetitle', $this->subtitle);
 
+		$this->runPage();
+		
 		$smarty->display('Page.tpl');
 	}
 

@@ -41,9 +41,11 @@ class WebRequest {
 		$pathInfo = $_SERVER['PATH_INFO'];
 		$page = trim($pathInfo ,'/');
 		if($page == "")
-			$page = "Main";
+			return "Main";
 			
-		return $page;
+		$pa = explode('/', $page);
+			
+		return $pa[0];
 	}
 	
 	/**
@@ -158,5 +160,10 @@ class WebRequest {
 			return unserialize($_SESSION['currUser']);
 		else
 			return false;
+	}
+	
+	public static function getSubpages()
+	{
+		return explode('/',trim($_SERVER['PATH_INFO'],'/'));
 	}
 }

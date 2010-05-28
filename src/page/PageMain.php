@@ -22,6 +22,6 @@ class PageMain extends PageBase
 	
 	function runPage()
 	{
-		return "pagemain";
+		$this->smarty->assign('subpage', 'page/MainPage.tpl');
 	}
 }

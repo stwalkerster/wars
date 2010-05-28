@@ -3,7 +3,7 @@
 		<div id="menu">
 			<ul>
 			{foreach key=key item=item from=$menu}
-				<li id="{$key}"><a href="{#smarty.config.baselink}/{$item[link]}">{$item[text]}</a></li>
+				<li id="{$key}"><a href="{$smarty.config.baselink}/{$item[link]}">{$item[text]}</a></li>
 			{/foreach}
 			</ul>
 		</div>

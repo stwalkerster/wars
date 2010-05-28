@@ -6,3 +6,5 @@ For security, I reccommend you move the smarty directories out of the web
 root, and maybe the source directory too. Remember to update the config 
 variables to point the the right place too.
 
+Create a file called 'localconfig.inc.php', and in there override any default
+values you need to.

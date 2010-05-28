@@ -51,7 +51,7 @@ $baseFilePath = "/~stwalkerster/newacc/";
 $baseScriptPath = "/home/stwalkerster/public_helpmebot_html/newacc/";
 
 // the real file path where all the logic code files are stored.
-$baseIncludePath = "/home/stwalkerster/public_html/newacc/src/";
+$baseIncludePath = $baseScriptPath . "src/";
 
 /*
  * Session data

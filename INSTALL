@@ -1,4 +1,12 @@
-When editing this file, please don't let lines get to this point.             |
+/**************************************************************************
+*                     Wikipedia Account Request System                    *
+***************************************************************************
+*                                                                         *
+* Conceptualised by Incubez (author: X!) and ACC (author: SQL and others) *
+*                                                                         *
+* Please refer to /LICENCE for more info.                                 *
+*                                                                         *
+**************************************************************************/
 
 Right. So you want to install WARS for some reason.
 
@@ -6,5 +14,5 @@ For security, I reccommend you move the smarty directories out of the web
 root, and maybe the source directory too. Remember to update the config 
 variables to point the the right place too.
 
-Create a file called 'localconfig.inc.php', and in there override any default
-values you need to.
+Create a file called 'localconfig.inc.php', and in there override any 
+default values you need to.

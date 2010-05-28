@@ -1,3 +1,13 @@
+/**************************************************************************
+*                     Wikipedia Account Request System                    *
+***************************************************************************
+*                                                                         *
+* Conceptualised by Incubez (author: X!) and ACC (author: SQL and others) *
+*                                                                         *
+* Please refer to /LICENCE for more info.                                 *
+*                                                                         *
+**************************************************************************/
+
 ANY FILES WITHIN THIS FOLDER THAT BEGIN WITH THE WORD 'Page' WILL BE TREATED AS PAGES.
 
 DO NOT PLACE ANY CLASS FILES WITHIN THIS FOLDER THAT ARE NOT SUBCLASSES OF PageBase.

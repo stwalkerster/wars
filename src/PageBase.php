@@ -34,7 +34,7 @@ abstract class PageBase
 	 */
 	var $subtitle;
 
-	var $title;
+	var $title = "Wikipeda Account Request System";
 
 	var $menu = array(
 		'menuHome' => array(

@@ -15,6 +15,11 @@ if(!defined("WARS"))
 
 class PageMain extends PageBase
 {
+	function __construct()
+	{
+		$this->subtitle = "Account Requests";
+	}
+	
 	function runPage()
 	{
 		return "pagemain";

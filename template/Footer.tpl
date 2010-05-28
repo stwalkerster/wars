@@ -1,3 +1,4 @@
+{config_load file="wars.config"}
 		</div>
 		<br class="clearall" />
 		<div id="menu">

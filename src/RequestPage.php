@@ -28,6 +28,8 @@ class RequestPage extends PageBase
 		$this->subtitle = "Request an account on the English Wikipedia";
 		
 		$this->title = "Account Creation Assistance";
+		
+		$this->menu  = array('enwiki' => array('text' => 'Wikipedia', 'link' => 'Forward?link=http://en.wikipedia.org/'));
 	}
 	
 	function runPage()

@@ -95,7 +95,7 @@ abstract class PageBase
 		$this->smarty->config_dir = $s_configDir;
 		$this->smarty->cache_dir = $s_cacheDir;
 
-		$this->smarty->config_load($s_configFile);
+		$this->smarty->config_load("wars.config","global");
 		
 		$this->smarty->assign('menu', $this->menu);
 		$this->smarty->assign('stylesheet', "style/cmelbye.css");

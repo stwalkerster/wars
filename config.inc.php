@@ -105,7 +105,7 @@ if( // if it doesn't exist, OR
 {
 	$handle = fopen($s_configDir . 'wars.config', "w");
 	fwrite($handle, "baselink = \"{$baseFilePath}internal.php\"\n");
-	fwrite($handle, "publicbaselink = \"{$baseScriptPath}\"\n");
+	fwrite($handle, "publicbaselink = \"{$baseFilePath}\"\n");
 	fwrite($handle, "toolemail = \"{$toolEmailAddress}\"\n");
 	fwrite($handle, "stylepath = \"{$baseStylePath}\"\n");
 	

@@ -105,16 +105,21 @@ abstract class PageBase
 			$curuserid = $curUser->getId();
 			$curusername = $curUser->getUsername();
 		}
-		
+ 
+		// assign settings that can be overridden in the implemented page
 		$this->smarty->assign('showHeaderInfo', 1);
-		$this->smarty->assign('userid', $curuserid );
-		$this->smarty->assign('username', $curusername ); 
-		$this->smarty->assign('menu', $this->menu);
 		$this->smarty->assign('stylesheet', "cmelbye.css");
+		
+		$this->runPage();
+		
+		// assign settings that depend on a value that can be changed by the implemented page
+		$this->smarty->assign('menu', $this->menu);
 		$this->smarty->assign('headertitle', $this->title);
 		$this->smarty->assign('pagetitle', $this->subtitle);
-
-		$this->runPage();
+		
+		// assign settings that should never be changed.
+		$this->smarty->assign('userid', $curuserid );
+		$this->smarty->assign('username', $curusername );
 		
 		$this->smarty->display('Page.tpl');
 	}

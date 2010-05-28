@@ -48,13 +48,13 @@ class PageLogin extends PageBase
 	
 	function runRegister()
 	{
-		$this->subtitle="Register";
+		$this->subtitle="Register for a Tool Account";
 		$this->smarty->assign('subpage', 'page/RegisterForm.tpl');
 	}
 	
 	function runForgotPw()
 	{
-		$this->subtitle="Forgot password";
+		$this->subtitle="Forgotten your password?";
 		$this->smarty->assign('subpage', 'page/ForgotPwForm.tpl');
 	}
 }

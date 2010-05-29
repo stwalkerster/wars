@@ -48,7 +48,7 @@ class RequestPage extends PageBase
 		
 		if(WebRequest::wasPosted())
 		{
-			
+			$this->addRequest();
 		}
 		else
 		{	
@@ -56,4 +56,10 @@ class RequestPage extends PageBase
 		}
 		
 	}
+	
+	function addRequest()
+	{
+		
+	}
+	
 }

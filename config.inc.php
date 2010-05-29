@@ -83,6 +83,9 @@ $readOnlyDb = 0;
 // Is the database available at the moment?
 $dontUseDb = 0;
 
+// default reserver
+$defaultReserver = 0;
+
 /*
  * Smarty configuration
  */

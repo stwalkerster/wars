@@ -77,6 +77,12 @@ $confDefaultReserver = 0;
 // tool contact email address
 $toolEmailAddress = "accounts-enwiki-l@lists.wikimedia.org";
 
+// Is the database read-only at the moment?
+$readOnlyDb = 0;
+
+// Is the database available at the moment?
+$dontUseDb = 0;
+
 /*
  * Smarty configuration
  */

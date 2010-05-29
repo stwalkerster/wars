@@ -1,5 +1,5 @@
 			<span class="reallyReallyImportant">This form is for requesting tool access. If you want to request an account for Wikipedia, then go to <a href="{$smarty.config.publicbaselink}">{$smarty.config.publicbaselink}</a></span>
-			<form action="{$smarty.config.baselink}/Register" method="post"> 
+			<form action="{$smarty.config.baselink}/Login/Register" method="post"> 
 			<div class="required">
 				<label for="name">Desired username</label>
 				This is the username you will use to log in to the tool.

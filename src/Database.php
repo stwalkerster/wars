@@ -60,18 +60,20 @@ class Database
 	 */
 	public function getResultSet($queryObject, $result_type = MYSQL_BOTH)
 	{
-		// run the query
-		// TODO: add security to this function, as this is a major SQL injection problem,
-		//       especially since all database security is left to this class.
-		$result = mysql_query($queryObject->toString(), $this->link) or die(mysql_error() . "<br />" . debug_print_backtrace());
-		
 		// initialise a new array
 		$set = array();
+	
+		global $dontUseDb;
+		if(!$dontUseDb)
+		{
+			// run the query
+			$result = mysql_query($queryObject->toString(), $this->link) or die(mysql_error() . "<br />" . debug_print_backtrace());
 		
-		// iterate through the resultset, adding each row to an array
-		while($row = mysql_fetch_array($result, $result_type))
-			$set[] = $row;
-			
+			// iterate through the resultset, adding each row to an array
+			while($row = mysql_fetch_array($result, $result_type))
+				$set[] = $row;
+		}
+		
 		// return the array
 		return $set;
 	}
@@ -93,7 +95,7 @@ class Database
 		foreach ($values as $val) {
 			
 			// is the value null, if so, it's null.
-			if($val == null)
+			if($val === null)
 				$query .= ', null';
 			else
 				// add new data item to the query securely (to keep him and Mr Database safe!),
@@ -105,8 +107,8 @@ class Database
 		$query .= ');';
 		
 		// am I allowed to write to the database according to the config file?
-		global $confReadOnlyDb;
-		if(! $confReadOnlyDb )
+		global $readOnlyDb, $dontUseDb;
+		if((!$readOnlyDb) && (!$dontUseDb) )
 			// yep, execute the query as normal, unless there's a problem, in which case tell me, and tell me where.
 			mysql_query($query, $this->link) or die(mysql_error() . "<br />" . debug_print_backtrace() );
 		else
@@ -154,8 +156,8 @@ class Database
 		$query .= ';';
 		
 		// am I allowed to write to the database according to the config file?
-		global $confReadOnlyDb;
-		if(! $confReadOnlyDb )
+		global $readOnlyDb, $dontUseDb;
+		if((!$readOnlyDb) && (!$dontUseDb) )
 			// yep, execute the query as normal, unless there's a problem, in which case tell me, and tell me where.
 			mysql_query($query, $this->link) or die(mysql_error() . "<br />" . debug_print_backtrace() );
 		else

@@ -135,8 +135,8 @@ abstract class PageBase
 		$pageName = "Page" . WebRequest::getPageName();
 
 		
-		//if(WebRequest::getCurrentUser() == false)
-		//	$pageName = "PageLogin";
+		if(WebRequest::getCurrentUser() == false)
+			$pageName = "PageLogin";
 
 		// check the page definition actually exists...
 		if(file_exists( $baseIncludePath .'page/' . $pageName . ".php"))

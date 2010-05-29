@@ -103,6 +103,11 @@ class WebRequest {
 			return null;
 	}
 	
+	public static function postString($name)
+	{
+		return htmlentities($_POST[$name]);
+	}
+	
 	/**
 	 * @param unknown_type $name
 	 * @return number|number
@@ -115,6 +120,17 @@ class WebRequest {
 			return (int)$raw;
 		else
 			return 0;	
+	}
+	
+	public static function postBool($name)
+	{
+		if(isset($_POST[$name]))
+		{	
+			$result = ($_POST[$name] == "on" ? 1 : 0);
+			return $result;
+		}
+		else
+			return 0;
 	}
 	
 	public static function unsetPost($name = null)
@@ -172,6 +188,13 @@ class WebRequest {
 	
 	public static function getSubpages()
 	{
-		return explode('/',trim($_SERVER['PATH_INFO'],'/'));
+		if(isset($_SERVER['PATH_INFO']))
+		{
+			return explode('/',trim($_SERVER['PATH_INFO'],'/'));
+		}
+		else
+		{
+			return array('Main');
+		}
 	}
 }

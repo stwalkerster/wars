@@ -276,7 +276,7 @@ float: right;
 	font-family: sans-serif;
 }
 
-#doublereserve-warn {
+#errorBox {
 	border:3px solid red;
 	background-color:pink;
 	color:black;

@@ -5,7 +5,7 @@
 * Written by Simon Walker ( 090931545 ) for module F27DB: Introduction to Database Systems	*
 * Lecturer: Brian Palmer and Adil Ibrahim													*
 * 																							*
-* Request class: Handles all request data, and accesses to the superglobal variables.		*
+* OutputPage class: handles all output in a secure and XHTML-valid method					*
 *********************************************************************************************/
 
 /**************************************************************************
@@ -15,6 +15,8 @@
 * DO NOT CHANGE THE EXISTING INTERFACE OF THIS CLASS unless you really    *
 * know what you're doing.                                                 *
 **************************************************************************/
+
+// NOTE: Use Smarty instead. References to this class should be removed.
 
 // check that this code is being called from a valid entry point. 
 if(!defined("WARS"))

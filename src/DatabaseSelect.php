@@ -23,7 +23,7 @@ class DatabaseSelect
 {	
 	var $fields = array();
 	
-	var $from;
+	var $from = '';
 	
 	private $joins = array();
 	function addJoin($type, $table, $colA, $colB)
@@ -55,14 +55,14 @@ class DatabaseSelect
 	 */
 	var $orders = array();
 	
-	var $limit;
+	var $limit = 0;
 	
 	function toString()
 	{
 		$query = 'SELECT ';
 	
 		$first = true;
-		foreach ($fields as $f) {
+		foreach ($this->fields as $f) {
 			if(!$first)
 				$query .= ', ';
 				
@@ -71,15 +71,15 @@ class DatabaseSelect
 			$first = false;
 		}
 		
-		$query .= ' FROM ' . mysql_escape_string($from) . ' ';
+		$query .= ' FROM ' . mysql_escape_string($this->from) . ' ';
 		
-		foreach ($joins as $j) {
+		foreach ($this->joins as $j) {
 			$query .=  mysql_escape_string($j['type']) . ' JOIN ' . mysql_escape_string($j['table']);
 			$query .=  ' ON ' . mysql_escape_string($j['colA']) . ' = ' . mysql_escape_string($j['colB']);
 		}
 		
 		$first = true;
-		foreach ($wheres as $w) {
+		foreach ($this->wheres as $w) {
 			if(!$first)
 				$query .= ' AND';
 				
@@ -90,7 +90,7 @@ class DatabaseSelect
 		}
 		
 		$first = true;
-		foreach ($groups as $g) {
+		foreach ($this->groups as $g) {
 			if(!$first)
 				$query .= ' GROUP BY ';
 			else
@@ -102,7 +102,7 @@ class DatabaseSelect
 		}
 		
 		$first = true;
-		foreach ($orders as $c => $o) {
+		foreach ($this->orders as $c => $o) {
 			if(!$first)
 				$query .= ' ORDER BY ';
 			else
@@ -113,8 +113,8 @@ class DatabaseSelect
 			$first = false;
 		}
 		
-		if($limit > 0)
-			$query .= ' LIMIT ' . mysql_escape_string($limit);
+		if($this->limit > 0)
+			$query .= ' LIMIT ' . mysql_escape_string($this->limit);
 			
 		$query .= ';';
 		

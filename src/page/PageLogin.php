@@ -66,7 +66,16 @@ class PageLogin extends PageBase
 	function runRegister()
 	{
 		$this->subtitle="Register for a Tool Account";
-		$this->smarty->assign('subpage', 'page/RegisterForm.tpl');
+		
+		if(WebRequest::wasPosted())
+		{
+			if(User::authenticate(WebRequest::getString('username'),WebRequest::getString('password')))
+				WebRequest::redirect('');
+		}
+		else
+		{
+			$this->smarty->assign('subpage', 'page/RegisterForm.tpl');
+		}
 	}
 	
 	function runForgotPw()

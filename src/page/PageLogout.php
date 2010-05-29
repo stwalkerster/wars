@@ -28,6 +28,6 @@ class PageLogout extends PageBase
 		setcookie(session_name(), '', time() - 42000);
 		session_destroy();
 		
-		header('Location: ' . $baseFilePath . 'internal.php/Login');
+		WebRequest::redirect('Login');
 	}
 }

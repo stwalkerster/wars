@@ -51,7 +51,16 @@ class PageLogin extends PageBase
 	function runLogin()
 	{
 		$this->subtitle="Login";
-		$this->smarty->assign('subpage', 'page/LoginForm.tpl');
+		
+		if(WebRequest::wasPosted())
+		{
+			if(User::authenticate(WebRequest::getString('username'),WebRequest::getString('password')))
+				WebRequest::redirect('');
+		}
+		else
+		{
+			$this->smarty->assign('subpage', 'page/LoginForm.tpl');
+		}
 	}
 	
 	function runRegister()

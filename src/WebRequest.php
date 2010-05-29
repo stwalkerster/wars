@@ -152,7 +152,7 @@ class WebRequest {
 	public static function redirect($page)
 	{
 		global $baseFilePath;
-		header("Location: $baseFilePath/index.php/$page");
+		header("Location: $baseFilePath/internal.php/$page");
 		die();
 	}
 	

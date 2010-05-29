@@ -25,12 +25,28 @@ class User implements DataObject
 {
 	public static function authenticate($username, $password)
 	{
+		$select = new DatabaseSelect();
+		$select->fields = array('user_id');
+		$select->from = 'user';
+		$select->addWhere('user_pass', '=', User::saltPassword($username , $password));
+		$select->addWhere('user_name', '=', $username );
+		
+		global $accDatabase;
+		
+		$resultset = $accDatabase->getResultSet($select,MYSQL_ASSOC);
+		
+		print_r($resultset);
 		
 	} 
 
 	public static function getByName($username);
 	
 	public static function getById($id);
+	
+	public static function saltPassword($username, $password)
+	{
+		return md5('ACC-' . $username . '-' . $password);
+	}
 	
 	public function __construct();
 	

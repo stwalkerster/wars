@@ -54,16 +54,16 @@ class Database
 	/**
 	 * Retrieves a resultset from a query in array form
 	 * 
-	 * @param string $query The query to execute
+	 * @param DatabaseSelect $queryObject The query to execute
 	 * @param unknown_type $result_type The type of the resultset to return (associative, indexed, or both)
 	 * @return array The result set in array form.
 	 */
-	public function getResultSet($query, $result_type = MYSQL_BOTH)
+	public function getResultSet($queryObject, $result_type = MYSQL_BOTH)
 	{
 		// run the query
 		// TODO: add security to this function, as this is a major SQL injection problem,
 		//       especially since all database security is left to this class.
-		$result = mysql_query($query, $this->link) or die(mysql_error() . "<br />" . debug_print_backtrace());
+		$result = mysql_query($queryObject->toString(), $this->link) or die(mysql_error() . "<br />" . debug_print_backtrace());
 		
 		// initialise a new array
 		$set = array();

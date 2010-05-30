@@ -29,7 +29,22 @@ class EmailConfirmationPage extends PageBase
 		$checksum = WebRequest::getInt('rc');
 		
 		$r = Request::getById($id);
-		$r->confirm($checksum);
+		if($r == false)
+		{ // request not found
+			
+			
+			return;
+		}
 		
+		
+		if($r->confirm($checksum))
+		{ // confirmation succeeded
+			
+			// run checks needed to alert tool users (similarity etc)
+		}
+		else
+		{ // error for some reason
+		
+		}
 	}
 }

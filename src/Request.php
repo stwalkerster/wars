@@ -26,6 +26,8 @@ class Request implements DataObject
 	public static function getById($id)
 	{
 		$this->new = false;
+		
+		return false;
 	}
 	
 	public function __construct($name, $email, $comment)

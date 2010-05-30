@@ -20,7 +20,7 @@ However, you do not need an account to read the encyclopedia or look up informat
 				<div class="required"> 
 					<label for="email">Your E-mail Address</label> 
 					<input type="text" name="email" id="email" size="30" /> 
-				<label for="email">Confirm your E-mail Address</label> 
+				<label for="emailconfirm">Confirm your E-mail Address</label> 
 					<input type="text" name="emailconfirm" id="emailconfirm" size="30" /> 
 					We need this to send you your password. Without it, you will not receive your password, and will be unable to log in to your account.
 				</div> 

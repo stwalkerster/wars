@@ -71,15 +71,13 @@ class PageLogin extends PageBase
 		{
 			if(WebRequest::postBool('guidelines') == 0)
 			{
-				$this->smarty->assign('error', 'error/NoAcceptGuidelines.tpl');
-				$this->smarty->assign('subpage', 'Error.tpl');
+				$this->error('NoAcceptGuidelines');
 				return;
 			}
 			
 			if(WebRequest::postString('pass') != WebRequest::postString('pass2'))
 			{
-				$this->smarty->assign('error', 'error/PasswordMismatch.tpl');
-				$this->smarty->assign('subpage', 'Error.tpl');
+				$this->error('PasswordMismatch');
 				return;
 			}
 			
@@ -89,8 +87,7 @@ class PageLogin extends PageBase
 				|| WebRequest::postString('email') == ""
 			)
 			{
-				$this->smarty->assign('error', 'error/RequiredInfoMissing.tpl');
-				$this->smarty->assign('subpage', 'Error.tpl');
+				$this->error('RequiredInfoMissing');
 				return;
 			}
 			

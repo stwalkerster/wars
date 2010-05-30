@@ -48,7 +48,10 @@ class RequestPage extends PageBase
 		
 		if(WebRequest::wasPosted())
 		{
-			$this->addRequest();
+			if(WebRequest::postString("email") == WebRequest::postString("emailconfirm"))
+				$this->addRequest(WebRequest::postString("name"),WebRequest::postString("email"),WebRequest::postString("comments"));
+			else
+				$this->error("EmailConfirmationMismatch");
 		}
 		else
 		{	
@@ -57,9 +60,27 @@ class RequestPage extends PageBase
 		
 	}
 	
-	function addRequest()
+	function addRequest($username,$email,$comments)
 	{
+		// validate
+		if($username == "")
+		{
+			$this->error('BlankUsername');
+			return;
+		}
 		
+		if($email == "")
+		{
+			$this->error('BlankEmail');
+			return;
+		}
+		
+		// create object
+		
+		$r = new Request($username,$email,$comments);
+		$r->save();
+		
+		// send confirmation email
 	}
 	
 }

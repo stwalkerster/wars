@@ -125,6 +125,17 @@ abstract class PageBase
 	}
 
 	/**
+	 * Show an error.
+	 * @param $errorName Name of the error file.
+	 * @return unknown_type
+	 */
+	function error($errorName)
+	{
+		$this->smarty->assign('error', 'error/'.$errorName.'.tpl');
+		$this->smarty->assign('subpage', 'Error.tpl');
+	}
+	
+	/**
 	 * Create a specific page, based on the Request URL
 	 */
 	static function create()

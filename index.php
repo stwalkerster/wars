@@ -34,6 +34,11 @@ if(WebRequest::getPageName() == "Forward")
 	require('src/page/PageForward.php');
 	$page = new PageForward();
 }
+// or is this a confirmation request?
+elseif(WebRequest::getPageName() == "Confirm")
+{
+	$page = new EmailConfirmationPage();
+}
 else
 {
 	// create the request page

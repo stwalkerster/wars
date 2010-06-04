@@ -10,7 +10,7 @@
 **************************************************************************/
 
 // check that this code is being called from a valid entry point. 
-if(!defined("ACCSYSTEM"))
+if(!defined("WARS"))
 	die("Invalid code entry point!");
 
 /**

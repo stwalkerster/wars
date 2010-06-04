@@ -20,7 +20,8 @@ require_once("config.inc.php");
 if(! WebRequest::isConsoleSession())
 {
 	require_once($baseIncludePath . 'page/PageError.php');
-	$page = new PageError("AccessDenied");
+	$page = new PageError();
+	$page->errorPage = "AccessDenied";
 	$page->execute();
 	die();
 }

@@ -19,6 +19,6 @@ class PageError extends PageBase
 	
 	function runPage()
 	{
-		$this->error($errorPage);
+		$this->error($this->errorPage);
 	}
 }

@@ -200,6 +200,6 @@ class WebRequest {
 	
 	public static function isConsoleSession()
 	{
-		return isset($_SERVER['REQUEST_METHOD']);
+		return ! isset($_SERVER['REQUEST_METHOD']);
 	}
 }

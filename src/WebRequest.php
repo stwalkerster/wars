@@ -197,4 +197,9 @@ class WebRequest {
 			return array('Main');
 		}
 	}
+	
+	public static function isConsoleSession()
+	{
+		return isset($_SERVER['REQUEST_METHOD']);
+	}
 }

@@ -37,7 +37,7 @@ class User implements DataObject
 		if(isset($resultset[0]))
 		{
 			$u = User::getById($resultset[0]['user_id']);
-			$_SESSION['currUser'] = serialize($u);
+			$_SESSION['currentUser'] = serialize($u);
 			
 			return true;
 		}

@@ -23,8 +23,16 @@ if(!defined("WARS"))
 
 class PageForward extends PageBase
 {
+	private $linkedRequest;
+	
+	function __construct()
+	{
+		$this->linkedRequest = Request::getById(WebRequest::getInt("id"));	
+	}
+	
 	function runPage()
 	{
-		WebRequest::redirectUrl(WebRequest::getString('link'));
+		if($this->linkedRequest == null || $this->linkedRequest->isAvailableForCurrentUser())
+			WebRequest::redirectUrl(WebRequest::getString('link'));
 	}
 }

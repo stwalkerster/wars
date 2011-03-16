@@ -181,7 +181,7 @@ class WebRequest {
 	public static function getCurrentUser()
 	{
 		if(isset($_SESSION['currUser']))
-			return unserialize($_SESSION['currUser']);
+			return unserialize($_SESSION['currentUser']);
 		else
 			return false;
 	}

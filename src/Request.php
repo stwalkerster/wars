@@ -27,7 +27,7 @@ class Request implements DataObject
 	{
 		$this->new = false;
 		
-		return false;
+		return null;
 	}
 	
 	public function __construct($name, $email, $comment)
@@ -144,7 +144,7 @@ class Request implements DataObject
 	
 	public function reserve($checksum)
 	{
-		$user = unserialize(WebRequest::sessionOrBlank('currentUser'));
+		$user = WebRequest::getCurrentUser();
 		$this->reserved = $user->getId();
 		$this->save($checksum);
 	}
@@ -160,7 +160,7 @@ class Request implements DataObject
 	}
 	public function getEmail()
 	{
-		$user = unserialize(WebRequest::sessionOrBlank('currUser'));
+		$user = WebRequest::getCurrentUser();
 		if($user->isAllowedPrivateData() || $this->isOpen() )
 		{
 			return $this->email;
@@ -169,7 +169,7 @@ class Request implements DataObject
 	}
 	public function getIp()
 	{
-		$user = unserialize(WebRequest::sessionOrBlank('currUser'));
+		$user = WebRequest::getCurrentUser();
 		if($user->isAllowedPrivateData() || $this->isOpen() )
 		{
 			return $this->ip;
@@ -210,7 +210,7 @@ class Request implements DataObject
 	}
 	public function getUseragent()
 	{
-		$user = unserialize(WebRequest::sessionOrBlank('currUser'));
+		$user = WebRequest::getCurrentUser();
 		if($user->isAllowedPrivateData() )
 		{
 			return $this->useragent;
@@ -262,5 +262,20 @@ class Request implements DataObject
 			return true;
 		else
 			return false;
+	}
+	
+	/**
+	 * 
+	 * Is the request available to the current user
+	 * @returns true if unreserved or reserved by the current user
+	 */
+	public function isAvailableForCurrentUser()
+	{
+		if($this->getReserved() == 0)
+			return true;
+		if($this->getReserved() == WebRequest::getCurrentUser()->getId())
+			return true;
+		
+		return false;
 	}
 }

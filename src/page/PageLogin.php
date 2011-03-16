@@ -55,7 +55,10 @@ class PageLogin extends PageBase
 		if(WebRequest::wasPosted())
 		{
 			if(User::authenticate(WebRequest::getString('username'),WebRequest::getString('password')))
+			{
+				// redirect to main page
 				WebRequest::redirect('Main');
+			}
 		}
 		else
 		{

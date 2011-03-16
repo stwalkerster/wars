@@ -82,23 +82,23 @@ class Request implements DataObject
 		if($this->new)
 		{ // INSERT
 			
-			$values = array(
-				$this->name,
-				$this->email,
-				$this->ip,
-				$this->comment,
-				$this->status,
-				$this->checksum,
-				$this->emailconfirmation,
-				$this->reserved,
-				$this->useragent,
-				$this->email_hash,
-				$this->ip_hash,
-				$this->emailsent,
-				$this->date
-			);
-			
-			$this->id = $accDatabase->insert('request', $values);
+//			$values = array(
+//				$this->name,
+//				$this->email,
+//				$this->ip,
+//				$this->comment,
+//				$this->status,
+//				$this->checksum,
+//				$this->emailconfirmation,
+//				$this->reserved,
+//				$this->useragent,
+//				$this->email_hash,
+//				$this->ip_hash,
+//				$this->emailsent,
+//				$this->date
+//			);
+//			
+//			$this->id = $accDatabase->insert('request', $values);
 			
 			$this->new = false;
 			
@@ -115,17 +115,17 @@ class Request implements DataObject
 			// update the checksum
 			$this->checksum = md5($this->id . $this->name . $this->email . microtime());
 			
-			$values = array(
-				'request_email' => $this->email,
-				'request_ip' => $this->ip,
-				'request_status' => $this->status,
-				'request_checksum' => $this->checksum,
-				'request_emailconfirmation' => $this->emailconfirmation,
-				'request_reserved' => $this->reserved,
-				'request_emailsent' => $this->emailsent
-			);
-			
-			$accDatabase->update('request', $values, array('pend_id' => $this->id));
+//			$values = array(
+//				'request_email' => $this->email,
+//				'request_ip' => $this->ip,
+//				'request_status' => $this->status,
+//				'request_checksum' => $this->checksum,
+//				'request_emailconfirmation' => $this->emailconfirmation,
+//				'request_reserved' => $this->reserved,
+//				'request_emailsent' => $this->emailsent
+//			);
+//			
+//			$accDatabase->update('request', $values, array('pend_id' => $this->id));
 			
 			return true;
 		}

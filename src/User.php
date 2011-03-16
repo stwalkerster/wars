@@ -264,27 +264,27 @@ class User implements DataObject
 		global $accDatabase;
 		if($this->newRecord)
 		{ // INSERT
-			$values = array(
-					$this->name, $this->email, $this->pass, $this->admin, $this->developer, 
-					$this->suspended, $this->new, $this->viewprivate, $this->onwiki, $this->welcome, 
-					$this->welcometemplate, $this->secureserver, $this->signature
-					);
-			
-			$this->id = $accDatabase->insert('user', $values);
+//			$values = array(
+//					$this->name, $this->email, $this->pass, $this->admin, $this->developer, 
+//					$this->suspended, $this->new, $this->viewprivate, $this->onwiki, $this->welcome, 
+//					$this->welcometemplate, $this->secureserver, $this->signature
+//					);
+//			
+//			$this->id = $accDatabase->insert('user', $values);
 			
 			$this->newRecord = 0;
 		}
 		else
 		{ // UPDATE
-			$values = array(
-					'user_email' => $this->email, 'user_pass' => $this->pass, 'user_admin' => $this->admin, 
-					'user_developer' => $this->developer, 'user_suspended' => $this->suspended, 
-					'user_new' => $this->new, 'user_onwiki' => $this->onwiki, 
-					'user_welcome' => $this->welcome, 'user_welcometemplate' => $this->welcometemplate, 
-					'user_secureserver' => $this->secureserver, 'user_signature' => $this->signature
-					);
-			
-			$accDatabase->update('user', $values, "user_id = $this->id", 1);
+//			$values = array(
+//					'user_email' => $this->email, 'user_pass' => $this->pass, 'user_admin' => $this->admin, 
+//					'user_developer' => $this->developer, 'user_suspended' => $this->suspended, 
+//					'user_new' => $this->new, 'user_onwiki' => $this->onwiki, 
+//					'user_welcome' => $this->welcome, 'user_welcometemplate' => $this->welcometemplate, 
+//					'user_secureserver' => $this->secureserver, 'user_signature' => $this->signature
+//					);
+//			
+//			$accDatabase->update('user', $values, "user_id = $this->id", 1);
 		}
 	}
 }

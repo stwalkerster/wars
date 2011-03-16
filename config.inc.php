@@ -29,13 +29,13 @@ ini_set('display_errors',1);
  */
 
 // Tool database
-$db_host_a = "helpmebot.org.uk";
+$db_host_a = "dbmaster.helpmebot.org.uk";
 $db_user_a = "wars";
 $db_pass_a = file_get_contents(".dbpw"); // grab the password from this file.
 $db_name_a = 'wars';
 
 // Wikipedia database
-$db_host_w = "helpmebot.org.uk";
+$db_host_w = "dbmaster.helpmebot.org.uk";
 $db_user_w = "stwalkerster";
 $db_pass_w = file_get_contents(".dbpw"); // grab the password from this file.
 $db_name_w = 'helpmebot_wiki';
@@ -123,7 +123,7 @@ if( // if it doesn't exist, OR
 
 
 // set up the environment
-$accDatabase = new Database($db_host_a, $db_user_a, $db_pass_a, $db_name_a);
+$accDatabase = new PDO("mysql:dbname=".$db_name_a.";host=".$db_host_a, $db_user_a, $db_pass_a);
 
 
 // autoload classes that have not been defined in the current script.

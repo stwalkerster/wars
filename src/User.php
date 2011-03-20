@@ -21,14 +21,20 @@
 if(!defined("WARS"))
 	die("Invalid code entry point!");
 	
-class User implements DataObject
+class User extends DataObject
 {
+	/**
+	 * Checks the user's credentials, and logs in the user.
+	 * @param string $username The user's username
+	 * @param string $password The raw password
+	 * @return boolean login was successful.
+	 */
 	public static function authenticate($username, $password)
 	{
 		global $accDatabase;
 		$statement = $accDatabase->prepare("SELECT * FROM user WHERE user_name = :username AND user_password = :password LIMIT 1;");
 		$statement->bindParam(":username", $username);
-		$statement->bindParam(":password", $password);
+		$statement->bindParam(":password", self::saltPassword($username, $password));
 		$resultUser = $statement->fetchObject("User");
 	
 		if($resultUser != false)
@@ -46,13 +52,6 @@ class User implements DataObject
 		global $accDatabase;
 		$statement = $accDatabase->prepare("SELECT * FROM user WHERE user_name = :username LIMIT 1;");
 		$statement->bindParam(":username",$username);
-		return $statement->fetchObject("User");
-	}
-	public static function getById($id)
-	{
-		global $accDatabase;
-		$statement = $accDatabase->prepare("SELECT * FROM user WHERE user_id = :userid LIMIT 1;");
-		$statement->bindParam(":userid",$id);
 		return $statement->fetchObject("User");
 	}
 	
@@ -122,15 +121,18 @@ class User implements DataObject
 	}
 	public function promoteAdmin( ) // security, is current user an admin?
 	{
+		// TODO: Implement function;
 		trigger_error("Not implemented.");
 	}
 	public function demoteAdmin( $reason ) // security, is current user an admin?
 	{
+		// TODO: Implement function;
 		trigger_error("Not implemented.");
 	}
 	
 	public function getDeveloper() 
 	{
+		// TODO: Implement function;
 		trigger_error("Not implemented.");
 	}
 	
@@ -140,10 +142,12 @@ class User implements DataObject
 	}
 	public function suspend( $reason ) // security, is current user an admin?
 	{
+		// TODO: Implement function;
 		trigger_error("Not implemented.");
 	}
 	public function unsuspend( ) // security, is current user an admin?
 	{
+		// TODO: Implement function;
 		trigger_error("Not implemented.");
 	}
 	
@@ -153,11 +157,13 @@ class User implements DataObject
 	}
 	public function approve( ) // security, is current user an admin?
 	{
+		// TODO: Implement function;
 		trigger_error("Not implemented.");
 	}
 	
 	public function isAllowedPrivateData()
 	{
+		// TODO: Implement function;
 		trigger_error("Not implemented.");
 	}
 	
@@ -197,17 +203,43 @@ class User implements DataObject
 		$this->user_welcome_sig=$signature;
 	}
 	
+	
 	public function save()
 	{
 		global $accDatabase;
 		if($this->newRecord)
 		{ // INSERT
-			
+			$statement = $accDatabase->prepare("INSERT INTO `acc_user`(`user_name`,`user_email`,`user_pass`,`user_onwikiname`,`user_confirmationdiff`)VALUES(:username,:useremail,:userpass,:useronwikiname,:userconfirmationdiff);");
+			$statement->bindValue(":username", $this->user_name);
+			$statement->bindValue(":useremail", $this->user_email);
+			$statement->bindValue(":useronwikiname", $this->user_onwikiname);
+			$statement->bindValue(":userpass", $this->user_pass);
+			$statement->bindValue(":userconfirmationdiff", $this->user_confirmationdiff);
+			if(!$statement->execute())
+				return false;
 			$this->newRecord = 0;
+			return true;
 		}
 		else
 		{ // UPDATE
-
+			$sqlText = "UPDATE `acc_user` SET `user_name` = :username, `user_email` = :useremail, `user_pass` = :userpass, `user_level` = :userlevel, `user_onwikiname` = :useronwikiname, `user_welcome_sig` = :userwelcomesig, `user_lastactive` = :userlastactive, `user_lastip` = :userlastip, `user_forcelogout` = :userforcelogout, `user_secure` = :usersecure, `user_checkuser` = :usercheckuser, `user_identified` = :useridentified, `user_welcome_templateid` = :userwelcometemplateid, `user_abortpref` = :userabortpref, WHERE `user_id` = :userid;";
+			$statement = $accDatabase->prepare($sqlText);
+			$statement->bindValue(":username", $this->user_name);
+			$statement->bindValue(":useremail", $this->user_email);
+			$statement->bindValue(":userpass", $this->user_pass);
+			$statement->bindValue(":userlevel", $this->user_level);
+			$statement->bindValue(":useronwikiname", $this->user_onwikiname);
+			$statement->bindValue(":userwelcomesig", $this->user_welcome_sig);
+			$statement->bindValue(":userlastactive", $this->user_lastactive);
+			$statement->bindValue(":userlastip", $this->user_lastip);
+			$statement->bindValue(":userforcelogout", $this->user_forcelogout);
+			$statement->bindValue(":usersecure", $this->user_secure);
+			$statement->bindValue(":usercheckuser", $this->user_checkuser);
+			$statement->bindValue(":useridentified", $this->user_identified);
+			$statement->bindValue(":userwelcometemplateid", $this->user_welcome_templateid);
+			$statement->bindValue(":userabortpref", $this->user_abortpref);
+			$statement->bindValue(":userid", $this->user_id);
+			return $statement->execute();
 		}
 	}
 }

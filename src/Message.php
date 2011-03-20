@@ -13,13 +13,8 @@
 if(!defined("WARS"))
 	die("Invalid code entry point!");
 	
-class Message implements DataObject
-{
-	public static function getById($id)
-	{
-		trigger_error("Not implemented");
-	}
-	
+class Message extends DataObject
+{	
 	public function save()
 	{
 		trigger_error("Not implemented");

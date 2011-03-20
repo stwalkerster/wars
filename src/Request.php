@@ -21,15 +21,8 @@
 if(!defined("WARS"))
 	die("Invalid code entry point!");
 	
-class Request implements DataObject
-{
-	public static function getById($id)
-	{
-		$this->new = false;
-		
-		return null;
-	}
-	
+class Request extends DataObject
+{	
 	public function __construct($name, $email, $comment)
 	{
 		// get globals needed

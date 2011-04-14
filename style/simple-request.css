@@ -3,6 +3,10 @@ body{
 	font-family:sans-serif;
 }
 
-form div{
+form div {
+	margin-bottom:1em;
+}
+
+form div input,form div textarea {
 	display:block;
 }

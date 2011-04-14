@@ -2,3 +2,11 @@
 body{
 	font-family:sans-serif;
 }
+
+form div {
+	margin-bottom:1em;
+}
+
+form div input {
+	display:block;
+}

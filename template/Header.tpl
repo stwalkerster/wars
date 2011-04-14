@@ -2,7 +2,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"> 
 <head> 
 	<title></title>	
-	<link rel="stylesheet" type="text/css" href="{$smarty.config.stylepath}{$stylesheet}" />	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /> 
+	<link rel="stylesheet" type="text/css" href="{$smarty.config.stylepath}{$stylesheet}" />
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /> 
 </head> 
 <body> 
 	<div id="globalwrapper">

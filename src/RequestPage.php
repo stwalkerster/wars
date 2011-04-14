@@ -43,6 +43,7 @@ class RequestPage extends PageBase
 	function runPage()
 	{
 		$this->smarty->assign('showHeaderInfo', 0);
+		$this->smarty->assign('stylesheet', 'simple-request.css');
 		
 		global $databases;
 		

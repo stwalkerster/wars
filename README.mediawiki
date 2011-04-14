@@ -1,0 +1,5 @@
+== Wikipedia Account Request System ==
+
+This is the rewrite of the ACC tool currently in use at http://toolserver.org/~acc/acc.php
+
+Please see INSTALL for installation notes, and HACKING for development notes

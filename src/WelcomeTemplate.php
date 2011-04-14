@@ -21,7 +21,7 @@
 if(!defined("WARS"))
 	die("Invalid code entry point!");
 	
-class WelcomeTemplate implements DataObject
+class WelcomeTemplate extends DataObject
 {
 	static function getById($id)
 	{

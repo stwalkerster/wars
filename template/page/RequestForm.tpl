@@ -1,4 +1,4 @@
-<h2>Welcome!</h2>
+<p>Welcome!</p>
 <p>We need a few bits of information to create your account.</p>
 <p>The first is a username, and secondly, a <strong>valid email address that we can send your password to</strong>. If you want to leave any comments, feel free to do so.</p>
 <p>Note that if you use this form, your IP address will be recorded, and displayed to <a href="{$smarty.config.publicbaselink}userlist.php">those who review account requests</a>.</p>

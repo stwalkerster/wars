@@ -24,5 +24,5 @@ abstract class DataObject
 		return $statement->fetchObject($me);
 	}
 	
-	function save();
+	abstract function save();
 }

@@ -16,3 +16,9 @@ variables to point the the right place too.
 
 Create a file called 'localconfig.inc.php', and in there override any 
 default values you need to.
+
+You'll also need to create the directories:
+	* smartyconfig
+	* smartycache
+	* smartycompile
+...and make sure they're writable by the webserver

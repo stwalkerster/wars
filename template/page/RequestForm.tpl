@@ -22,7 +22,6 @@
 	</div> 
 	<div class="forminfo">Please <span class="semiimportant">check all the information</span> supplied above is correct, and that you have specified a <span class="semiimportant">valid email address</span>, then click the submit button below.</div> 
 	<div class="submit"> 
-		<input type="submit" value="Submit" /> 
-		<input type="reset" value="Reset" /> 
+		<input type="submit" value="Submit" name="submit" /> 
 	</div> 
 </form> 

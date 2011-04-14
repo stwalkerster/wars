@@ -36,6 +36,8 @@ abstract class PageBase
 
 	var $title = "Wikipeda Account Request System";
 
+	var $pagetemplate = "Page.tpl";
+	
 	var $menu = array(
 		'menuHome' => array(
 			'link' => '',
@@ -121,7 +123,7 @@ abstract class PageBase
 		$this->smarty->assign('userid', $curuserid );
 		$this->smarty->assign('username', $curusername );
 		
-		$this->smarty->display('Page.tpl');
+		$this->smarty->display($this->pagetemplate);
 	}
 
 	/**

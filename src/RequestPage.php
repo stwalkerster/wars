@@ -57,6 +57,7 @@ class RequestPage extends PageBase
 		else
 		{	
 			$this->smarty->assign('subpage', 'page/RequestForm.tpl');
+			$this->pagetemplate = "SimplePage.tpl";
 		}
 		
 	}

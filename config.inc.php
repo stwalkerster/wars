@@ -1,4 +1,4 @@
-<?php
+#<?php
 /**************************************************************************
 *                     Wikipedia Account Request System                    *
 ***************************************************************************
@@ -31,13 +31,13 @@ ini_set('display_errors',1);
 // Tool database
 $db_host_a = "dbmaster.helpmebot.org.uk";
 $db_user_a = "wars";
-$db_pass_a = file_get_contents(".dbpw"); // grab the password from this file.
+$db_pass_a = trim(file_get_contents(".dbpw")); // grab the password from this file.
 $db_name_a = 'wars';
 
 // Wikipedia database
 $db_host_w = "dbmaster.helpmebot.org.uk";
 $db_user_w = "stwalkerster";
-$db_pass_w = file_get_contents(".dbpw"); // grab the password from this file.
+$db_pass_w = trim(file_get_contents(".dbpw")); // grab the password from this file.
 $db_name_w = 'helpmebot_wiki';
 
 /*
@@ -120,7 +120,6 @@ if( // if it doesn't exist, OR
 	
 	fclose($handle);
 }
-
 
 // set up the environment
 $accDatabase = new PDO("mysql:dbname=".$db_name_a.";host=".$db_host_a, $db_user_a, $db_pass_a);

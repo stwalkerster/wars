@@ -138,3 +138,11 @@ ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
 SQL
 );
+
+function out($text)
+{
+	$lines = split("[\n|\r]", $text);
+	foreach ($lines as $value) {
+		echo date('c') . "  : " . $value . "\n";
+	}
+}

@@ -86,6 +86,11 @@ die("not implemented yet!");
  *  * titleblacklist
  */
 out("Stage six: Add fully calculated data (run maintenance scripts)");
+
+require_once $baseMaintenancePath . 'RecreateTitleBlacklist.php';
+
+require_once $baseMaintenancePath . 'RecreateTrustedIPs.php';
+
  
 /*
  * Stage seven: Add indices, foreign keys, and other assorted produce

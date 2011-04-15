@@ -36,7 +36,7 @@ function entryFromString($line) {
 	}
 }
 
-$queryresult = unserialize(file_get_contents("http://en.wikipedia.org/w/api.php?action=query&format=php&prop=revisions&titles=MediaWiki:Titleblacklist&rvprop=content"));
+$queryresult = unserialize(HttpClient::getInstance()->get("http://en.wikipedia.org/w/api.php?action=query&format=php&prop=revisions&titles=MediaWiki:Titleblacklist&rvprop=content"));
 $queryresult = current($queryresult['query']['pages']);
 
 $text = $queryresult['revisions'][0]['*'];

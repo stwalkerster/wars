@@ -5,7 +5,7 @@ if (isset($_SERVER['REQUEST_METHOD'])) {
 define("WARS",1);
 require_once 'config.inc.php';
 
-$htmlfile = file_get_contents('http://www.wikimedia.org/trusted-xff.html');
+$htmlfile = HttpClient::getInstance()->get('http://www.wikimedia.org/trusted-xff.html');
 $matchfound = preg_match_all('/(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)/', $htmlfile, $matches, PREG_SET_ORDER);
 if (!$matchfound)
 	die('ERROR: No IPs found on trusted XFF page.');

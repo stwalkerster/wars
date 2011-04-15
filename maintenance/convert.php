@@ -6,7 +6,7 @@
 define("WARS", 1);
 require_once 'config.inc.php';
 
-$olddatabase = "p_acc_sand";
+$olddatabase = "p_acc_live_testcopy";
 
 require_once $baseMaintenancePath . 'convert.inc';
 

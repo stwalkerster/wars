@@ -106,7 +106,9 @@ foreach ($log_updates as $q)
 	out("    Done!");
 }
 
-
+out("  - Final insertion");
+query("INSERT INTO acc_log SELECT log_id, log_target_id, log_target_object, log_target_text, log_user_id, log_user_text, log_action, log_time, log_cmt FROM $olddatabase.acc_log;");
+out("    Done!");
 
 /*
  * Stage seven: Add fully calculated data (run maintenance scripts)

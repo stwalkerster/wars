@@ -56,6 +56,9 @@ $baseIncludePath = "/home/stwalkerster/public_helpmebot_html/newacc/src/";
 // the path which stores all the stylesheets
 $baseStylePath = "/~stwalkerster/newacc/style/";
 
+// the real file path where the maintenance directory is.
+$baseMaintenancePath = $baseScriptPath . "maintenance/";
+
 // the path where Peachy resides
 $peachyPath = $baseScriptPath . "peachy/";
 

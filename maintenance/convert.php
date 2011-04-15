@@ -80,15 +80,15 @@ out("    Done!");
 out("Stage five: Add partially calculated dependant data");
 
 out("  - acc_welcome");
-query("INSERT INTO acc_welcome SELECT welcome_id, user_id, acc_welcome.welcome_user, acc_welcome.welcome_status FROM $olddatabase.acc_welcome left join $olddatabase.acc_user on user_name = welcome_uid;");
+query("INSERT INTO acc_welcome SELECT welcome_id, user_id, acc_welcome.welcome_user, acc_welcome.welcome_status FROM $olddatabase.acc_welcome left join acc_user on user_name = welcome_uid;");
 out("    Done!");
 
 out("  - acc_ban");
-query("INSERT INTO acc_ban SELECT ban_id, ban_type, ban_target, user_id, ban_reason, ban_date, ban_duration, ban_active FROM $olddatabase.acc_ban left join $olddatabase.acc_user on user_name = ban_user;");
+query("INSERT INTO acc_ban SELECT ban_id, ban_type, ban_target, user_id, ban_reason, ban_date, ban_duration, ban_active FROM $olddatabase.acc_ban left join acc_user on user_name = ban_user;");
 out("    Done!");
 
 out("  - acc_cmt");
-query("INSERT INTO acc_cmt SELECT cmt_id, cmt_time, user_id, cmt_comment, cmt_visability, pend_id FROM $olddatabase.acc_cmt left join $olddatabase.acc_user on user_name = cmt_user;");
+query("INSERT INTO acc_cmt SELECT cmt_id, cmt_time, user_id, cmt_comment, cmt_visability, pend_id FROM $olddatabase.acc_cmt left join acc_user on user_name = cmt_user;");
 out("    Done!");
 
 /*

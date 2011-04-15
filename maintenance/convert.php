@@ -30,7 +30,12 @@ foreach ($tables_sql as $key => $value)
 {
 	out("  - $key");
 	$result = $accDatabase->query($value);
-	print_r($result->errorInfo());
+	$error = $result->errorInfo();
+	if($error[0] != "0000")
+	{
+		print_r($error);
+		die;
+	}
 	out("    Done!");
 }
 

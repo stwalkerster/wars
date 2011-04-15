@@ -79,7 +79,7 @@ out("    Done!");
  *  * cmt
  */
 out("Stage five: Add partially calculated dependant data");
-
+die("not implemented yet!");
 /*
  * Stage six: Add fully calculated data (run maintenance scripts)
  *  * trusted ips

@@ -78,7 +78,6 @@ out("    Done!");
  *  * cmt
  */
 out("Stage five: Add partially calculated dependant data");
-die("not implemented yet!");
 
 /*
  * Stage six: Split table columns:

@@ -79,6 +79,14 @@ out("    Done!");
  */
 out("Stage five: Add partially calculated dependant data");
 
+out("  - acc_welcome");
+query("INSERT INTO acc_welcome SELECT welcome_id, user_id, acc_welcome.welcome_user, acc_welcome.welcome_status FROM $olddatabase.acc_welcome left join $olddatabase.acc_user on user_name = welcome_uid;");
+out("    Done!");
+
+out("  - acc_ban");
+query("SELECT ban_id, ban_type, ban_target, user_id, ban_reason, ban_date, ban_duration, ban_active FROM acc_ban left join acc_user on user_name = ban_user;");
+out("    Done!");
+
 /*
  * Stage six: Split table columns:
  *  * log

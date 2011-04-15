@@ -116,7 +116,7 @@ CREATE  TABLE IF NOT EXISTS `acc_log` (
   `log_user_id` INT NOT NULL DEFAULT 0 ,
   `log_user_text` VARCHAR(255) NOT NULL ,
   `log_action` VARCHAR(255) NOT NULL ,
-  `log_time` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ,
+  `log_time` DATETIME NOT NULL ,
   `log_cmt` BLOB NOT NULL ,
   PRIMARY KEY (`log_id`) ,
   INDEX `acc_log_action_idx` (`log_action` ASC) ,

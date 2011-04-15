@@ -6,7 +6,7 @@
 define("WARS", 1);
 require_once 'config.inc.php';
 
-$olddatabase = "p_acc_live_testcopy";
+$olddatabase = "p_acc_test";
 
 require_once $baseMaintenancePath . 'convert.inc';
 
@@ -96,6 +96,17 @@ out("    Done!");
  *  * log
  */
 out("Stage six: Split table columns");
+
+$i=0;
+foreach ($log_updates as $q)
+{
+	$i++;
+	out("  - $i / 27");
+	query($q);
+	out("    Done!");
+}
+
+
 
 /*
  * Stage seven: Add fully calculated data (run maintenance scripts)

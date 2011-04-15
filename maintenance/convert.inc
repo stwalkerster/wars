@@ -141,6 +141,36 @@ DEFAULT CHARACTER SET = utf8
 SQL
 );
 
+$log_updates = array(
+"ALTER TABLE $olddatabase.acc_log ADD COLUMN `log_user_id` INT NULL  AFTER `log_cmt` , ADD COLUMN `log_user_text` VARCHAR(255) NULL  AFTER `log_user_id` , ADD COLUMN `log_target_id` INT NULL  AFTER `log_user_text` , ADD COLUMN `log_target_object` VARCHAR(45) NULL  AFTER `log_target_id` , ADD COLUMN `log_target_text` VARCHAR(255) NULL  AFTER `log_target_object` ;",
+"SET SQL_SAFE_UPDATES=0;",
+"update $olddatabase.acc_log set log_user_text = log_user;",
+"update $olddatabase.acc_log set log_target_object = 'user', log_target_id = log_pend where log_action = 'Approved';",
+"update $olddatabase.acc_log set log_target_object = 'ban', log_target_text = log_pend where log_action = 'Banned';",
+"delete from $olddatabase.acc_log where log_action = 'Blacklist Hit';",
+"update $olddatabase.acc_log set log_target_object = 'request', log_target_id = log_pend where log_action = 'BreakReserve';",
+"delete from $olddatabase.acc_log where log_action = 'Closed';",
+"update $olddatabase.acc_log set log_target_object = 'request', log_target_id = log_pend where log_action  like 'Closed %';",
+"update $olddatabase.acc_log set log_action = 'Deferred to flagged users' where log_action = 'Deferred to admins';",
+"update $olddatabase.acc_log set log_target_object = 'request', log_target_id = log_pend where log_action like 'Deferred to%';",
+"update $olddatabase.acc_log set log_target_object = 'request', log_target_id = log_pend where log_action = 'Email Confirmed';",
+"delete from $olddatabase.acc_log where log_action = 'DNSBL Hit';",
+"update $olddatabase.acc_log set log_target_object = 'request', log_target_id = log_pend where log_action = 'Reserved';",
+"update $olddatabase.acc_log set log_target_object = 'request', log_target_id = log_pend where log_action = 'Unreserved';",
+"delete from $olddatabase.acc_log where log_action = 'badpass';",
+"update $olddatabase.acc_log set log_target_object = 'user', log_target_id = log_pend where log_action = 'Declined';",
+"update $olddatabase.acc_log set log_target_object = 'user', log_target_id = log_pend where log_action = 'Demoted';",
+"update $olddatabase.acc_log set log_target_object = 'user', log_target_id = log_pend where log_action = 'Promoted';",
+"update $olddatabase.acc_log set log_target_object = 'user', log_target_id = log_pend where log_action = 'Suspended';",
+"update $olddatabase.acc_log set log_target_object = 'message', log_target_id = log_pend where log_action = 'Edited';",
+"update $olddatabase.acc_log set log_target_object = 'ban', log_target_id = log_pend where log_action = 'Unbanned';",
+"update $olddatabase.acc_log set log_target_object = 'user', log_target_id = log_pend where log_action = 'Prefchange';",
+"update $olddatabase.acc_log set log_target_object = 'user', log_target_id = log_pend where log_action = 'Renamed';",
+"update $olddatabase.acc_log set log_target_object = 'template', log_target_id = log_pend where log_action = 'CreatedTemplate';",
+"update $olddatabase.acc_log set log_target_object = 'template', log_target_id = log_pend where log_action = 'DeletedTemplate';",
+"update $olddatabase.acc_log set log_target_object = 'template', log_target_id = log_pend where log_action = 'EditedTemplate';",
+);
+
 function out($text)
 {
 	$lines = split("[\n|\r]", $text);

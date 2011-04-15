@@ -1,5 +1,5 @@
 <?php
-
+define("WARS", 1);
 require_once 'config.inc.php';
 
 $olddatabase = "p_acc_sand";

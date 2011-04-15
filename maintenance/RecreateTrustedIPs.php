@@ -44,6 +44,7 @@ if($accDatabase->beginTransaction())
 	}
 
 	$accDatabase->commit();
+	echo "Trusted IPs table has been recreated.\n";
 }
 else
 	echo "Error starting transaction.\n";

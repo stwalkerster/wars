@@ -80,7 +80,9 @@ CREATE  TABLE IF NOT EXISTS `acc_emails` (
   `mail_count` INT(11) NOT NULL ,
   `mail_desc` VARCHAR(255) NOT NULL ,
   `mail_type` VARCHAR(255) NOT NULL ,
-  PRIMARY KEY (`mail_id`) )
+  `mail_key` VARCHAR(45) NOT NULL ,
+  PRIMARY KEY (`mail_id`) ,
+  UNIQUE INDEX `mail_key_UNIQUE` (`mail_key` ASC) )
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1
 SQL

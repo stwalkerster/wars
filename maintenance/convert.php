@@ -101,21 +101,17 @@ $i=0;
 foreach ($log_updates as $q)
 {
 	$i++;
-	out("  - $i / 27");
+	out("  - $i / 28");
 	query($q);
 	out("    Done!");
 }
-
-out("  - Final insertion");
-query("INSERT INTO acc_log SELECT log_id, log_target_id, log_target_object, log_target_text, log_user_id, log_user_text, log_action, log_time, log_cmt FROM $olddatabase.acc_log;");
-out("    Done!");
 
 /*
  * Stage seven: Add fully calculated data (run maintenance scripts)
  *  * trusted ips
  *  * titleblacklist
  */
-out("Stage six: Add fully calculated data (run maintenance scripts)");
+out("Stage seven: Add fully calculated data (run maintenance scripts)");
 
 require_once $baseMaintenancePath . 'RecreateTitleBlacklist.php';
 

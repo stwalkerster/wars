@@ -169,6 +169,7 @@ $log_updates = array(
 "update $olddatabase.acc_log set log_target_object = 'template', log_target_id = log_pend where log_action = 'CreatedTemplate';",
 "update $olddatabase.acc_log set log_target_object = 'template', log_target_id = log_pend where log_action = 'DeletedTemplate';",
 "update $olddatabase.acc_log set log_target_object = 'template', log_target_id = log_pend where log_action = 'EditedTemplate';",
+"INSERT INTO acc_log SELECT log_id, log_target_id, log_target_object, log_target_text, user_id, log_user_text, log_action, log_time, log_cmt FROM $olddatabase.acc_log left JOIN acc_user on user_name = log_user_text;",
 );
 
 function out($text)

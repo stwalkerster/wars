@@ -92,6 +92,9 @@ $dontUseDb = 0;
 // default reserver
 $defaultReserver = 0;
 
+// the useragent used by the tool when making external requests
+$toolUserAgent = "WARS/0.1 (+http://toolserver.org/~acc/; +https://github.com/enwikipedia-acc/wars)";
+
 /*
  * Smarty configuration
  */

@@ -27,19 +27,7 @@ out("Stage one: Create database tables");
 foreach ($tables_sql as $key => $value)
 {
 	out("  - $key");
-	$result = $accDatabase->query($value);
-	if(get_class($result) != "PDOStatement")
-	{
-		out("Error! Could not retrieve result!");
-		echo $value;
-		die();
-	}
-	$error = $result->errorInfo();
-	if($error[0] != "0000")
-	{
-		print_r($error);
-		die;
-	}
+	query($value);
 	out("    Done!");
 }
 
@@ -52,35 +40,11 @@ foreach ($tables_sql as $key => $value)
 out("Stage two: Add existing simple data");
 
 out("  - acc_template");
-$result = $accDatabase->query("INSERT INTO acc_template SELECT * FROM $olddatabase.acc_template;");
-if(get_class($result) != "PDOStatement")
-{
-	out("Error! Could not retrieve result!");
-	echo $value;
-	die();
-}
-$error = $result->errorInfo();
-if($error[0] != "0000")
-{
-	print_r($error);
-	die;
-}
+query("INSERT INTO acc_template SELECT * FROM $olddatabase.acc_template;");
 out("    Done!");
 
 out("  - acc_emails");
-$result = $accDatabase->query("INSERT INTO acc_emails SELECT mail_id, mail_text, mail_count, mail_desc, mail_type, substr(mail_desc,1,45) FROM $olddatabase.acc_emails;");
-if(get_class($result) != "PDOStatement")
-{
-	out("Error! Could not retrieve result!");
-	echo $value;
-	die();
-}
-$error = $result->errorInfo();
-if($error[0] != "0000")
-{
-	print_r($error);
-	die;
-}
+query("INSERT INTO acc_emails SELECT mail_id, mail_text, mail_count, mail_desc, mail_type, substr(mail_desc,1,45) FROM $olddatabase.acc_emails;");
 out("    Done!");
 
 
@@ -93,19 +57,7 @@ out("    Done!");
 out("Stage three: Add dependant data");
 
 out("  - acc_user");
-$result = $accDatabase->query("INSERT INTO acc_user SELECT user_id, user_name, user_email, user_pass, user_level, user_onwikiname, user_welcome_sig, user_lastactive, user_lastip, user_forcelogout, user_secure, user_checkuser, user_identified, user_welcome_templateid, user_abortpref, user_confirmationdiff FROM $olddatabase.acc_user; ");
-if(get_class($result) != "PDOStatement")
-{
-	out("Error! Could not retrieve result!");
-	echo $value;
-	die();
-}
-$error = $result->errorInfo();
-if($error[0] != "0000")
-{
-	print_r($error);
-	die;
-}
+query("INSERT INTO acc_user SELECT user_id, user_name, user_email, user_pass, user_level, user_onwikiname, user_welcome_sig, user_lastactive, user_lastip, user_forcelogout, user_secure, user_checkuser, user_identified, user_welcome_templateid, user_abortpref, user_confirmationdiff FROM $olddatabase.acc_user; ");
 out("    Done!");
 
 /*
@@ -116,19 +68,7 @@ out("    Done!");
 out("Stage four: Add dependant data");
 
 out("  - acc_pend");
-$result = $accDatabase->query("INSERT INTO acc_pend SELECT * FROM $olddatabase.acc_pend;");
-if(get_class($result) != "PDOStatement")
-{
-	out("Error! Could not retrieve result!");
-	echo $value;
-	die();
-}
-$error = $result->errorInfo();
-if($error[0] != "0000")
-{
-	print_r($error);
-	die;
-}
+query("INSERT INTO acc_pend SELECT * FROM $olddatabase.acc_pend;");
 out("    Done!");
 
 /*

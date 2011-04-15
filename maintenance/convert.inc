@@ -148,3 +148,21 @@ function out($text)
 		echo date('c') . "  : " . $value . "\n";
 	}
 }
+
+function query($q)
+{
+	global $accDatabase;
+	$result = $accDatabase->query($q);
+	if(get_class($result) != "PDOStatement")
+	{
+		out("Error! Could not retrieve result!");
+		echo $value;
+		die();
+	}
+	$error = $result->errorInfo();
+	if($error[0] != "0000")
+	{
+		print_r($error);
+		die;
+	}	
+}

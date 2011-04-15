@@ -24,9 +24,6 @@ foreach ($ip as $i) {
 }
 $sqlquery = substr($sqlquery, 0, -2) . ';';
 
-mysql_connect($toolserver_host, $toolserver_username, $toolserver_password);
-@ mysql_select_db($toolserver_database) or die(mysql_error());
-
 if($accDatabase->beginTransaction())
 {
 	

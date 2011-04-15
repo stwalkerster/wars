@@ -66,7 +66,7 @@ if($accDatabase->beginTransaction())
 	foreach ($entries as $entry) {
 		list($rregex, $casesensitive) = $entry;
 		
-		$regex = mysql_real_escape_string($rregex);
+		$regex = $accDatabase->quote($rregex);
 		
 		if(array_key_exists($regex, $sanitycheck))
 			continue;

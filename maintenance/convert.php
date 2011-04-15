@@ -87,6 +87,10 @@ out("  - acc_ban");
 query("SELECT ban_id, ban_type, ban_target, user_id, ban_reason, ban_date, ban_duration, ban_active FROM acc_ban left join acc_user on user_name = ban_user;");
 out("    Done!");
 
+out("  - acc_cmt");
+query("SELECT cmt_id, cmt_time, user_id, cmt_comment, cmt_visability, pend_id FROM acc_cmt left join acc_user on user_name = cmt_user;");
+out("    Done!");
+
 /*
  * Stage six: Split table columns:
  *  * log

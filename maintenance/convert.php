@@ -75,13 +75,19 @@ out("    Done!");
  * Stage five: Add partially calculated dependant data:
  *  * welcome
  *  * ban
- *  * log
  *  * cmt
  */
 out("Stage five: Add partially calculated dependant data");
 die("not implemented yet!");
+
 /*
- * Stage six: Add fully calculated data (run maintenance scripts)
+ * Stage six: Split table columns:
+ *  * log
+ */
+out("Stage six: Split table columns");
+
+/*
+ * Stage seven: Add fully calculated data (run maintenance scripts)
  *  * trusted ips
  *  * titleblacklist
  */
@@ -91,7 +97,6 @@ require_once $baseMaintenancePath . 'RecreateTitleBlacklist.php';
 
 require_once $baseMaintenancePath . 'RecreateTrustedIPs.php';
 
- 
 /*
- * Stage seven: Add indices, foreign keys, and other assorted produce
+ * Stage eight: Add indices, foreign keys, and other assorted produce
  */

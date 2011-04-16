@@ -1,14 +1,14 @@
 <?php 
 
 $tables_sql = array( 'acc_trustedips' => <<<SQL
-CREATE  TABLE IF NOT EXISTS `acc_trustedips` (
+CREATE  TABLE  `acc_trustedips` (
   `trustedips_ipaddr` VARCHAR(15) NOT NULL ,
   PRIMARY KEY (`trustedips_ipaddr`) )
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1
 SQL
 , 'acc_titleblacklist' => <<<SQL
-CREATE  TABLE IF NOT EXISTS `acc_titleblacklist` (
+CREATE  TABLE  `acc_titleblacklist` (
   `titleblacklist_regex` VARCHAR(128) NOT NULL ,
   `titleblacklist_casesensitive` TINYINT(1) NOT NULL ,
   PRIMARY KEY (`titleblacklist_regex`) )
@@ -16,7 +16,7 @@ ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1
 SQL
 , 'acc_welcomequeue' => <<<SQL
-CREATE  TABLE IF NOT EXISTS `acc_welcomequeue` (
+CREATE  TABLE  `acc_welcomequeue` (
   `welcomequeue_id` INT(11) NOT NULL AUTO_INCREMENT ,
   `welcomequeue_uid` INT NOT NULL DEFAULT 0 COMMENT 'Username of the welcoming user' ,
   `welcomequeue_user` VARCHAR(1024) NOT NULL ,
@@ -26,7 +26,7 @@ ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1
 SQL
 , 'acc_ban' => <<<SQL
-CREATE  TABLE IF NOT EXISTS `acc_ban` (
+CREATE  TABLE  `acc_ban` (
   `ban_id` INT(11) NOT NULL AUTO_INCREMENT ,
   `ban_type` VARCHAR(255) NOT NULL ,
   `ban_target` VARCHAR(700) NOT NULL ,
@@ -40,7 +40,7 @@ ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1
 SQL
 , 'acc_welcometemplate' => <<<SQL
-CREATE  TABLE IF NOT EXISTS `acc_welcometemplate` (
+CREATE  TABLE  `acc_welcometemplate` (
   `welcometemplate_id` INT(11) NOT NULL AUTO_INCREMENT ,
   `welcometemplate_usercode` TINYTEXT NOT NULL ,
   `welcometemplate_botcode` TINYTEXT NOT NULL ,
@@ -49,7 +49,7 @@ ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1
 SQL
 , 'acc_user' => <<<SQL
-CREATE  TABLE IF NOT EXISTS `acc_user` (
+CREATE  TABLE  `acc_user` (
   `user_id` INT(11) NOT NULL AUTO_INCREMENT ,
   `user_name` VARCHAR(255) NOT NULL ,
   `user_email` VARCHAR(255) NOT NULL ,
@@ -71,7 +71,7 @@ ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1
 SQL
 , 'acc_message' => <<<SQL
-CREATE  TABLE IF NOT EXISTS `acc_message` (
+CREATE  TABLE  `acc_message` (
   `message_id` INT(11) NOT NULL AUTO_INCREMENT ,
   `message_text` BLOB NOT NULL ,
   `message_count` INT(11) NOT NULL ,
@@ -83,7 +83,7 @@ ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1
 SQL
 , 'acc_request' => <<<SQL
-CREATE  TABLE IF NOT EXISTS `acc_request` (
+CREATE  TABLE  `acc_request` (
   `request_id` INT(11) NOT NULL AUTO_INCREMENT ,
   `request_email` VARCHAR(512) NOT NULL ,
   `request_ip` VARCHAR(255) NOT NULL ,
@@ -102,7 +102,7 @@ ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1
 SQL
 , 'acc_log' => <<<SQL
-CREATE  TABLE IF NOT EXISTS `acc_log` (
+CREATE  TABLE  `acc_log` (
   `log_id` INT(11) NOT NULL AUTO_INCREMENT ,
   `log_target_id` INT NOT NULL DEFAULT 0 ,
   `log_target_objecttype` VARCHAR(45) NULL ,
@@ -117,7 +117,7 @@ ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1
 SQL
 , 'acc_comment' => <<<SQL
-CREATE  TABLE IF NOT EXISTS `acc_comment` (
+CREATE  TABLE  `acc_comment` (
   `comment_id` INT(11) NOT NULL AUTO_INCREMENT ,
   `comment_time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ,
   `comment_user` INT NOT NULL DEFAULT 0 ,
@@ -133,27 +133,41 @@ SQL
 $backup = array(
 "DROP DATABASE IF EXISTS ".$olddatabase."_backup;",
 "CREATE DATABASE ".$olddatabase."_backup;",
-"LOCK TABLES $olddatabase.acc_ban WRITE, $olddatabase.acc_cmt WRITE, $olddatabase.acc_emails WRITE, $olddatabase.acc_log WRITE, $olddatabase.acc_pend WRITE, $olddatabase.acc_template WRITE, $olddatabase.acc_titleblacklist WRITE, $olddatabase.acc_trustedips WRITE, $olddatabase.acc_user WRITE, $olddatabase.acc_welcome WRITE;",
 "CREATE TABLE ".$olddatabase."_backup.acc_ban LIKE $olddatabase.acc_ban;",
-"INSERT INTO ".$olddatabase."_backup.acc_ban SELECT * FROM $olddatabase.acc_ban;",
 "CREATE TABLE ".$olddatabase."_backup.acc_cmt LIKE $olddatabase.acc_cmt;",
-"INSERT INTO ".$olddatabase."_backup.acc_cmt SELECT * FROM $olddatabase.acc_cmt;",
 "CREATE TABLE ".$olddatabase."_backup.acc_emails LIKE $olddatabase.acc_emails;",
-"INSERT INTO ".$olddatabase."_backup.acc_emails SELECT * FROM $olddatabase.acc_emails;",
 "CREATE TABLE ".$olddatabase."_backup.acc_log LIKE $olddatabase.acc_log;",
-"INSERT INTO ".$olddatabase."_backup.acc_log SELECT * FROM $olddatabase.acc_log;",
 "CREATE TABLE ".$olddatabase."_backup.acc_pend LIKE $olddatabase.acc_pend;",
-"INSERT INTO ".$olddatabase."_backup.acc_pend SELECT * FROM $olddatabase.acc_pend;",
 "CREATE TABLE ".$olddatabase."_backup.acc_template LIKE $olddatabase.acc_template;",
-"INSERT INTO ".$olddatabase."_backup.acc_template SELECT * FROM $olddatabase.acc_template;",
 "CREATE TABLE ".$olddatabase."_backup.acc_titleblacklist LIKE $olddatabase.acc_titleblacklist;",
-"INSERT INTO ".$olddatabase."_backup.acc_titleblacklist SELECT * FROM $olddatabase.acc_titleblacklist;",
 "CREATE TABLE ".$olddatabase."_backup.acc_trustedips LIKE $olddatabase.acc_trustedips;",
-"INSERT INTO ".$olddatabase."_backup.acc_trustedips SELECT * FROM $olddatabase.acc_trustedips;",
 "CREATE TABLE ".$olddatabase."_backup.acc_user LIKE $olddatabase.acc_user;",
-"INSERT INTO ".$olddatabase."_backup.acc_user SELECT * FROM $olddatabase.acc_user;",
 "CREATE TABLE ".$olddatabase."_backup.acc_welcome LIKE $olddatabase.acc_welcome;",
+
+"LOCK TABLES $olddatabase.acc_ban WRITE, $olddatabase.acc_cmt WRITE, $olddatabase.acc_emails WRITE, 
+	$olddatabase.acc_log WRITE, $olddatabase.acc_pend WRITE, $olddatabase.acc_template WRITE, 
+	$olddatabase.acc_titleblacklist WRITE, $olddatabase.acc_trustedips WRITE, $olddatabase.acc_user WRITE, 
+	$olddatabase.acc_welcome WRITE, ".$olddatabase."_backup.acc_ban WRITE, 
+	".$olddatabase."_backup.acc_cmt WRITE, ".$olddatabase."_backup.acc_emails WRITE, 
+	".$olddatabase."_backup.acc_log WRITE, ".$olddatabase."_backup.acc_pend WRITE, 
+	".$olddatabase."_backup.acc_template WRITE, ".$olddatabase."_backup.acc_titleblacklist WRITE, 
+	".$olddatabase."_backup.acc_trustedips WRITE, ".$olddatabase."_backup.acc_user WRITE, 
+	".$olddatabase."_backup.acc_welcome WRITE,
+	acc_trustedips WRITE, acc_titleblacklist WRITE, acc_welcomequeue WRITE, acc_ban WRITE,
+	acc_welcometemplate WRITE, acc_user WRITE, acc_message WRITE, acc_request WRITE, acc_log WRITE,
+	acc_comment WRITE;",
+
+"INSERT INTO ".$olddatabase."_backup.acc_ban SELECT * FROM $olddatabase.acc_ban;",
+"INSERT INTO ".$olddatabase."_backup.acc_cmt SELECT * FROM $olddatabase.acc_cmt;",
+"INSERT INTO ".$olddatabase."_backup.acc_emails SELECT * FROM $olddatabase.acc_emails;",
+"INSERT INTO ".$olddatabase."_backup.acc_log SELECT * FROM $olddatabase.acc_log;",
+"INSERT INTO ".$olddatabase."_backup.acc_pend SELECT * FROM $olddatabase.acc_pend;",
+"INSERT INTO ".$olddatabase."_backup.acc_template SELECT * FROM $olddatabase.acc_template;",
+"INSERT INTO ".$olddatabase."_backup.acc_titleblacklist SELECT * FROM $olddatabase.acc_titleblacklist;",
+"INSERT INTO ".$olddatabase."_backup.acc_trustedips SELECT * FROM $olddatabase.acc_trustedips;",
+"INSERT INTO ".$olddatabase."_backup.acc_user SELECT * FROM $olddatabase.acc_user;",
 "INSERT INTO ".$olddatabase."_backup.acc_welcome SELECT * FROM $olddatabase.acc_welcome;",
+
 );
 
 $pre_transform = array(
@@ -198,10 +212,13 @@ function out($text, $newline=TRUE)
 	}
 }
 
+$querycount = 0;
+
 function query($q)
 {
 	global $accDatabase;
 	$result = $accDatabase->query($q);
+	$querycount++;
 	$error = $accDatabase->errorInfo();
 	if($error[0] != "0000")
 	{

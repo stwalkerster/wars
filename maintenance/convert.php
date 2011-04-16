@@ -19,11 +19,26 @@ for ($i = 10; $i > 0; $i--) {
 }
 
 out("Starting conversion...");
+
 /*
- * Stage zero: Make a hot spare of the old database, and lock the tables in the current one
+ * Stage one: Create database tables
  */
 
-out("Stage zero: Make a hot spare of the old database, and lock the tables in the current one");
+out("Stage one: Create database tables");
+
+foreach ($tables_sql as $key => $value)
+{
+	out("  - $key");
+	query("DROP TABLE IF EXISTS $key;");
+	query($value);
+	out("    Done!");
+}
+
+/*
+ * Stage two: Make a hot spare of the old database
+ */
+
+out("Stage two: Make a hot spare of the old database");
 
 $i=0;
 $imax = count($backup);
@@ -36,11 +51,13 @@ foreach ($backup as $q)
 }
 
 out(" Done!");
+
+
 /*
- * Stage one: Perform pre-transforms on existing database
+ * Stage three: Perform pre-transforms on existing database
  */
 
-out("Stage one: Perform pre-transforms on data");
+out("Stage three: Perform pre-transforms on data");
 
 $i=0;
 $imax = count($pre_transform);
@@ -53,27 +70,16 @@ foreach ($pre_transform as $q)
 }
 
 out(" Done!");
-/*
- * Stage two: Create database tables
- */
 
-out("Stage two: Create database tables");
-
-foreach ($tables_sql as $key => $value)
-{
-	out("  - $key");
-	query($value);
-	out("    Done!");
-}
 
 out(" Done!");
 /*
- * Stage three: Add existing simple data:
+ * Stage four: Add existing simple data:
  *  * template
  *  * emails
  */
  
-out("Stage three: Add existing simple data");
+out("Stage four: Add existing simple data");
 
 out("  - acc_welcometemplate");
 query("INSERT INTO acc_welcometemplate SELECT * FROM $olddatabase.acc_template;");
@@ -86,11 +92,11 @@ out("    Done!");
 
 out(" Done!");
 /*
- * Stage four: Add dependant data:
+ * Stage five: Add dependant data:
  *  * user
  */
  
-out("Stage four: Add dependant data");
+out("Stage five: Add dependant data");
 
 out("  - acc_user");
 query("INSERT INTO acc_user SELECT user_id, user_name, user_email, user_pass, user_level, user_onwikiname, user_welcome_sig, user_lastactive, user_lastip, user_forcelogout, user_secure, user_checkuser, user_identified, user_welcome_templateid, user_abortpref, user_confirmationdiff FROM $olddatabase.acc_user; ");
@@ -98,11 +104,11 @@ out("    Done!");
 
 out(" Done!");
 /*
- * Stage five: Add dependant data:
+ * Stage six: Add dependant data:
  *  * pend
  */
 
-out("Stage five: Add dependant data");
+out("Stage six: Add dependant data");
 
 out("  - acc_request");
 query("INSERT INTO acc_request SELECT * FROM $olddatabase.acc_pend;");
@@ -110,12 +116,12 @@ out("    Done!");
 
 out(" Done!");
 /*
- * Stage six: Add partially calculated dependant data:
+ * Stage seven: Add partially calculated dependant data:
  *  * welcome
  *  * ban
  *  * cmt
  */
-out("Stage six: Add partially calculated dependant data");
+out("Stage seven: Add partially calculated dependant data");
 
 out("  - acc_welcomequeue");
 query("INSERT INTO acc_welcomequeue SELECT welcome_id, user_id, acc_welcome.welcome_user, acc_welcome.welcome_status FROM $olddatabase.acc_welcome left join acc_user on user_name = welcome_uid;");
@@ -131,10 +137,10 @@ out("    Done!");
 
 out(" Done!");
 /*
- * Stage seven: Split table columns:
+ * Stage eight: Split table columns:
  *  * log
  */
-out("Stage seven: Split table columns");
+out("Stage eight: Split table columns");
 
 out("  - acc_log");
 query("INSERT INTO acc_log SELECT log_id, log_target_id, log_target_object, log_target_text, user_id, log_user_text, log_action, log_time, log_cmt FROM $olddatabase.acc_log left JOIN acc_user on user_name = log_user_text;");
@@ -142,11 +148,11 @@ out("    Done!");
 
 out(" Done!");
 /*
- * Stage eight: Add fully calculated data (run maintenance scripts)
+ * Stage nine: Add fully calculated data (run maintenance scripts)
  *  * trusted ips
  *  * titleblacklist
  */
-out("Stage eight: Add fully calculated data (run maintenance scripts)");
+out("Stage nine: Add fully calculated data (run maintenance scripts)");
 
 require_once $baseMaintenancePath . 'RecreateTitleBlacklist.php';
 
@@ -154,9 +160,9 @@ require_once $baseMaintenancePath . 'RecreateTrustedIPs.php';
 
 out(" Done!");
 /* 
- * Stage nine: Run post-transform queries on the database
+ * Stage ten: Run post-transform queries on the database
  */
-out("Stage nine: Run post-transform queries on the database");
+out("Stage ten: Run post-transform queries on the database");
 
 $i=0;
 $imax = count($post_transform);
@@ -170,6 +176,10 @@ foreach ($post_transform as $q)
 
 out(" Done!");
 /*
- * Stage ten: Add indices, foreign keys, and other assorted produce
+ * Stage eleven: Add indices, foreign keys, and other assorted produce
  */
-out("Stage ten: Add indices, foreign keys, and other assorted produce");
+out("Stage eleven: Add indices, foreign keys, and other assorted produce");
+
+out(" Done!");
+
+out("Conversion Complete. $querycount queries were executed.");

@@ -23,28 +23,12 @@ if(!defined("WARS"))
 	
 class WelcomeTemplate extends DataObject
 {
-	static function getById($id)
+	static function getDisplayList()
 	{
 		trigger_error("Not implemented.");
 	}
 	
-	static function getDisplayList()
-	{
-		$s = new DatabaseSelect();
-		$s->fields = array('template_id', 'template_display');
-		$s->from='welcometemplate';
-		
-		global $accDatabase;
-		$rs = $accDatabase->getResultSet($s, MYSQL_ASSOC);
-		
-		$list = array();
-		foreach ($rs as $r) 
-		{
-			$list[$r['template_id']] = $r['template_display'];
-		}
-		
-		return $list;
-	}
+	private $template_id, $template_usercode, $template_botcode;
 	
 	function save()
 	{

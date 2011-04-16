@@ -18,8 +18,9 @@ for ($i = 10; $i > 0; $i--) {
 	sleep(1);
 }
 
-out("Starting conversion...");
 
+out("Starting conversion...");
+pause();
 /*
  * Stage one: Create database tables
  */
@@ -33,7 +34,8 @@ foreach ($tables_sql as $key => $value)
 	query($value);
 	out("    Done!");
 }
-
+out(" Done!");
+pause();
 /*
  * Stage two: Make a hot spare of the old database
  */
@@ -51,7 +53,7 @@ foreach ($backup as $q)
 }
 
 out(" Done!");
-
+pause();
 
 /*
  * Stage three: Perform pre-transforms on existing database
@@ -70,9 +72,7 @@ foreach ($pre_transform as $q)
 }
 
 out(" Done!");
-
-
-out(" Done!");
+pause();
 /*
  * Stage four: Add existing simple data:
  *  * template
@@ -91,6 +91,7 @@ out("    Done!");
 
 
 out(" Done!");
+pause();
 /*
  * Stage five: Add dependant data:
  *  * user
@@ -103,6 +104,7 @@ query("INSERT INTO acc_user SELECT user_id, user_name, user_email, user_pass, us
 out("    Done!");
 
 out(" Done!");
+pause();
 /*
  * Stage six: Add dependant data:
  *  * pend
@@ -115,6 +117,7 @@ query("INSERT INTO acc_request SELECT * FROM $olddatabase.acc_pend;");
 out("    Done!");
 
 out(" Done!");
+pause();
 /*
  * Stage seven: Add partially calculated dependant data:
  *  * welcome
@@ -136,6 +139,7 @@ query("INSERT INTO acc_comment SELECT cmt_id, cmt_time, user_id, cmt_comment, cm
 out("    Done!");
 
 out(" Done!");
+pause();
 /*
  * Stage eight: Split table columns:
  *  * log
@@ -147,6 +151,7 @@ query("INSERT INTO acc_log SELECT log_id, log_target_id, log_target_object, log_
 out("    Done!");
 
 out(" Done!");
+pause();
 /*
  * Stage nine: Add fully calculated data (run maintenance scripts)
  *  * trusted ips
@@ -159,6 +164,7 @@ require_once $baseMaintenancePath . 'RecreateTitleBlacklist.php';
 require_once $baseMaintenancePath . 'RecreateTrustedIPs.php';
 
 out(" Done!");
+pause();
 /* 
  * Stage ten: Run post-transform queries on the database
  */
@@ -175,6 +181,7 @@ foreach ($post_transform as $q)
 }
 
 out(" Done!");
+pause();
 /*
  * Stage eleven: Add indices, foreign keys, and other assorted produce
  */
@@ -183,3 +190,4 @@ out("Stage eleven: Add indices, foreign keys, and other assorted produce");
 out(" Done!");
 
 out("Conversion Complete. $querycount queries were executed.");
+pause();

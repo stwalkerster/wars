@@ -226,3 +226,8 @@ function query($q)
 		die;
 	}	
 }
+function pause()
+{
+	out("Press enter to continue...");
+	fgets(STDIN);	
+}

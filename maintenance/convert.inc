@@ -21,7 +21,7 @@ CREATE  TABLE IF NOT EXISTS `acc_welcomequeue` (
   `welcomequeue_uid` INT NOT NULL DEFAULT 0 COMMENT 'Username of the welcoming user' ,
   `welcomequeue_user` VARCHAR(1024) NOT NULL ,
   `welcomequeue_status` VARCHAR(96) NOT NULL ,
-  PRIMARY KEY (`welcome_id`) )
+  PRIMARY KEY (`welcomequeue_id`) )
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1
 SQL
@@ -44,7 +44,7 @@ CREATE  TABLE IF NOT EXISTS `acc_welcometemplate` (
   `welcometemplate_id` INT(11) NOT NULL AUTO_INCREMENT ,
   `welcometemplate_usercode` TINYTEXT NOT NULL ,
   `welcometemplate_botcode` TINYTEXT NOT NULL ,
-  PRIMARY KEY (`template_id`) )
+  PRIMARY KEY (`welcometemplate_id`) )
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1
 SQL
@@ -78,7 +78,7 @@ CREATE  TABLE IF NOT EXISTS `acc_message` (
   `message_desc` VARCHAR(255) NOT NULL ,
   `message_type` VARCHAR(255) NOT NULL ,
   `message_key` VARCHAR(45) NOT NULL ,
-  PRIMARY KEY (`mail_id`) )
+  PRIMARY KEY (`message_id`) )
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1
 SQL

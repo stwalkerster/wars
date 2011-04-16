@@ -15,12 +15,12 @@ CREATE  TABLE IF NOT EXISTS `acc_titleblacklist` (
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1
 SQL
-, 'acc_welcome' => <<<SQL
-CREATE  TABLE IF NOT EXISTS `acc_welcome` (
-  `welcome_id` INT(11) NOT NULL AUTO_INCREMENT ,
-  `welcome_uid` INT NOT NULL DEFAULT 0 COMMENT 'Username of the welcoming user' ,
-  `welcome_user` VARCHAR(1024) NOT NULL ,
-  `welcome_status` VARCHAR(96) NOT NULL ,
+, 'acc_welcomequeue' => <<<SQL
+CREATE  TABLE IF NOT EXISTS `acc_welcomequeue` (
+  `welcomequeue_id` INT(11) NOT NULL AUTO_INCREMENT ,
+  `welcomequeue_uid` INT NOT NULL DEFAULT 0 COMMENT 'Username of the welcoming user' ,
+  `welcomequeue_user` VARCHAR(1024) NOT NULL ,
+  `welcomequeue_status` VARCHAR(96) NOT NULL ,
   PRIMARY KEY (`welcome_id`) )
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1
@@ -39,11 +39,11 @@ CREATE  TABLE IF NOT EXISTS `acc_ban` (
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1
 SQL
-, 'acc_template' => <<<SQL
-CREATE  TABLE IF NOT EXISTS `acc_template` (
-  `template_id` INT(11) NOT NULL AUTO_INCREMENT ,
-  `template_usercode` TINYTEXT NOT NULL ,
-  `template_botcode` TINYTEXT NOT NULL ,
+, 'acc_welcometemplate' => <<<SQL
+CREATE  TABLE IF NOT EXISTS `acc_welcometemplate` (
+  `welcometemplate_id` INT(11) NOT NULL AUTO_INCREMENT ,
+  `welcometemplate_usercode` TINYTEXT NOT NULL ,
+  `welcometemplate_botcode` TINYTEXT NOT NULL ,
   PRIMARY KEY (`template_id`) )
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1
@@ -66,46 +66,38 @@ CREATE  TABLE IF NOT EXISTS `acc_user` (
   `user_welcome_templateid` INT(11) NOT NULL DEFAULT '0' ,
   `user_abortpref` TINYINT(4) NOT NULL DEFAULT '0' ,
   `user_confirmationdiff` INT(10) UNSIGNED NOT NULL DEFAULT '0' ,
-  PRIMARY KEY (`user_id`) ,
-  UNIQUE INDEX `I_username` USING BTREE (`user_name` ASC) ,
-  UNIQUE INDEX `user_onwikiname_UNIQUE` (`user_onwikiname` ASC) ,
-  UNIQUE INDEX `user_email_UNIQUE` (`user_email` ASC) )
+  PRIMARY KEY (`user_id`) )
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1
 SQL
-, 'acc_emails' => <<<SQL
-CREATE  TABLE IF NOT EXISTS `acc_emails` (
-  `mail_id` INT(11) NOT NULL AUTO_INCREMENT ,
-  `mail_text` BLOB NOT NULL ,
-  `mail_count` INT(11) NOT NULL ,
-  `mail_desc` VARCHAR(255) NOT NULL ,
-  `mail_type` VARCHAR(255) NOT NULL ,
-  `mail_key` VARCHAR(45) NOT NULL ,
-  PRIMARY KEY (`mail_id`) ,
-  UNIQUE INDEX `mail_key_UNIQUE` (`mail_key` ASC) )
+, 'acc_message' => <<<SQL
+CREATE  TABLE IF NOT EXISTS `acc_message` (
+  `message_id` INT(11) NOT NULL AUTO_INCREMENT ,
+  `message_text` BLOB NOT NULL ,
+  `message_count` INT(11) NOT NULL ,
+  `message_desc` VARCHAR(255) NOT NULL ,
+  `message_type` VARCHAR(255) NOT NULL ,
+  `message_key` VARCHAR(45) NOT NULL ,
+  PRIMARY KEY (`mail_id`) )
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1
 SQL
-, 'acc_pend' => <<<SQL
-CREATE  TABLE IF NOT EXISTS `acc_pend` (
-  `pend_id` INT(11) NOT NULL AUTO_INCREMENT ,
-  `pend_email` VARCHAR(512) NOT NULL ,
-  `pend_ip` VARCHAR(255) NOT NULL ,
-  `pend_name` VARCHAR(512) NOT NULL ,
-  `pend_cmt` MEDIUMTEXT NOT NULL ,
-  `pend_status` VARCHAR(255) NOT NULL ,
-  `pend_date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ,
-  `pend_checksum` VARCHAR(256) NOT NULL ,
-  `pend_emailsent` VARCHAR(10) NOT NULL ,
-  `pend_mailconfirm` VARCHAR(255) NOT NULL ,
-  `pend_reserved` INT(11) NOT NULL DEFAULT '0' COMMENT 'User ID of user who has \"reserved\" this request' ,
-  `pend_useragent` BLOB NOT NULL COMMENT 'Useragent of the requesting web browser' ,
-  `pend_proxyip` VARCHAR(255) NULL DEFAULT NULL ,
-  PRIMARY KEY (`pend_id`) ,
-  INDEX `acc_pend_status_mailconf` (`pend_status` ASC, `pend_mailconfirm` ASC) ,
-  INDEX `pend_ip_status` (`pend_ip` ASC, `pend_mailconfirm` ASC) ,
-  INDEX `pend_email_status` (`pend_email` ASC, `pend_mailconfirm` ASC) ,
-  INDEX `ft_useragent` (`pend_useragent`(512) ASC) )
+, 'acc_request' => <<<SQL
+CREATE  TABLE IF NOT EXISTS `acc_request` (
+  `request_id` INT(11) NOT NULL AUTO_INCREMENT ,
+  `request_email` VARCHAR(512) NOT NULL ,
+  `request_ip` VARCHAR(255) NOT NULL ,
+  `request_name` VARCHAR(512) NOT NULL ,
+  `request_cmt` MEDIUMTEXT NOT NULL ,
+  `request_status` VARCHAR(255) NOT NULL ,
+  `request_date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ,
+  `request_checksum` VARCHAR(256) NOT NULL ,
+  `request_emailsent` VARCHAR(10) NOT NULL ,
+  `request_mailconfirm` VARCHAR(255) NOT NULL ,
+  `request_reserved` INT(11) NOT NULL DEFAULT '0' COMMENT 'User ID of user who has \"reserved\" this request' ,
+  `request_useragent` BLOB NOT NULL COMMENT 'Useragent of the requesting web browser' ,
+  `request_proxyip` VARCHAR(255) NULL DEFAULT NULL ,
+  PRIMARY KEY (`request_id`) )
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1
 SQL
@@ -120,22 +112,19 @@ CREATE  TABLE IF NOT EXISTS `acc_log` (
   `log_action` VARCHAR(255) NOT NULL ,
   `log_time` DATETIME NOT NULL ,
   `log_cmt` BLOB NOT NULL ,
-  PRIMARY KEY (`log_id`) ,
-  INDEX `acc_log_action_idx` (`log_action` ASC) ,
-  INDEX `log_pend_idx` (`log_target_text` ASC) )
+  PRIMARY KEY (`log_id`) )
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1
 SQL
-, 'acc_cmt' => <<<SQL
-CREATE  TABLE IF NOT EXISTS `acc_cmt` (
-  `cmt_id` INT(11) NOT NULL AUTO_INCREMENT ,
-  `cmt_time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ,
-  `cmt_user` INT NOT NULL DEFAULT 0 ,
-  `cmt_comment` MEDIUMTEXT NOT NULL ,
-  `cmt_visibility` VARCHAR(255) NOT NULL ,
-  `cmd_pend` INT(11) NOT NULL ,
-  PRIMARY KEY (`cmt_id`) ,
-  UNIQUE INDEX `cmt_id` (`cmt_id` ASC) )
+, 'acc_comment' => <<<SQL
+CREATE  TABLE IF NOT EXISTS `acc_comment` (
+  `comment_id` INT(11) NOT NULL AUTO_INCREMENT ,
+  `comment_time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ,
+  `comment_user` INT NOT NULL DEFAULT 0 ,
+  `comment_comment` MEDIUMTEXT NOT NULL ,
+  `comment_visibility` VARCHAR(255) NOT NULL ,
+  `comment_request` INT(11) NOT NULL ,
+  PRIMARY KEY (`comment_id`) )
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
 SQL

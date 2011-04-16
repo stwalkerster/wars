@@ -48,31 +48,31 @@ echo "Connecting to mysql://$toolserver_username@$toolserver_host/$toolserver_da
 $db = new Database($toolserver_host, $toolserver_username, $toolserver_password, $toolserver_database);
 if(!$db) trigger_error($db->lastError(), E_USER_ERROR);
 $res = $db->select(
-	array('acc_welcome', 'acc_user', 'acc_template'),
-	array('welcome_id', 'welcome_user', 'user_onwikiname', 'user_welcome_sig', 'template_botcode'),
-	array('welcome_status' => 'Open'),
+	array('acc_welcomequeue', 'acc_user', 'acc_welcometemplate'),
+	array('welcomequeue_id', 'welcomequeue_user', 'user_onwikiname', 'user_welcome_sig', 'welcometemplate_botcode'),
+	array('welcomequeue_status' => 'Open'),
 	array(),
-	array('welcome_uid' => 'user_id', 'user_welcome_templateid' => 'template_id')
+	array('welcomequeue_uid' => 'user_id', 'user_welcome_templateid' => 'welcometemplate_id')
 );
 
 if(count($res)) {
 	$wiki = Peachy::newWiki("WelcomerBot");
 	foreach($res as $row) {
-		$theid = $row['welcome_id'];
+		$theid = $row['welcomequeue_id'];
 		$db->update(
-			'acc_welcome',
-			array('welcome_status' => 'Closed'),
-			array('welcome_id' => $theid)
+			'acc_welcomequeue',
+			array('welcomequeue_status' => 'Closed'),
+			array('welcomequeue_id' => $theid)
 		);
 		
-		$user = $row['welcome_user'];
+		$user = $row['welcomequeue_user'];
 		$creator = $row['user_onwikiname'];
 		$signature = html_entity_decode($row['user_welcome_sig']) . ' ~~~~~';
 		if (!preg_match("/\[\[[ ]*(w:)?[ ]*(en:)?[ ]*User[ ]*:[ ]*".$creator."[ ]*(\||\]\])/i", $signature))
 			$signature = " – [[User:$creator|$creator]] ([[User talk:$creator|talk]])";
 		$templateID = $row['user_welcome_templateid'];
 		
-		$templateCode = $row['template_botcode'];
+		$templateCode = $row['welcometemplate_botcode'];
 		$templateCode = str_replace('$signature', $signature, $templateCode);
 		$templateCode = str_replace('$username', $creator, $templateCode);
 		if (!$templateCode)

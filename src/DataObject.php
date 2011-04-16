@@ -19,7 +19,7 @@ abstract class DataObject
 	{
 		$me = get_class($this);
 		global $accDatabase;
-		$statement = $accDatabase->prepare("SELECT * FROM ".strtolower($me)." WHERE ".strtolower($me)."_id = :oid LIMIT 1;");
+		$statement = $accDatabase->prepare("SELECT * FROM acc_".strtolower($me)." WHERE ".strtolower($me)."_id = :oid LIMIT 1;");
 		$statement->bindParam(":oid",$id);
 		return $statement->fetchObject($me);
 	}

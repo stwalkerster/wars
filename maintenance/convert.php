@@ -39,12 +39,12 @@ foreach ($tables_sql as $key => $value)
  
 out("Stage two: Add existing simple data");
 
-out("  - acc_template");
-query("INSERT INTO acc_template SELECT * FROM $olddatabase.acc_template;");
+out("  - acc_welcometemplate");
+query("INSERT INTO acc_welcometemplate SELECT * FROM $olddatabase.acc_template;");
 out("    Done!");
 
-out("  - acc_emails");
-query("INSERT INTO acc_emails SELECT mail_id, mail_text, mail_count, mail_desc, mail_type, substr(mail_desc,1,45) FROM $olddatabase.acc_emails;");
+out("  - acc_message");
+query("INSERT INTO acc_message SELECT mail_id, mail_text, mail_count, mail_desc, mail_type, substr(mail_desc,1,45) FROM $olddatabase.acc_emails;");
 out("    Done!");
 
 
@@ -67,8 +67,8 @@ out("    Done!");
 
 out("Stage four: Add dependant data");
 
-out("  - acc_pend");
-query("INSERT INTO acc_pend SELECT * FROM $olddatabase.acc_pend;");
+out("  - acc_request");
+query("INSERT INTO acc_request SELECT * FROM $olddatabase.acc_pend;");
 out("    Done!");
 
 /*
@@ -79,16 +79,16 @@ out("    Done!");
  */
 out("Stage five: Add partially calculated dependant data");
 
-out("  - acc_welcome");
-query("INSERT INTO acc_welcome SELECT welcome_id, user_id, acc_welcome.welcome_user, acc_welcome.welcome_status FROM $olddatabase.acc_welcome left join acc_user on user_name = welcome_uid;");
+out("  - acc_welcomequeue");
+query("INSERT INTO acc_welcomequeue SELECT welcome_id, user_id, acc_welcome.welcome_user, acc_welcome.welcome_status FROM $olddatabase.acc_welcome left join acc_user on user_name = welcome_uid;");
 out("    Done!");
 
 out("  - acc_ban");
 query("INSERT INTO acc_ban SELECT ban_id, ban_type, ban_target, user_id, ban_reason, ban_date, ban_duration, ban_active FROM $olddatabase.acc_ban left join acc_user on user_name = ban_user;");
 out("    Done!");
 
-out("  - acc_cmt");
-query("INSERT INTO acc_cmt SELECT cmt_id, cmt_time, user_id, cmt_comment, cmt_visability, pend_id FROM $olddatabase.acc_cmt left join acc_user on user_name = cmt_user;");
+out("  - acc_comment");
+query("INSERT INTO acc_comment SELECT cmt_id, cmt_time, user_id, cmt_comment, cmt_visability, pend_id FROM $olddatabase.acc_cmt left join acc_user on user_name = cmt_user;");
 out("    Done!");
 
 /*

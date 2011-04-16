@@ -50,7 +50,7 @@ class User extends DataObject
 	public static function getByName($username)
 	{		
 		global $accDatabase;
-		$statement = $accDatabase->prepare("SELECT * FROM user WHERE user_name = :username LIMIT 1;");
+		$statement = $accDatabase->prepare("SELECT * FROM acc_user WHERE user_name = :username LIMIT 1;");
 		$statement->bindParam(":username",$username);
 		return $statement->fetchObject("User");
 	}

@@ -130,7 +130,33 @@ DEFAULT CHARACTER SET = utf8
 SQL
 );
 
-$log_updates = array(
+$backup = array(
+"DROP DATABASE IF EXISTS ".$olddatabase."_backup;",
+"CREATE DATABASE ".$olddatabase."_backup;",
+"LOCK TABLES $olddatabase.acc_ban WRITE, $olddatabase.acc_cmt WRITE, $olddatabase.acc_emails WRITE, $olddatabase.acc_log WRITE, $olddatabase.acc_pend WRITE, $olddatabase.acc_template WRITE, $olddatabase.acc_titleblacklist WRITE, $olddatabase.acc_trustedips WRITE, $olddatabase.acc_user WRITE, $olddatabase.acc_welcome WRITE;",
+"CREATE TABLE ".$olddatabase."_backup.acc_ban LIKE $olddatabase.acc_ban;",
+"INSERT INTO ".$olddatabase."_backup.acc_ban SELECT * FROM $olddatabase.acc_ban;",
+"CREATE TABLE ".$olddatabase."_backup.acc_cmt LIKE $olddatabase.acc_cmt;",
+"INSERT INTO ".$olddatabase."_backup.acc_cmt SELECT * FROM $olddatabase.acc_cmt;",
+"CREATE TABLE ".$olddatabase."_backup.acc_emails LIKE $olddatabase.acc_emails;",
+"INSERT INTO ".$olddatabase."_backup.acc_emails SELECT * FROM $olddatabase.acc_emails;",
+"CREATE TABLE ".$olddatabase."_backup.acc_log LIKE $olddatabase.acc_log;",
+"INSERT INTO ".$olddatabase."_backup.acc_log SELECT * FROM $olddatabase.acc_log;",
+"CREATE TABLE ".$olddatabase."_backup.acc_pend LIKE $olddatabase.acc_pend;",
+"INSERT INTO ".$olddatabase."_backup.acc_pend SELECT * FROM $olddatabase.acc_pend;",
+"CREATE TABLE ".$olddatabase."_backup.acc_template LIKE $olddatabase.acc_template;",
+"INSERT INTO ".$olddatabase."_backup.acc_template SELECT * FROM $olddatabase.acc_template;",
+"CREATE TABLE ".$olddatabase."_backup.acc_titleblacklist LIKE $olddatabase.acc_titleblacklist;",
+"INSERT INTO ".$olddatabase."_backup.acc_titleblacklist SELECT * FROM $olddatabase.acc_titleblacklist;",
+"CREATE TABLE ".$olddatabase."_backup.acc_trustedips LIKE $olddatabase.acc_trustedips;",
+"INSERT INTO ".$olddatabase."_backup.acc_trustedips SELECT * FROM $olddatabase.acc_trustedips;",
+"CREATE TABLE ".$olddatabase."_backup.acc_user LIKE $olddatabase.acc_user;",
+"INSERT INTO ".$olddatabase."_backup.acc_user SELECT * FROM $olddatabase.acc_user;",
+"CREATE TABLE ".$olddatabase."_backup.acc_welcome LIKE $olddatabase.acc_welcome;",
+"INSERT INTO ".$olddatabase."_backup.acc_welcome SELECT * FROM $olddatabase.acc_welcome;",
+);
+
+$pre_transform = array(
 "ALTER TABLE $olddatabase.acc_log ADD COLUMN `log_user_id` INT NULL  AFTER `log_cmt` , ADD COLUMN `log_user_text` VARCHAR(255) NULL  AFTER `log_user_id` , ADD COLUMN `log_target_id` INT NULL  AFTER `log_user_text` , ADD COLUMN `log_target_object` VARCHAR(45) NULL  AFTER `log_target_id` , ADD COLUMN `log_target_text` VARCHAR(255) NULL  AFTER `log_target_object` ;",
 "SET SQL_SAFE_UPDATES=0;",
 "update $olddatabase.acc_log set log_user_text = log_user;",
@@ -158,14 +184,17 @@ $log_updates = array(
 "update $olddatabase.acc_log set log_target_object = 'template', log_target_id = log_pend where log_action = 'CreatedTemplate';",
 "update $olddatabase.acc_log set log_target_object = 'template', log_target_id = log_pend where log_action = 'DeletedTemplate';",
 "update $olddatabase.acc_log set log_target_object = 'template', log_target_id = log_pend where log_action = 'EditedTemplate';",
-"INSERT INTO acc_log SELECT log_id, log_target_id, log_target_object, log_target_text, user_id, log_user_text, log_action, log_time, log_cmt FROM $olddatabase.acc_log left JOIN acc_user on user_name = log_user_text;",
 );
 
-function out($text)
+$post_transform = array(
+"UPDATE acc_request SET request_status = 'New' where request_mailconfirm != 'Confirmed' and request_status = 'Open';",
+);
+
+function out($text, $newline=TRUE)
 {
 	$lines = split("[\n|\r]", $text);
 	foreach ($lines as $value) {
-		echo date('c') . "  : " . $value . "\n";
+		echo date('c') . "  : " . $value . ($newline?"\n":"");
 	}
 }
 

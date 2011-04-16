@@ -1,6 +1,6 @@
 <?php
 /*
- * Stage zero: Set up the environment
+ * Set up the environment
  */
 
 define("WARS", 1);
@@ -14,15 +14,50 @@ out("This script will convert an ACC-style database into a WARS database.");
 out("Please ^C in 10 seconds if you do not wish to translate $olddatabase");
 out("into $db_name_a .");
 for ($i = 10; $i > 0; $i--) {
-	out($i);
+	out($i."...",FALSE);
 	sleep(1);
 }
 
+out("Starting conversion...");
 /*
- * Stage one: Create database tables
+ * Stage zero: Make a hot spare of the old database, and lock the tables in the current one
  */
 
-out("Stage one: Create database tables");
+out("Stage zero: Make a hot spare of the old database, and lock the tables in the current one");
+
+$i=0;
+$imax = count($backup);
+foreach ($backup as $q)
+{
+	$i++;
+	out("  - $i / $imax");
+	query($q);
+	out("    Done!");
+}
+
+out(" Done!");
+/*
+ * Stage one: Perform pre-transforms on existing database
+ */
+
+out("Stage one: Perform pre-transforms on data");
+
+$i=0;
+$imax = count($pre_transform);
+foreach ($pre_transform as $q)
+{
+	$i++;
+	out("  - $i / $imax");
+	query($q);
+	out("    Done!");
+}
+
+out(" Done!");
+/*
+ * Stage two: Create database tables
+ */
+
+out("Stage two: Create database tables");
 
 foreach ($tables_sql as $key => $value)
 {
@@ -31,13 +66,14 @@ foreach ($tables_sql as $key => $value)
 	out("    Done!");
 }
 
+out(" Done!");
 /*
- * Stage two: Add existing simple data:
+ * Stage three: Add existing simple data:
  *  * template
  *  * emails
  */
  
-out("Stage two: Add existing simple data");
+out("Stage three: Add existing simple data");
 
 out("  - acc_welcometemplate");
 query("INSERT INTO acc_welcometemplate SELECT * FROM $olddatabase.acc_template;");
@@ -48,36 +84,38 @@ query("INSERT INTO acc_message SELECT mail_id, mail_text, mail_count, mail_desc,
 out("    Done!");
 
 
-
+out(" Done!");
 /*
- * Stage three: Add dependant data:
+ * Stage four: Add dependant data:
  *  * user
  */
  
-out("Stage three: Add dependant data");
+out("Stage four: Add dependant data");
 
 out("  - acc_user");
 query("INSERT INTO acc_user SELECT user_id, user_name, user_email, user_pass, user_level, user_onwikiname, user_welcome_sig, user_lastactive, user_lastip, user_forcelogout, user_secure, user_checkuser, user_identified, user_welcome_templateid, user_abortpref, user_confirmationdiff FROM $olddatabase.acc_user; ");
 out("    Done!");
 
+out(" Done!");
 /*
- * Stage four: Add dependant data:
+ * Stage five: Add dependant data:
  *  * pend
  */
 
-out("Stage four: Add dependant data");
+out("Stage five: Add dependant data");
 
 out("  - acc_request");
 query("INSERT INTO acc_request SELECT * FROM $olddatabase.acc_pend;");
 out("    Done!");
 
+out(" Done!");
 /*
- * Stage five: Add partially calculated dependant data:
+ * Stage six: Add partially calculated dependant data:
  *  * welcome
  *  * ban
  *  * cmt
  */
-out("Stage five: Add partially calculated dependant data");
+out("Stage six: Add partially calculated dependant data");
 
 out("  - acc_welcomequeue");
 query("INSERT INTO acc_welcomequeue SELECT welcome_id, user_id, acc_welcome.welcome_user, acc_welcome.welcome_status FROM $olddatabase.acc_welcome left join acc_user on user_name = welcome_uid;");
@@ -91,32 +129,47 @@ out("  - acc_comment");
 query("INSERT INTO acc_comment SELECT cmt_id, cmt_time, user_id, cmt_comment, cmt_visability, pend_id FROM $olddatabase.acc_cmt left join acc_user on user_name = cmt_user;");
 out("    Done!");
 
+out(" Done!");
 /*
- * Stage six: Split table columns:
+ * Stage seven: Split table columns:
  *  * log
  */
-out("Stage six: Split table columns");
+out("Stage seven: Split table columns");
 
-$i=0;
-foreach ($log_updates as $q)
-{
-	$i++;
-	out("  - $i / 28");
-	query($q);
-	out("    Done!");
-}
+out("  - acc_log");
+query("INSERT INTO acc_log SELECT log_id, log_target_id, log_target_object, log_target_text, user_id, log_user_text, log_action, log_time, log_cmt FROM $olddatabase.acc_log left JOIN acc_user on user_name = log_user_text;");
+out("    Done!");
 
+out(" Done!");
 /*
- * Stage seven: Add fully calculated data (run maintenance scripts)
+ * Stage eight: Add fully calculated data (run maintenance scripts)
  *  * trusted ips
  *  * titleblacklist
  */
-out("Stage seven: Add fully calculated data (run maintenance scripts)");
+out("Stage eight: Add fully calculated data (run maintenance scripts)");
 
 require_once $baseMaintenancePath . 'RecreateTitleBlacklist.php';
 
 require_once $baseMaintenancePath . 'RecreateTrustedIPs.php';
 
-/*
- * Stage eight: Add indices, foreign keys, and other assorted produce
+out(" Done!");
+/* 
+ * Stage nine: Run post-transform queries on the database
  */
+out("Stage nine: Run post-transform queries on the database");
+
+$i=0;
+$imax = count($post_transform);
+foreach ($post_transform as $q)
+{
+	$i++;
+	out("  - $i / $imax");
+	query($q);
+	out("    Done!");
+}
+
+out(" Done!");
+/*
+ * Stage ten: Add indices, foreign keys, and other assorted produce
+ */
+out("Stage ten: Add indices, foreign keys, and other assorted produce");

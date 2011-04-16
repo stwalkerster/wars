@@ -4,7 +4,7 @@ require_once 'config.inc.php';
 
 $olddatabase = "p_acc_test";
 
-require_once $baseMaintenancePath . 'devel/convert.inc';
+require_once $baseMaintenancePath . 'convert.inc';
 
 query("DROP TABLE $olddatabase.acc_log;");
 query("CREATE TABLE $olddatabase.acc_log LIKE $olddatabase.log_bu;");

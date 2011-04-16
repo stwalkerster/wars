@@ -216,7 +216,7 @@ $querycount = 0;
 
 function query($q)
 {
-	global $accDatabase;
+	global $accDatabase, $querycount;
 	$result = $accDatabase->query($q);
 	$querycount++;
 	$error = $accDatabase->errorInfo();

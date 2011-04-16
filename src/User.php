@@ -32,7 +32,7 @@ class User extends DataObject
 	public static function authenticate($username, $password)
 	{
 		global $accDatabase;
-		$statement = $accDatabase->prepare("SELECT * FROM user WHERE user_name = :username AND user_password = :password LIMIT 1;");
+		$statement = $accDatabase->prepare("SELECT * FROM acc_user WHERE user_name = :username AND user_password = :password LIMIT 1;");
 		$statement->bindParam(":username", $username);
 		$statement->bindParam(":password", self::saltPassword($username, $password));
 		$resultUser = $statement->fetchObject("User");

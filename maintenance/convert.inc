@@ -208,7 +208,7 @@ function out($text, $newline=TRUE)
 {
 	$lines = split("[\n|\r]", $text);
 	foreach ($lines as $value) {
-		echo date('c') . "  : " . $value . ($newline?"\n":"");
+		echo ($newline?date('c'):"") . "  : " . $value . ($newline?"\n":"");
 	}
 }
 

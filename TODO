@@ -1,0 +1,20 @@
+TODO list for WARS:
+
+(Please remove items from this list when complete)
+
+* Data Object implementation
+** User
+** Message
+** Request
+** WelcomeTemplate
+** User
+** Ban
+** Trustedips
+** Titleblacklist
+** Comment
+** WelcomeQueue
+
+* Fix old data objects to use PDO etc
+** Request
+
+* Build smarty templates for various pages

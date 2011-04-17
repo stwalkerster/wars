@@ -23,6 +23,37 @@ if(!defined("WARS"))
 	
 class Request extends DataObject
 {	
+	static function generateConfirmationHash($id)
+	{
+		// Sets the seed variable as the current Unix timestamp with microseconds.
+		// The following lines of code ensure that the HASH is unique.
+		$seed = microtime(true);
+		
+		// Delay execution for a random number of miliseconds.
+		// Adds the current Unix timestamp to the seed variable.
+		usleep(rand(0,3000));
+		$seed = $seed +  microtime(true);
+		
+		// Delay execution for a random number of miliseconds.
+		// Adds the current Unix timestamp to the seed variable.
+		usleep(rand(0,300));
+		$seed = $seed +  microtime(true);
+		
+		// Delay execution for a random number of miliseconds.
+		// Subtracts the current Unix timestamp to the seed variable.
+		usleep(rand(0,300));
+		$seed = $seed -  microtime(true);
+		
+		// Seed the better random number generator.
+		mt_srand($seed);
+		
+		// Generates the salt which would be used to generate the HASH.
+		$salt = mt_rand();
+		
+		// Generates the HASH.
+		return md5($id . $salt);
+	}
+	
 	public function __construct($name, $email, $comment)
 	{
 		// get globals needed
@@ -32,40 +63,30 @@ class Request extends DataObject
 		$this->new = true;
 		
 		// new object, hasn't been assigned an id yet.
-		$this->id = false;
+		$this->request_id = false;
 		
-		$this->name = $name;
-		$this->email = $email;
-		$this->ip = $_SERVER['REMOTE_ADDR'];
-		$this->comment = $comment;
-		$this->status = "New";
-		$this->checksum = null; // updated in code automatically later
-		$this->emailconfirmation = md5(time() . "|" . $name);
-		$this->reserved = $defaultReserver;
-		$this->useragent = $_ENV["HTTP_USER_AGENT"];
-		$this->ip_hash = md5($this->ip);
-		$this->email_hash = md5($this->email);
-		$this->emailsent = 0;
-		$this->date = null; // auto-inserted by database
+		$this->request_email = $email;
+		$this->request_ip = $_SERVER['REMOTE_ADDR'];
+		$this->request_name = $name;
+		$this->request_cmt = $comment;
+		$this->request_status = "New";
+		$this->request_date = date("Y-m-d H:i:s");
+		$this->request_checksum = "";
+		$this->request_emailsent = '';
+		$this->request_mailconfirm = '';
+		$this->request_reserved = $defaultReserver;
+		$this->request_useragent = $_SERVER['HTTP_USER_AGENT'];
+		$this->request_proxyip = ''; //TODO: set xff header
+		
 	}
-	
-	// ro = read only
-	private $id; // ro
-	private $name; // ro
-	private $email; // ro
-	private $ip; // ro
-	private $comment; // ro
-	private $status;
-	private $checksum;
-	private $emailconfirmation;
-	private $reserved;
-	private $useragent; // ro
-	private $ip_hash;
-	private $email_hash;
-	private $emailsent;
-	private $date; // ro
+
 	
 	private $new;
+	
+	private $request_id, $request_email, $request_ip, $request_name,
+		$request_cmt, $request_status, $request_date, $request_checksum,
+		$request_emailsent, $request_mailconfirm, $request_reserved, 
+		$request_useragent, $request_proxyip;
 	
 	
 	public function save($checksum)
@@ -73,36 +94,23 @@ class Request extends DataObject
 		global $accDatabase;
 		
 		if($this->new)
-		{ // INSERT
+		{ 
+			// TODO: save
 			
-//			$values = array(
-//				$this->name,
-//				$this->email,
-//				$this->ip,
-//				$this->comment,
-//				$this->status,
-//				$this->checksum,
-//				$this->emailconfirmation,
-//				$this->reserved,
-//				$this->useragent,
-//				$this->email_hash,
-//				$this->ip_hash,
-//				$this->emailsent,
-//				$this->date
-//			);
-//			
-//			$this->id = $accDatabase->insert('request', $values);
+			$this->request_id = 0; // get last insert id
+			
+			$this->request_mailconfirm = self::generateConfirmationHash($this->request_id);
 			
 			$this->new = false;
 			
-			$this->save(null); // save again to set the checksum.
+			$this->save(null); // save again to set the checksum and mail confirmation.
 			
 			return true;
 		}
 		else
-		{ // UPDATE
+		{ // TODO: UPDATE
 			
-			if($this->checksum != $checksum)
+			if($this->request_checksum != $checksum)
 				return false;
 				
 			// update the checksum
@@ -127,88 +135,65 @@ class Request extends DataObject
 
 	public function confirm($emailChecksum)
 	{
-		if($emailChecksum == $this->emailconfirmation)
-		{
-			$this->status = "Open";
-			return $this->save($this->checksum);
-		}
-		return false;
+//TODO
 	}
 	
 	public function reserve($checksum)
 	{
-		$user = WebRequest::getCurrentUser();
-		$this->reserved = $user->getId();
-		$this->save($checksum);
+		//TODO
 	}
 	public function unreserve($checksum)
 	{
-		$this->reserved = 0;
-		$this->save($checksum);
+		//TODO
 	}
 	
 	public function getId()
 	{
-		return $this->id;	
+		return $this->request_id;	
 	}
 	public function getEmail()
 	{
-		$user = WebRequest::getCurrentUser();
-		if($user->isAllowedPrivateData() || $this->isOpen() )
-		{
-			return $this->email;
-		}
-		return $this->email_hash;
+		//TODO
 	}
 	public function getIp()
 	{
-		$user = WebRequest::getCurrentUser();
-		if($user->isAllowedPrivateData() || $this->isOpen() )
-		{
-			return $this->ip;
-		}
-		return $this->ip_hash;
+		//TODO
 	}
 	public function getName()
 	{
-		return $this->name;
+		return $this->request_name;
 	}
 	public function getComment()
 	{
-		return $this->comment;
+		return $this->request_cmt;
 	}
 	public function getStatus()
 	{
-		return $this->status;
+		return $this->request_status;
 	}
 	public function getDate()
 	{
-		return $this->date;
+		return $this->request_date;
 	}
 	public function getChecksum()
 	{
-		return $this->checksum;
+		return $this->request_checksum;
 	}
 	public function emailsent()
 	{
-		return $this->emailsent;
+		return $this->request_emailsent;
 	}
 	public function getEmailConfirmation()
 	{
-		return $this->emailconfirmation;
+		return $this->request_mailconfirm;
 	}
 	public function getReserved()
 	{
-		return $this->reserved;
+		return $this->request_reserved;
 	}
 	public function getUseragent()
 	{
-		$user = WebRequest::getCurrentUser();
-		if($user->isAllowedPrivateData() )
-		{
-			return $this->useragent;
-		}
-		return false;
+		//TODO
 	}
 
 	public function defer($target, $checksum)
@@ -218,28 +203,12 @@ class Request extends DataObject
 	}
 	public function close($emailId, $checksum)
 	{
-		if($emailId == 1)
-			$this->status = "Created";
-		else
-			$this->status = "Declined";
-			
-		if($emailId != 0)
-		{
-			$message = Message::getById($emailId);
-			mail($this->email, "Re: English Wikipedia Account Request", $message->getMessage());
-		}
-		return $this->save($checksum);
+		//TODO
 	}
 	
 	public function customClose($created, $message, $checksum)
 	{
-		if($created == 1)
-			$this->status = "Created";
-		else
-			$this->status = "Declined";
-			
-		mail($this->email, "Re: English Wikipedia Account Request", $message);
-		return $this->save($checksum);
+		//TODO
 	}
 
 	
@@ -249,12 +218,7 @@ class Request extends DataObject
 	 */
 	public function isOpen()
 	{
-		if($this->status != "Created"
-		&& $this->status != "Declined"
-		&& $this->status != "New")
-			return true;
-		else
-			return false;
+		//TODO
 	}
 	
 	/**

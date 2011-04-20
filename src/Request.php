@@ -20,9 +20,13 @@
 // check that this code is being called from a valid entry point. 
 if(!defined("WARS"))
 	die("Invalid code entry point!");
-	
+
+// initialise the default checksum for new requests
+define("WARS_REQUEST_DEFAULT_CHECKSUM", md5("WARS_REQUEST_DEFAULT_CHECKSUM"));	
+
 class Request extends DataObject
 {	
+	
 	static function generateConfirmationHash($id)
 	{
 		// Sets the seed variable as the current Unix timestamp with microseconds.
@@ -71,7 +75,7 @@ class Request extends DataObject
 		$this->request_cmt = $comment;
 		$this->request_status = "New";
 		$this->request_date = date("Y-m-d H:i:s");
-		$this->request_checksum = "";
+		$this->request_checksum = WARS_REQUEST_DEFAULT_CHECKSUM;
 		$this->request_emailsent = '';
 		$this->request_mailconfirm = '';
 		$this->request_reserved = $defaultReserver;
@@ -80,7 +84,6 @@ class Request extends DataObject
 		
 	}
 
-	
 	private $new;
 	
 	private $request_id, $request_email, $request_ip, $request_name,
@@ -95,39 +98,64 @@ class Request extends DataObject
 		
 		if($this->new)
 		{ 
-			// TODO: save
+			$statement = $accDatabase->prepare("INSERT INTO acc_user ( request_id, request_email, request_ip, request_name, request_cmt, request_status, request_date, request_checksum, request_emailsent, request_mailconfirm, request_reserved,  request_useragent, request_proxyip ) VALUES (  :request_id, :request_email, :request_ip, :request_name, :request_cmt, :request_status, :request_date, :request_checksum, :request_emailsent, :request_mailconfirm, :request_reserved, :request_useragent, :request_proxyip );");
+
+			$this->request_id = 0; 
 			
-			$this->request_id = 0; // get last insert id
+			$statement->bindParam(":request_id",$this->request_id);
+			$statement->bindParam(":request_email",$this->request_email);
+			$statement->bindParam(":request_ip",$this->request_ip);
+			$statement->bindParam(":request_name",$this->request_name);
+			$statement->bindParam(":request_cmt",$this->request_cmt);
+			$statement->bindParam(":request_status",$this->request_status);
+			$statement->bindParam(":request_date",$this->request_date);
+			$statement->bindParam(":request_checksum",$this->request_checksum);
+			$statement->bindParam(":request_emailsent",$this->request_emailsent);
+			$statement->bindParam(":request_mailconfirm",$this->request_mailconfirm);
+			$statement->bindParam(":request_reserved",$this->request_reserved);
+			$statement->bindParam(":request_useragent",$this->request_useragent);
+			$statement->bindParam(":request_proxyip",$this->request_proxyip);
+			
+			$statement->execute();
+			
+			$this->request_id = $accDatabase->lastInsertId();
 			
 			$this->request_mailconfirm = self::generateConfirmationHash($this->request_id);
 			
 			$this->new = false;
 			
-			$this->save(null); // save again to set the checksum and mail confirmation.
+			// save again to set the checksum and mail confirmation.
+			// this needs the default checksum because this is the initial save
+			$this->save(WARS_REQUEST_DEFAULT_CHECKSUM); 
 			
 			return true;
 		}
 		else
-		{ // TODO: UPDATE
-			
+		{ 			
 			if($this->request_checksum != $checksum)
 				return false;
 				
 			// update the checksum
-			$this->checksum = md5($this->id . $this->name . $this->email . microtime());
+			$this->request_checksum = md5($this->id . $this->name . $this->email . microtime());
 			
-//			$values = array(
-//				'request_email' => $this->email,
-//				'request_ip' => $this->ip,
-//				'request_status' => $this->status,
-//				'request_checksum' => $this->checksum,
-//				'request_emailconfirmation' => $this->emailconfirmation,
-//				'request_reserved' => $this->reserved,
-//				'request_emailsent' => $this->emailsent
-//			);
-//			
-//			$accDatabase->update('request', $values, array('pend_id' => $this->id));
+			$statement = $accDatabase->prepare("UPDATE acc_request SET request_email = :request_email, request_ip = :request_ip, request_name = :request_name, request_cmt = :request_cmt, request_status = :request_status, request_date = :request_date, request_checksum = :request_checksum, request_emailsent = :request_emailsent, request_mailconfirm = :request_mailconfirm, request_reserved = :request_reserved, request_useragent = :request_useragent, request_proxyip = :request_proxyip WHERE request_id = :request_id AND request_checksum = :checksum;");
 			
+			$statement->bindParam(":request_id",$this->request_id);
+			$statement->bindParam(":request_email",$this->request_email);
+			$statement->bindParam(":request_ip",$this->request_ip);
+			$statement->bindParam(":request_name",$this->request_name);
+			$statement->bindParam(":request_cmt",$this->request_cmt);
+			$statement->bindParam(":request_status",$this->request_status);
+			$statement->bindParam(":request_date",$this->request_date);
+			$statement->bindParam(":request_checksum",$this->request_checksum); // (update to new checksum)
+			$statement->bindParam(":request_emailsent",$this->request_emailsent);
+			$statement->bindParam(":request_mailconfirm",$this->request_mailconfirm);
+			$statement->bindParam(":request_reserved",$this->request_reserved);
+			$statement->bindParam(":request_useragent",$this->request_useragent);
+			$statement->bindParam(":request_proxyip",$this->request_proxyip);
+			$statement->bindParam(":checksum", $checksum); // (check old checksum AGAIN)
+			
+			$statement->execute();
 			return true;
 		}
 		return true;
@@ -135,7 +163,24 @@ class Request extends DataObject
 
 	public function confirm($emailChecksum)
 	{
-//TODO
+		if($this->request_mailconfirm == $emailChecksum)
+		{
+			// check we're not gonna double-confirm this
+			if($this->request_status == REQUEST_STATUS_NEW)
+			{
+				
+				$this->request_status == REQUEST_STATUS_OPEN;
+				
+				// TODO: add a log entry to the new entries queue
+			}
+			
+			// TODO: return success code - correct code
+			// should report success even if it did nothing
+		}
+		else
+		{
+			// TODO: return error code - wrong hash
+		}
 	}
 	
 	public function reserve($checksum)

@@ -89,7 +89,7 @@ class Request extends DataObject
 		$request_useragent, $request_proxyip;
 	
 	
-	public function save($checksum)
+	protected function save($checksum)
 	{
 		global $accDatabase;
 		

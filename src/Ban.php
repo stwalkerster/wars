@@ -15,7 +15,7 @@ if(!defined("WARS"))
 	
 class Ban extends DataObject
 {	
-	public function save()
+	protected function save()
 	{
 		trigger_error("Not implemented");
 	}

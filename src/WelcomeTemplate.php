@@ -30,7 +30,7 @@ class WelcomeTemplate extends DataObject
 	
 	private $template_id, $template_usercode, $template_botcode;
 	
-	function save()
+	protected function save()
 	{
 		trigger_error("Not implemented.");
 	}

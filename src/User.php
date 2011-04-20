@@ -204,7 +204,7 @@ class User extends DataObject
 	}
 	
 	
-	public function save()
+	protected function save()
 	{
 		global $accDatabase;
 		if($this->newRecord)

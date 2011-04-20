@@ -24,6 +24,9 @@ if(!defined("WARS"))
 // initialise the default checksum for new requests
 define("WARS_REQUEST_DEFAULT_CHECKSUM", md5("WARS_REQUEST_DEFAULT_CHECKSUM"));	
 
+define("REQUEST_STATUS_NEW", "New");
+define("REQUEST_STATUS_OPEN", "Open");
+
 class Request extends DataObject
 {	
 	
@@ -91,7 +94,7 @@ class Request extends DataObject
 		$request_emailsent, $request_mailconfirm, $request_reserved, 
 		$request_useragent, $request_proxyip;
 	
-	
+
 	protected function save($checksum)
 	{
 		global $accDatabase;
@@ -116,7 +119,12 @@ class Request extends DataObject
 			$statement->bindParam(":request_useragent",$this->request_useragent);
 			$statement->bindParam(":request_proxyip",$this->request_proxyip);
 			
-			$statement->execute();
+			
+			
+			if(!$statement->execute())
+			{
+				return false;	
+			}
 			
 			$this->request_id = $accDatabase->lastInsertId();
 			
@@ -126,7 +134,10 @@ class Request extends DataObject
 			
 			// save again to set the checksum and mail confirmation.
 			// this needs the default checksum because this is the initial save
-			$this->save(WARS_REQUEST_DEFAULT_CHECKSUM); 
+			if(!$this->save(WARS_REQUEST_DEFAULT_CHECKSUM))
+			{
+				return false;
+			} 
 			
 			return true;
 		}
@@ -155,7 +166,11 @@ class Request extends DataObject
 			$statement->bindParam(":request_proxyip",$this->request_proxyip);
 			$statement->bindParam(":checksum", $checksum); // (check old checksum AGAIN)
 			
-			$statement->execute();
+			if(!$statement->execute())
+			{
+				return false;
+			}
+			
 			return true;
 		}
 		return true;

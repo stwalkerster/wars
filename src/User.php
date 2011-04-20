@@ -105,6 +105,8 @@ class User extends DataObject
 	public function setEmail($newemail) // security, is current user an admin, or is this the current user?
 	{
 		$this->user_email = $newemail;
+		
+		//TODO: save
 	} 
 	
 	public function setPass($newpass, $oldpass)
@@ -113,6 +115,8 @@ class User extends DataObject
 		{
 			$this->user_pass = User::saltPassword($this->username, $newpass);
 		}
+		
+		//TODO: save
 	}
 	
 	public function isAdmin() 
@@ -183,6 +187,7 @@ class User extends DataObject
 	public function setTemplate($id)
 	{
 		$this->user_welcome_templateid = $id;
+		//TODO: save
 	}
 	
 	public function getSecureStatus()
@@ -192,6 +197,7 @@ class User extends DataObject
 	public function setSecureStatus($useSecureServer)
 	{
 		$this->user_secure = $useSecureServer;
+		//TODO: save
 	}
 	
 	public function getSignature()
@@ -201,6 +207,7 @@ class User extends DataObject
 	public function setSignature($signature)
 	{
 		$this->user_welcome_sig=$signature;
+		//TODO:save
 	}
 	
 	

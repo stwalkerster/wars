@@ -132,7 +132,7 @@ if( // if it doesn't exist, OR
 
 // set up the environment
 $accDatabase = new PDO("mysql:dbname=".$db_name_a.";host=".$db_host_a, $db_user_a, $db_pass_a);
-
+$accDatabase->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); // Set Errorhandling to Exception
 
 // autoload classes that have not been defined in the current script.
 // I therefore don't have to write a long list of require()s.

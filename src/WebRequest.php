@@ -178,6 +178,10 @@ class WebRequest {
 		die();
 	}
 	
+	/**
+	 * @todo check the name of this session variable, probably convert the name to a defined constant
+	 * @return unknown_type
+	 */
 	public static function getCurrentUser()
 	{
 		if(isset($_SESSION['currUser']))

@@ -198,10 +198,59 @@ class Request extends DataObject
 		}
 	}
 	
+	/**
+	 * @todo bind return values of statement to the correct fields
+	 * @todo add log entry
+	 * @todo sort out return values, defining values as appropriate
+	 * @param string $checksum The checksum of the request
+	 * @return mixed true for success, numeric for error
+	 */
 	public function reserve($checksum)
 	{
-		//TODO
+		global $accDatabase;
+		$accDatabase->beginTransaction();
+		
+		// check reserved status
+		$statement = $accDatabase->prepare("SELECT request_reserved, request_checksum FROM acc_request WHERE request_id = :request_id");
+		$statement->bindParam(":request_id", $this->request_id);
+		
+		// TODO: bind other columns to 
+		
+		if($this->request_reserved != 0)
+		{
+			if($this->request_reserved == WebRequest::getCurrentUser()->getId())
+			{
+				// looks like this user already has this request reserved
+				// return suitable error message
+			}
+			else
+			{
+				// looks like someone else already has this request reserved
+				// return suitable error message
+			}
+		}
+		
+		// reserve
+		$this->request_reserved = WebRequest::getCurrentUser()->getId();
+		
+		// add log entry
+		
+		
+		
+		// save
+		if($this->save($checksum))
+		{
+			$accDatabase->commit();
+			return true; //TODO: define as a constant
+		}
+		else
+		{
+			$accDatabase->rollBack();
+			return; // something failed. return suitable error code
+		}
 	}
+	
+	
 	public function unreserve($checksum)
 	{
 		//TODO

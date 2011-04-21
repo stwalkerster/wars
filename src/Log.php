@@ -9,19 +9,19 @@
 *                                                                         *
 **************************************************************************/
 
+/**************************************************************************
+* Please note: This file was originally written by Simon Walker for a     *
+* university assignment, and may need adapting for purpose.               *
+*                                                                         *
+* DO NOT CHANGE THE EXISTING INTERFACE OF THIS CLASS unless you really    *
+* know what you're doing.                                                 *
+**************************************************************************/
+
 // check that this code is being called from a valid entry point. 
 if(!defined("WARS"))
 	die("Invalid code entry point!");
-	
+
 class Log extends DataObject
-{	
-	protected function save()
-	{
-		trigger_error("Not implemented");
-	}
+{
 	
-	public function getMessage()
-	{
-		trigger_error("Not implemented");
-	}
 }

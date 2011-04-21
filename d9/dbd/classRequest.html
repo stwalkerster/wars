@@ -17,6 +17,7 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Search');
   <div class="tabs">
     <ul class="tablist">
       <li><a href="../../index.html"><span>Main&nbsp;Page</span></a></li>
+      <li><a href="../../pages.html"><span>Related&nbsp;Pages</span></a></li>
       <li class="current"><a href="../../annotated.html"><span>Classes</span></a></li>
       <li><a href="../../files.html"><span>Files</span></a></li>
       <li><a href="../../dirs.html"><span>Directories</span></a></li>
@@ -52,6 +53,7 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Search');
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-static-methods">Static Public Member Functions</a> &#124;
 <a href="#pro-methods">Protected Member Functions</a> &#124;
+<a href="#pri-methods">Private Member Functions</a> &#124;
 <a href="#pri-attribs">Private Attributes</a>  </div>
   <div class="headertitle">
 <h1>Request Class Reference</h1>  </div>
@@ -100,6 +102,9 @@ Static Public Member Functions</h2></td></tr>
 Protected Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/dbd/classRequest.html#a168e3488511838cc614e58f470b865d6">save</a> ($checksum)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d1e/classDataObject.html#aabd82cd6689a925885d545df86d5b80b">save</a> ()</td></tr>
+<tr><td colspan="2"><h2><a name="pri-methods"></a>
+Private Member Functions</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/dbd/classRequest.html#af8167dc9462f3bda1de8ee9615889e61">allowPrivateDataRelease</a> ()</td></tr>
 <tr><td colspan="2"><h2><a name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/dbd/classRequest.html#a95ee495d0ddc093bdcfaba341bef0826">$new</a></td></tr>
@@ -152,6 +157,26 @@ Private Attributes</h2></td></tr>
 </div>
 </div>
 <hr/><h2>Member Function Documentation</h2>
+<a class="anchor" id="af8167dc9462f3bda1de8ee9615889e61"></a><!-- doxytag: member="Request::allowPrivateDataRelease" ref="af8167dc9462f3bda1de8ee9615889e61" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Request::allowPrivateDataRelease </td>
+          <td>(</td>
+          <td class="paramname"></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td><code> [private]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>Checks to see if the current user is able to see the private data associated with this request</p>
+<dl class="return"><dt><b>Returns:</b></dt><dd>boolean </dd></dl>
+<dl class="todo"><dt><b><a class="el" href="../../dd/da0/todo.html#_todo000008">Todo:</a></b></dt><dd>implement </dd></dl>
+
+</div>
+</div>
 <a class="anchor" id="a5f3f5ddfaeafdf08a2842947f07d6f90"></a><!-- doxytag: member="Request::close" ref="a5f3f5ddfaeafdf08a2842947f07d6f90" args="($emailId, $checksum)" -->
 <div class="memitem">
 <div class="memproto">
@@ -176,6 +201,15 @@ Private Attributes</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
+<dl class="todo"><dt><b><a class="el" href="../../dd/da0/todo.html#_todo000006">Todo:</a></b></dt><dd>implement </dd></dl>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>unknown_type</em>&nbsp;</td><td>$emailId </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>unknown_type</em>&nbsp;</td><td>$checksum </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>unknown_type </dd></dl>
 
 </div>
 </div>
@@ -194,6 +228,15 @@ Private Attributes</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
+<p>Confirms the email address of the request, and sets the request to the open state </p>
+<dl class="todo"><dt><b><a class="el" href="../../dd/da0/todo.html#_todo000002">Todo:</a></b></dt><dd>add log entry to transaction </dd></dl>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>string</em>&nbsp;</td><td>$emailChecksum checksum passed via email </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>true if the confirmation was successful </dd></dl>
 
 </div>
 </div>
@@ -227,6 +270,16 @@ Private Attributes</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
+<dl class="todo"><dt><b><a class="el" href="../../dd/da0/todo.html#_todo000007">Todo:</a></b></dt><dd>implement </dd></dl>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>unknown_type</em>&nbsp;</td><td>$created </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>unknown_type</em>&nbsp;</td><td>$message </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>unknown_type</em>&nbsp;</td><td>$checksum </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>unknown_type </dd></dl>
 
 </div>
 </div>
@@ -254,6 +307,15 @@ Private Attributes</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
+<dl class="todo"><dt><b><a class="el" href="../../dd/da0/todo.html#_todo000005">Todo:</a></b></dt><dd>implement </dd></dl>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>unknown_type</em>&nbsp;</td><td>$target </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>unknown_type</em>&nbsp;</td><td>$checksum </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>unknown_type </dd></dl>
 
 </div>
 </div>
@@ -324,6 +386,10 @@ Private Attributes</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
+<p>Returns the current request checksum</p>
+<p>DO NOT PASS THIS DIRECTLY BACK TO THIS OBJECT.</p>
+<p>It should be sent to the user, and passed in with the user's next request. This is to help prevent "edit conflicts"</p>
+<dl class="return"><dt><b>Returns:</b></dt><dd>string </dd></dl>
 
 </div>
 </div>
@@ -341,6 +407,8 @@ Private Attributes</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
+<p>Returns the comment left by the requestor </p>
+<dl class="return"><dt><b>Returns:</b></dt><dd>string </dd></dl>
 
 </div>
 </div>
@@ -358,6 +426,8 @@ Private Attributes</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
+<p>Returns the date the current request was submitted </p>
+<dl class="return"><dt><b>Returns:</b></dt><dd>timestamp </dd></dl>
 
 </div>
 </div>
@@ -375,6 +445,8 @@ Private Attributes</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
+<p>Returns the request email, if the current user is allowed it </p>
+<dl class="return"><dt><b>Returns:</b></dt><dd>string </dd></dl>
 
 </div>
 </div>
@@ -409,6 +481,8 @@ Private Attributes</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
+<p>Returns the request ID </p>
+<dl class="return"><dt><b>Returns:</b></dt><dd>int </dd></dl>
 
 </div>
 </div>
@@ -426,6 +500,8 @@ Private Attributes</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
+<p>Returns the request IP address, if the current user is allowed it </p>
+<dl class="return"><dt><b>Returns:</b></dt><dd>string </dd></dl>
 
 </div>
 </div>
@@ -443,6 +519,8 @@ Private Attributes</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
+<p>Returns the requested name of this request </p>
+<dl class="return"><dt><b>Returns:</b></dt><dd>string </dd></dl>
 
 </div>
 </div>
@@ -477,6 +555,8 @@ Private Attributes</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
+<p>Returns the current status of the request </p>
+<dl class="return"><dt><b>Returns:</b></dt><dd>unknown_type </dd></dl>
 
 </div>
 </div>
@@ -494,6 +574,8 @@ Private Attributes</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
+<p>If the current user is a checkuser, returns the useragent of the browser the request was submitted from </p>
+<dl class="return"><dt><b>Returns:</b></dt><dd>mixed useragent string, or false if the user isn't a checkuser </dd></dl>
 
 </div>
 </div>
@@ -550,25 +632,18 @@ Private Attributes</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="aabd82cd6689a925885d545df86d5b80b"></a><!-- doxytag: member="Request::save" ref="aabd82cd6689a925885d545df86d5b80b" args="()" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">DataObject::save </td>
-          <td>(</td>
-          <td class="paramname"></td>
-          <td>&nbsp;)&nbsp;</td>
-          <td><code> [abstract, protected, inherited]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Reimplemented in <a class="el" href="../../da/de6/classBan.html#a8e592bb0f6ef397207790cb4eb542303">Ban</a>, <a class="el" href="../../db/d4b/classComment.html#ad50234681b37f7365f59caeb501a2cf2">Comment</a>, <a class="el" href="../../d0/d77/classLog.html#af96c1eec74fdc9bf8ca381767bdb37d7">Log</a>, <a class="el" href="../../d6/d28/classMessage.html#a238d9db97202f918173a59a82d8f48b8">Message</a>, <a class="el" href="../../d7/d48/classTitleBlacklist.html#abec24db72afd1a0979abbace0f0a4b71">TitleBlacklist</a>, <a class="el" href="../../d7/d01/classTrustedIPs.html#aad6e306bb068a993a63f97cb01a58318">TrustedIPs</a>, <a class="el" href="../../d9/dc0/classUser.html#a945fb1f1b6996275f08983b909f05e8a">User</a>, <a class="el" href="../../d6/d28/classMessage.html#a238d9db97202f918173a59a82d8f48b8">Message</a>, and <a class="el" href="../../d2/d5d/classWelcomeTemplate.html#a68fdf3b4d5b5422cbf4c2442a40dee20">WelcomeTemplate</a>.</p>
+<p>Reserves a request to the current user</p>
+<dl class="todo"><dt><b><a class="el" href="../../dd/da0/todo.html#_todo000003">Todo:</a></b></dt><dd><p class="startdd">bind return values of statement to the correct fields </p>
+<p>add log entry </p>
+<p class="enddd">sort out return values, defining values as appropriate </p>
+</dd></dl>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>string</em>&nbsp;</td><td>$checksum The checksum of the request </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>mixed true for success, numeric for error </dd></dl>
 
 </div>
 </div>
@@ -590,6 +665,28 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="aabd82cd6689a925885d545df86d5b80b"></a><!-- doxytag: member="Request::save" ref="aabd82cd6689a925885d545df86d5b80b" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">DataObject::save </td>
+          <td>(</td>
+          <td class="paramname"></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td><code> [abstract, protected, inherited]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>Saves the current state of the object to the database.</p>
+<p>This is not transaction-based, all calls to it must be wrapped inside a transaction</p>
+<dl class="return"><dt><b>Returns:</b></dt><dd>true on success, false on failure </dd></dl>
+
+<p>Reimplemented in <a class="el" href="../../da/de6/classBan.html#a8e592bb0f6ef397207790cb4eb542303">Ban</a>, <a class="el" href="../../db/d4b/classComment.html#ad50234681b37f7365f59caeb501a2cf2">Comment</a>, <a class="el" href="../../d6/d28/classMessage.html#a238d9db97202f918173a59a82d8f48b8">Message</a>, <a class="el" href="../../d7/d48/classTitleBlacklist.html#abec24db72afd1a0979abbace0f0a4b71">TitleBlacklist</a>, <a class="el" href="../../d7/d01/classTrustedIPs.html#aad6e306bb068a993a63f97cb01a58318">TrustedIPs</a>, <a class="el" href="../../d9/dc0/classUser.html#a945fb1f1b6996275f08983b909f05e8a">User</a>, <a class="el" href="../../d6/d28/classMessage.html#a238d9db97202f918173a59a82d8f48b8">Message</a>, and <a class="el" href="../../d2/d5d/classWelcomeTemplate.html#a68fdf3b4d5b5422cbf4c2442a40dee20">WelcomeTemplate</a>.</p>
+
+</div>
+</div>
 <a class="anchor" id="a300d0aee5154ac3929d19276853d3f92"></a><!-- doxytag: member="Request::unreserve" ref="a300d0aee5154ac3929d19276853d3f92" args="($checksum)" -->
 <div class="memitem">
 <div class="memproto">
@@ -605,6 +702,17 @@ Private Attributes</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
+<p>Unreserves a request if it's reserved by the current user, or an admin. If an admin attempts to unreserve a request that's not theirs, it will either become unreserved, or reserved to the current user</p>
+<dl class="todo"><dt><b><a class="el" href="../../dd/da0/todo.html#_todo000004">Todo:</a></b></dt><dd><p class="startdd">set up sane return values for errors </p>
+<p class="enddd">set up logging </p>
+</dd></dl>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>unknown_type</em>&nbsp;</td><td>$checksum </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>muxed true for success, numeric for errors </dd></dl>
 
 </div>
 </div>
@@ -809,7 +917,7 @@ Private Attributes</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Wed Apr 20 2011 12:54:49 for Wikipedia Account Request System by&nbsp;
+<hr class="footer"/><address class="footer"><small>Generated on Thu Apr 21 2011 23:36:46 for Wikipedia Account Request System by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/></a> 1.7.1 </small></address>
 </body>

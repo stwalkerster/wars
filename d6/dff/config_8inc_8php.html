@@ -17,6 +17,7 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Search');
   <div class="tabs">
     <ul class="tablist">
       <li><a href="../../index.html"><span>Main&nbsp;Page</span></a></li>
+      <li><a href="../../pages.html"><span>Related&nbsp;Pages</span></a></li>
       <li><a href="../../annotated.html"><span>Classes</span></a></li>
       <li class="current"><a href="../../files.html"><span>Files</span></a></li>
       <li><a href="../../dirs.html"><span>Directories</span></a></li>
@@ -80,6 +81,7 @@ Variables</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/dff/config_8inc_8php.html#ad2193d0eb703d2203a52325006625b34">$dontUseDb</a> = 0</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/dff/config_8inc_8php.html#a7400ec696ba486263114bf41c9aec2dd">$defaultReserver</a> = 0</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/dff/config_8inc_8php.html#ab851cbb6717b640407a42fc18271805a">$toolUserAgent</a> = &quot;WARS/0.1 (+http://toolserver.org/~acc/; +https://github.com/enwikipedia-acc/wars)&quot;</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/dff/config_8inc_8php.html#ae7fd68288ba402510c082737f84a0959">$adminsStealReservations</a> = false</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/dff/config_8inc_8php.html#a9bc3053f777076d5ae52df89e2727c06">$s_cacheDir</a> = $baseScriptPath . '/smartycache/'</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/dff/config_8inc_8php.html#addcc07a3762ed3140109d86f50b9dddd">$s_compileDir</a> = $baseScriptPath . '/smartycompile/'</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/dff/config_8inc_8php.html#a43e2f83e28de0108fe7ced47772d5dec">$s_templateDir</a> = $baseScriptPath . '/template/'</td></tr>
@@ -90,7 +92,7 @@ Variables</h2></td></tr>
 'config.inc.php')||(file_exists($baseScriptPath. <br class="typebreak"/>
 'localconfig.inc.php')&amp;&amp;filectime($s_configDir. <br class="typebreak"/>
 'wars.config')&lt; filectime($baseScriptPath. <br class="typebreak"/>
-'localconfig.inc.php')))&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/dff/config_8inc_8php.html#a90562296c943d946cccbc619f0dcb199">$accDatabase</a> = new PDO(&quot;mysql:dbname=&quot;.$db_name_a.&quot;;host=&quot;.$db_host_a, $db_user_a, $db_pass_a)</td></tr>
+'localconfig.inc.php')))&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/dff/config_8inc_8php.html#a90562296c943d946cccbc619f0dcb199">$accDatabase</a> = new <a class="el" href="../../de/d03/classDatabase.html">Database</a>(&quot;mysql:dbname=&quot;.$db_name_a.&quot;;host=&quot;.$db_host_a, $db_user_a, $db_pass_a)</td></tr>
 </table>
 <hr/><h2>Function Documentation</h2>
 <a class="anchor" id="ae555c87d85c2e61aff4e45868690625c"></a><!-- doxytag: member="config.inc.php::__autoload" ref="ae555c87d85c2e61aff4e45868690625c" args="($class)" -->
@@ -117,7 +119,20 @@ Variables</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="../../d6/d4f/schedule_8php.html#a5b68b95a141078e21aa328358e081306">if</a> ((!file_exists($s_configDir. 'wars.config'))||filectime($s_configDir. 'wars.config')&lt; filectime($baseScriptPath. 'config.inc.php')||(file_exists($baseScriptPath. 'localconfig.inc.php')&amp;&amp;filectime($s_configDir. 'wars.config')&lt; filectime($baseScriptPath. 'localconfig.inc.php'))) $accDatabase = new PDO(&quot;mysql:dbname=&quot;.$db_name_a.&quot;;host=&quot;.$db_host_a, $db_user_a, $db_pass_a)</td>
+          <td class="memname"><a class="el" href="../../d6/d4f/schedule_8php.html#a5b68b95a141078e21aa328358e081306">if</a> ((!file_exists($s_configDir. 'wars.config'))||filectime($s_configDir. 'wars.config')&lt; filectime($baseScriptPath. 'config.inc.php')||(file_exists($baseScriptPath. 'localconfig.inc.php')&amp;&amp;filectime($s_configDir. 'wars.config')&lt; filectime($baseScriptPath. 'localconfig.inc.php'))) $accDatabase = new <a class="el" href="../../de/d03/classDatabase.html">Database</a>(&quot;mysql:dbname=&quot;.$db_name_a.&quot;;host=&quot;.$db_host_a, $db_user_a, $db_pass_a)</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ae7fd68288ba402510c082737f84a0959"></a><!-- doxytag: member="config.inc.php::$adminsStealReservations" ref="ae7fd68288ba402510c082737f84a0959" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">$adminsStealReservations = false</td>
         </tr>
       </table>
 </div>
@@ -465,7 +480,7 @@ Variables</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Wed Apr 20 2011 12:54:48 for Wikipedia Account Request System by&nbsp;
+<hr class="footer"/><address class="footer"><small>Generated on Thu Apr 21 2011 23:36:46 for Wikipedia Account Request System by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/></a> 1.7.1 </small></address>
 </body>

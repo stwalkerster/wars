@@ -17,6 +17,7 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Search');
   <div class="tabs">
     <ul class="tablist">
       <li><a href="../../index.html"><span>Main&nbsp;Page</span></a></li>
+      <li><a href="../../pages.html"><span>Related&nbsp;Pages</span></a></li>
       <li class="current"><a href="../../annotated.html"><span>Classes</span></a></li>
       <li><a href="../../files.html"><span>Files</span></a></li>
       <li><a href="../../dirs.html"><span>Directories</span></a></li>
@@ -116,8 +117,11 @@ Protected Member Functions</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
+<p>Saves the current state of the object to the database.</p>
+<p>This is not transaction-based, all calls to it must be wrapped inside a transaction</p>
+<dl class="return"><dt><b>Returns:</b></dt><dd>true on success, false on failure </dd></dl>
 
-<p>Reimplemented in <a class="el" href="../../da/de6/classBan.html#a8e592bb0f6ef397207790cb4eb542303">Ban</a>, <a class="el" href="../../db/d4b/classComment.html#ad50234681b37f7365f59caeb501a2cf2">Comment</a>, <a class="el" href="../../d0/d77/classLog.html#af96c1eec74fdc9bf8ca381767bdb37d7">Log</a>, <a class="el" href="../../d6/d28/classMessage.html#a238d9db97202f918173a59a82d8f48b8">Message</a>, <a class="el" href="../../d7/d48/classTitleBlacklist.html#abec24db72afd1a0979abbace0f0a4b71">TitleBlacklist</a>, <a class="el" href="../../d7/d01/classTrustedIPs.html#aad6e306bb068a993a63f97cb01a58318">TrustedIPs</a>, <a class="el" href="../../d9/dc0/classUser.html#a945fb1f1b6996275f08983b909f05e8a">User</a>, <a class="el" href="../../d6/d28/classMessage.html#a238d9db97202f918173a59a82d8f48b8">Message</a>, and <a class="el" href="../../d2/d5d/classWelcomeTemplate.html#a68fdf3b4d5b5422cbf4c2442a40dee20">WelcomeTemplate</a>.</p>
+<p>Reimplemented in <a class="el" href="../../da/de6/classBan.html#a8e592bb0f6ef397207790cb4eb542303">Ban</a>, <a class="el" href="../../db/d4b/classComment.html#ad50234681b37f7365f59caeb501a2cf2">Comment</a>, <a class="el" href="../../d6/d28/classMessage.html#a238d9db97202f918173a59a82d8f48b8">Message</a>, <a class="el" href="../../d7/d48/classTitleBlacklist.html#abec24db72afd1a0979abbace0f0a4b71">TitleBlacklist</a>, <a class="el" href="../../d7/d01/classTrustedIPs.html#aad6e306bb068a993a63f97cb01a58318">TrustedIPs</a>, <a class="el" href="../../d9/dc0/classUser.html#a945fb1f1b6996275f08983b909f05e8a">User</a>, <a class="el" href="../../d6/d28/classMessage.html#a238d9db97202f918173a59a82d8f48b8">Message</a>, and <a class="el" href="../../d2/d5d/classWelcomeTemplate.html#a68fdf3b4d5b5422cbf4c2442a40dee20">WelcomeTemplate</a>.</p>
 
 </div>
 </div>
@@ -139,7 +143,7 @@ Protected Member Functions</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Wed Apr 20 2011 12:54:48 for Wikipedia Account Request System by&nbsp;
+<hr class="footer"/><address class="footer"><small>Generated on Thu Apr 21 2011 23:36:46 for Wikipedia Account Request System by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/></a> 1.7.1 </small></address>
 </body>

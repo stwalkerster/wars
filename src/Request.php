@@ -26,6 +26,16 @@ define("WARS_REQUEST_DEFAULT_CHECKSUM", md5("WARS_REQUEST_DEFAULT_CHECKSUM"));
 
 define("REQUEST_STATUS_NEW", "New");
 define("REQUEST_STATUS_OPEN", "Open");
+define("REQUEST_STATUS_CHECKUSER", "Checkuser");
+/**
+ * @todo check the possible statuses in the database
+ * @var unknown_type
+ */
+define("REQUEST_STATUS_FLAGGEDUSER", "Flagged User");
+define("REQUEST_STATUS_CLOSED", "Closed");
+
+define("REQUEST_PRIVACY_EMAIL", "email@currently.hidden");
+define("REQUEST_PRIVACY_IP", "127.0.0.1");
 
 class Request extends DataObject
 {	
@@ -199,6 +209,8 @@ class Request extends DataObject
 	}
 	
 	/**
+	 * Reserves a request to the current user
+	 * 
 	 * @todo bind return values of statement to the correct fields
 	 * @todo add log entry
 	 * @todo sort out return values, defining values as appropriate
@@ -259,6 +271,10 @@ class Request extends DataObject
 	}
 	
 	/**
+	 * Unreserves a request if it's reserved by the current user, or an admin. 
+	 * If an admin attempts to unreserve a request that's not theirs, it will 
+	 * either become unreserved, or reserved to the current user
+	 * 
 	 * @todo set up sane return values for errors
 	 * @todo set up logging
 	 * @param unknown_type $checksum
@@ -323,38 +339,98 @@ class Request extends DataObject
 		}
 	}
 	
+	/**
+	 * Returns the request ID
+	 * @return int
+	 */
 	public function getId()
 	{
 		return $this->request_id;	
 	}
+	
+	/**
+	 * Returns the request email, if the current user is allowed it
+	 * @return string
+	 */
 	public function getEmail()
 	{
-		//TODO
+		if($this->allowPrivateDataRelease())
+		{
+			return $this->request_email;
+		}
+		else
+		{
+			return REQUEST_PRIVACY_EMAIL;
+		}
 	}
+	
+	/**
+	 * Returns the request IP address, if the current user is allowed it
+	 * @return string
+	 */
 	public function getIp()
 	{
-		//TODO
+		if($this->allowPrivateDataRelease())
+		{
+			return $this->request_ip;
+		}
+		else
+		{
+			return REQUEST_PRIVACY_IP;
+		}
 	}
+
+	/**
+	 * Returns the requested name of this request
+	 * @return string
+	 */
 	public function getName()
 	{
 		return $this->request_name;
 	}
+	
+	/**
+	 * Returns the comment left by the requestor
+	 * @return string
+	 */
 	public function getComment()
 	{
 		return $this->request_cmt;
 	}
+	
+	/**
+	 * Returns the current status of the request
+	 * @return unknown_type
+	 */
 	public function getStatus()
 	{
 		return $this->request_status;
 	}
+	
+	/**
+	 * Returns the date the current request was submitted
+	 * @return timestamp
+	 */
 	public function getDate()
 	{
 		return $this->request_date;
 	}
+	
+	/**
+	 * Returns the current request checksum
+	 * 
+	 * DO NOT PASS THIS DIRECTLY BACK TO THIS OBJECT.
+	 * 
+	 * It should be sent to the user, and passed in with the user's next request.
+	 * This is to help prevent "edit conflicts"
+	 * 
+	 * @return string
+	 */
 	public function getChecksum()
 	{
 		return $this->request_checksum;
 	}
+
 	public function emailsent()
 	{
 		return $this->request_emailsent;
@@ -367,21 +443,51 @@ class Request extends DataObject
 	{
 		return $this->request_reserved;
 	}
+	
+	/**
+	 * If the current user is a checkuser, returns the useragent of the browser the request was submitted from
+	 * @return mixed useragent string, or false if the user isn't a checkuser
+	 */
 	public function getUseragent()
+	{
+		if(WebRequest::getCurrentUser()->isCheckuser())
+		{
+			return $this->request_useragent;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+	/**
+	 * @todo implement
+	 * @param unknown_type $target
+	 * @param unknown_type $checksum
+	 * @return unknown_type
+	 */
+	public function defer($target, $checksum)
 	{
 		//TODO
 	}
-
-	public function defer($target, $checksum)
-	{
-		$this->status = $target;
-		$this->save($checksum);
-	}
+	/**
+	 * @todo implement
+	 * @param unknown_type $emailId
+	 * @param unknown_type $checksum
+	 * @return unknown_type
+	 */
 	public function close($emailId, $checksum)
 	{
 		//TODO
 	}
 	
+	/**
+	 * @todo implement
+	 * @param unknown_type $created
+	 * @param unknown_type $message
+	 * @param unknown_type $checksum
+	 * @return unknown_type
+	 */
 	public function customClose($created, $message, $checksum)
 	{
 		//TODO
@@ -394,7 +500,15 @@ class Request extends DataObject
 	 */
 	public function isOpen()
 	{
-		//TODO
+		switch($this->request_status)
+		{
+			case REQUEST_STATUS_CHECKUSER:
+			case REQUEST_STATUS_FLAGGEDUSER:
+			case REQUEST_STATUS_OPEN:
+				return true;
+			default:
+				return false;
+		}
 	}
 	
 	/**
@@ -410,5 +524,17 @@ class Request extends DataObject
 			return true;
 		
 		return false;
+	}
+	
+	/**
+	 * Checks to see if the current user is able to see the private data associated with this request
+	 * 
+	 * @return boolean
+	 * @todo implement
+	 */
+	private function allowPrivateDataRelease()
+	{
+		
+		
 	}
 }

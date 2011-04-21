@@ -186,6 +186,13 @@ class Request extends DataObject
 		return true;
 	}
 
+	/**
+	 * 
+	 * Confirms the email address of the request, and sets the request to the open state
+	 * @todo add log entry to transaction
+	 * @param string $emailChecksum checksum passed via email
+	 * @return true if the confirmation was successful
+	 */
 	public function confirm($emailChecksum)
 	{
 		if($this->request_mailconfirm == $emailChecksum)
@@ -193,18 +200,24 @@ class Request extends DataObject
 			// check we're not gonna double-confirm this
 			if($this->request_status == REQUEST_STATUS_NEW)
 			{
-				
+				global $accDatabase;
+								
 				$this->request_status == REQUEST_STATUS_OPEN;
 				
+				$accDatabase->beginTransaction();
+				
 				// TODO: add a log entry to the new entries queue
+				
+				// override the checksum requirement - this is an external edit
+				$this->save($this->request_checksum);
 			}
 			
-			// TODO: return success code - correct code
+			return true;
 			// should report success even if it did nothing
 		}
 		else
 		{
-			// TODO: return error code - wrong hash
+			return false;
 		}
 	}
 	

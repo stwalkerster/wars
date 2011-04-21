@@ -258,10 +258,69 @@ class Request extends DataObject
 		}
 	}
 	
-	
+	/**
+	 * @todo set up sane return values for errors
+	 * @todo set up logging
+	 * @param unknown_type $checksum
+	 * @return muxed true for success, numeric for errors
+	 */
 	public function unreserve($checksum)
 	{
-		//TODO
+		global $accDatabase;
+		
+		$accDatabase->beginTransaction();
+		
+		// check it's actually reserved
+		if($this->request_reserved == 0)
+			return; // TODO: set sane return codes up
+		
+		// check it's this user who has got it reserved
+		if($this->request_reserved == WebRequest::getCurrentUser()->getId())
+		{
+			// unreserve
+			$this->request_reserved = 0;
+			
+			// TODO: add log entry
+			
+			// save
+			if($this->save($checksum))
+			{
+				$accDatabase->commit();
+				return true;
+			}
+			else
+			{
+				$accDatabase->rollBack();
+				return; //TODO: return code stuff
+			}
+		}
+		else
+		{	// not the user who's got it reserved, could be an admin breaking the reservation		
+			if(WebRequest::getCurrentUser()->isAdmin())
+			{
+				// admin requesting to break the reservation, unreserve it and re-reserve to current user
+				global $adminsStealReservations;
+				$this->request_reserved = $adminsStealReservations ? WebRequest::getCurrentUser()->getId() : 0;
+				
+				// add break log entry
+				
+				if($adminsStealReservations)
+				{
+					// add reserve log entry
+				}
+				
+				if($this->save())
+				{
+					$accDatabase->commit();
+					return true;
+				}
+				else
+				{
+					$accDatabase->rollBack();
+					return; // set up return value
+				}
+			}
+		}
 	}
 	
 	public function getId()

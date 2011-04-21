@@ -221,12 +221,20 @@ class Request extends DataObject
 			if($this->request_reserved == WebRequest::getCurrentUser()->getId())
 			{
 				// looks like this user already has this request reserved
+				
+				$accDatabase->rollBack();
+				
 				// return suitable error message
+				return;
 			}
 			else
 			{
 				// looks like someone else already has this request reserved
+				
+				$accDatabase->rollBack();
+				
 				// return suitable error message
+				return;
 			}
 		}
 		

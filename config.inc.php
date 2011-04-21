@@ -95,6 +95,8 @@ $defaultReserver = 0;
 // the useragent used by the tool when making external requests
 $toolUserAgent = "WARS/0.1 (+http://toolserver.org/~acc/; +https://github.com/enwikipedia-acc/wars)";
 
+// do admins steal requests when they unreserve someone else's request, or do they simply break the reservation?
+$adminsStealReservations = false;
 /*
  * Smarty configuration
  */

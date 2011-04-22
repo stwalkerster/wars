@@ -74,7 +74,7 @@ class WebRequest {
 	 */
 	public static function getString($name)
 	{
-		return htmlentities($_GET[$name]);
+		return $_GET[$name];
 	}
 	
 	/**
@@ -105,7 +105,7 @@ class WebRequest {
 	
 	public static function postString($name)
 	{
-		return htmlentities($_POST[$name]);
+		return $_POST[$name];
 	}
 	
 	/**

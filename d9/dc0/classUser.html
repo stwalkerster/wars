@@ -72,7 +72,7 @@ Inheritance diagram for User:</div>
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/dc0/classUser.html#a04c6f22b556a3f21463faaf8cdff2166">__construct</a> ($username, $password, $email, $onwiki)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/dc0/classUser.html#ab85808b180763aae0ad612ddac38f630">__construct</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/dc0/classUser.html#a39ad6e655fcc40623b9af2203cd7afa5">getId</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/dc0/classUser.html#aea1f51a8f3da9bc8be76928866ec951f">getUsername</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/dc0/classUser.html#acf082b95b344df14b9e8a6c09868dbcd">getEmail</a> ()</td></tr>
@@ -102,6 +102,7 @@ Static Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/dc0/classUser.html#a7acbb7b4767d60e2304d53f236b6a8db">authenticate</a> ($username, $password)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/dc0/classUser.html#a4d4e968c7855c1403181946a583541ad">getByName</a> ($username)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/dc0/classUser.html#a7e5c6b4139ff1b9517f6b9517d011ddc">saltPassword</a> ($username, $password)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">static&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/dc0/classUser.html#aa96f68d2c5112a273a05b391c8fba18d">create</a> ($username, $password, $email, $onwiki)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d1e/classDataObject.html#a99411338bbac9e3042c1e3485ac7619a">getById</a> ($id)</td></tr>
 <tr><td colspan="2"><h2><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
@@ -127,38 +128,16 @@ Private Attributes</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/dc0/classUser.html#a51c2975629a2c87e0f832333d18cc58d">$newRecord</a></td></tr>
 </table>
 <hr/><h2>Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="a04c6f22b556a3f21463faaf8cdff2166"></a><!-- doxytag: member="User::__construct" ref="a04c6f22b556a3f21463faaf8cdff2166" args="($username, $password, $email, $onwiki)" -->
+<a class="anchor" id="ab85808b180763aae0ad612ddac38f630"></a><!-- doxytag: member="User::__construct" ref="ab85808b180763aae0ad612ddac38f630" args="()" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">User::__construct </td>
           <td>(</td>
-          <td class="paramtype">$&nbsp;</td>
-          <td class="paramname"> <em>username</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
+          <td class="paramname"></td>
+          <td>&nbsp;)&nbsp;</td>
           <td></td>
-          <td class="paramtype">$&nbsp;</td>
-          <td class="paramname"> <em>password</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">$&nbsp;</td>
-          <td class="paramname"> <em>email</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">$&nbsp;</td>
-          <td class="paramname"> <em>onwiki</em></td><td>&nbsp;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td><td></td>
         </tr>
       </table>
 </div>
@@ -244,6 +223,45 @@ Private Attributes</h2></td></tr>
   </dd>
 </dl>
 <dl class="return"><dt><b>Returns:</b></dt><dd>boolean </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="aa96f68d2c5112a273a05b391c8fba18d"></a><!-- doxytag: member="User::create" ref="aa96f68d2c5112a273a05b391c8fba18d" args="($username, $password, $email, $onwiki)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">static User::create </td>
+          <td>(</td>
+          <td class="paramtype">$&nbsp;</td>
+          <td class="paramname"> <em>username</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">$&nbsp;</td>
+          <td class="paramname"> <em>password</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">$&nbsp;</td>
+          <td class="paramname"> <em>email</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">$&nbsp;</td>
+          <td class="paramname"> <em>onwiki</em></td><td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td><td><code> [static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
 
 </div>
 </div>
@@ -963,7 +981,7 @@ Private Attributes</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Fri Apr 22 2011 00:40:15 for Wikipedia Account Request System by&nbsp;
+<hr class="footer"/><address class="footer"><small>Generated on Fri Apr 22 2011 22:36:06 for Wikipedia Account Request System by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/></a> 1.7.1 </small></address>
 </body>

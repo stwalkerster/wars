@@ -154,16 +154,21 @@ class User extends DataObject
 	 */
 	public function checkPass($cleartext)
 	{
+		echo "pass-start ";
 		$version = substr($this->user_pass, 0, 3);
-
+		echo $version;
 		if($version == "$2$")
 		{
+			echo " ver2 ";
 			return ($this->user_pass === self::saltPassword($this->user_name, $cleartext));
 		}
 		else
 		{
+			echo " ver1 ";
 			if(md5($cleartext) === $this->user_pass)
 			{
+				echo "match";
+				
 				// update password to new spec
 
 				global $accDatabase;

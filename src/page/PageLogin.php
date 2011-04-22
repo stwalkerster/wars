@@ -101,7 +101,7 @@ class PageLogin extends PageBase
 			}
 			
 			
-			$u = new User(
+			$u = User::create(
 				WebRequest::postString('name'),
 				WebRequest::postString('pass'),
 				WebRequest::postString('email'),

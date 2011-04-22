@@ -71,30 +71,38 @@ class Request extends DataObject
 		return md5($id . $salt);
 	}
 	
-	public function __construct($name, $email, $comment)
+	public function __construct()
 	{
+		
+	}
+	
+	public static function create($name, $email, $comment)
+	{	
 		// get globals needed
 		global $defaultReserver;
+
+		$instance = new self();
 		
 		// it's new!
-		$this->new = true;
+		$instance->new = true;
 		
 		// new object, hasn't been assigned an id yet.
-		$this->request_id = false;
+		$instance->request_id = false;
 		
-		$this->request_email = $email;
-		$this->request_ip = $_SERVER['REMOTE_ADDR'];
-		$this->request_name = $name;
-		$this->request_cmt = $comment;
-		$this->request_status = "New";
-		$this->request_date = date("Y-m-d H:i:s");
-		$this->request_checksum = WARS_REQUEST_DEFAULT_CHECKSUM;
-		$this->request_emailsent = '';
-		$this->request_mailconfirm = '';
-		$this->request_reserved = $defaultReserver;
-		$this->request_useragent = $_SERVER['HTTP_USER_AGENT'];
-		$this->request_proxyip = ''; //TODO: set xff header
+		$instance->request_email = $email;
+		$instance->request_ip = $_SERVER['REMOTE_ADDR'];
+		$instance->request_name = $name;
+		$instance->request_cmt = $comment;
+		$instance->request_status = "New";
+		$instance->request_date = date("Y-m-d H:i:s");
+		$instance->request_checksum = WARS_REQUEST_DEFAULT_CHECKSUM;
+		$instance->request_emailsent = '';
+		$instance->request_mailconfirm = '';
+		$instance->request_reserved = $defaultReserver;
+		$instance->request_useragent = $_SERVER['HTTP_USER_AGENT'];
+		$instance->request_proxyip = ''; //TODO: set xff header
 		
+		return $instance;
 	}
 
 	private $new;

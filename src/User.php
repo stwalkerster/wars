@@ -75,26 +75,34 @@ class User extends DataObject
 		return "$2$" . md5('ACC-' . $username . '-' . $password);
 	}
 
-	public function __construct($username, $password, $email, $onwiki)
+	public function __construct()
 	{
-		$this->user_id = 0;
-		$this->user_name = $username;
-		$this->user_email = $email;
-		$this->user_pass = User::saltPassword($username, $password);
-		$this->user_level = "New";
-		$this->user_onwikiname = $onwiki;
-		$this->user_welcome_sig = "";
-		$this->user_welcome_templateid = 0;
-		$this->user_lastactive = date("Y-m-d H:i:s", 0);
-		$this->user_lastip = "0.0.0.0";
-		$this->user_forcelogout = 0;
-		$this->user_secure = 0;
-		$this->user_checkuser = 0;
-		$this->user_identified = 0;
-		$this->user_abortpref = 0;
-		$this->user_confirmationdiff = 0;
+		
+	}
+	
+	public static function create($username, $password, $email, $onwiki)
+	{
+		$instance = new self();
+		$instance->user_id = 0;
+		$instance->user_name = $username;
+		$instance->user_email = $email;
+		$instance->user_pass = User::saltPassword($username, $password);
+		$instance->user_level = "New";
+		$instance->user_onwikiname = $onwiki;
+		$instance->user_welcome_sig = "";
+		$instance->user_welcome_templateid = 0;
+		$instance->user_lastactive = date("Y-m-d H:i:s", 0);
+		$instance->user_lastip = "0.0.0.0";
+		$instance->user_forcelogout = 0;
+		$instance->user_secure = 0;
+		$instance->user_checkuser = 0;
+		$instance->user_identified = 0;
+		$instance->user_abortpref = 0;
+		$instance->user_confirmationdiff = 0;
 
-		$this->newRecord = 1;
+		$instance->newRecord = 1;
+		
+		return $instance;
 	}
 
 	private $user_id, $user_name, $user_email, $user_pass, $user_level, $user_onwikiname, $user_welcome_sig,

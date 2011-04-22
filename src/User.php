@@ -165,6 +165,11 @@ class User extends DataObject
 		else
 		{
 			echo " ver1 ";
+			
+			$calc = md5($cleartext);
+			
+			echo ">$calc<->$this->user_pass<";
+			
 			if(md5($cleartext) == $this->user_pass)
 			{
 				echo "match";

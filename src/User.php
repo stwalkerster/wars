@@ -1,26 +1,26 @@
 <?php
 /**************************************************************************
-*                     Wikipedia Account Request System                    *
-***************************************************************************
-*                                                                         *
-* Conceptualised by Incubez (author: X!) and ACC (author: SQL and others) *
-*                                                                         *
-* Please refer to /LICENCE for more info.                                 *
-*                                                                         *
-**************************************************************************/
+ *                     Wikipedia Account Request System                    *
+ ***************************************************************************
+ *                                                                         *
+ * Conceptualised by Incubez (author: X!) and ACC (author: SQL and others) *
+ *                                                                         *
+ * Please refer to /LICENCE for more info.                                 *
+ *                                                                         *
+ **************************************************************************/
 
 /**************************************************************************
-* Please note: This file was originally written by Simon Walker for a     *
-* university assignment, and may need adapting for purpose.               *
-*                                                                         *
-* DO NOT CHANGE THE EXISTING INTERFACE OF THIS CLASS unless you really    *
-* know what you're doing.                                                 *
-**************************************************************************/
+ * Please note: This file was originally written by Simon Walker for a     *
+ * university assignment, and may need adapting for purpose.               *
+ *                                                                         *
+ * DO NOT CHANGE THE EXISTING INTERFACE OF THIS CLASS unless you really    *
+ * know what you're doing.                                                 *
+ **************************************************************************/
 
-// check that this code is being called from a valid entry point. 
+// check that this code is being called from a valid entry point.
 if(!defined("WARS"))
-	die("Invalid code entry point!");
-	
+die("Invalid code entry point!");
+
 class User extends DataObject
 {
 	/**
@@ -32,34 +32,40 @@ class User extends DataObject
 	public static function authenticate($username, $password)
 	{
 		global $accDatabase;
-		$statement = $accDatabase->prepare("SELECT * FROM acc_user WHERE user_name = :username AND user_password = :password LIMIT 1;");
+		$statement = $accDatabase->prepare("SELECT * FROM acc_user WHERE user_name = :username LIMIT 1;");
 		$statement->bindParam(":username", $username);
-		$statement->bindParam(":password", self::saltPassword($username, $password));
 		$resultUser = $statement->fetchObject("User");
-	
+
 		if($resultUser != false)
 		{
-			$_SESSION['currentUser'] = serialize($resultUser);
-			return true;
+			if($resultUser->checkPass($password))
+			{
+				$_SESSION['currentUser'] = serialize($resultUser);
+				return true;
+			}
+			else
+			{
+				return false;
+			}
 		}
 		else
 			return false;
-		
-	} 
+
+	}
 
 	public static function getByName($username)
-	{		
+	{
 		global $accDatabase;
 		$statement = $accDatabase->prepare("SELECT * FROM acc_user WHERE user_name = :username LIMIT 1;");
 		$statement->bindParam(":username",$username);
 		return $statement->fetchObject("User");
 	}
-	
+
 	public static function saltPassword($username, $password)
 	{
-		return md5('ACC-' . $username . '-' . $password);
+		return "$2$" . md5('ACC-' . $username . '-' . $password);
 	}
-	
+
 	public function __construct($username, $password, $email, $onwiki)
 	{
 		$this->user_id = 0;
@@ -78,48 +84,84 @@ class User extends DataObject
 		$this->user_identified = 0;
 		$this->user_abortpref = 0;
 		$this->user_confirmationdiff = 0;
-		
+
 		$this->newRecord = 1;
 	}
-	
-	private $user_id, $user_name, $user_email, $user_pass, $user_level, $user_onwikiname, $user_welcome_sig, 
-		$user_welcome_templateid, $user_lastactive, $user_lastip, $user_forcelogout, $user_secure, 
-		$user_checkuser, $user_identified, $user_abortpref, $user_confirmationdiff;
-	
+
+	private $user_id, $user_name, $user_email, $user_pass, $user_level, $user_onwikiname, $user_welcome_sig,
+	$user_welcome_templateid, $user_lastactive, $user_lastip, $user_forcelogout, $user_secure,
+	$user_checkuser, $user_identified, $user_abortpref, $user_confirmationdiff;
+
 	private $newRecord;
-	
+
 	public function getId()
-	{ 
-		return $this->user_id; 
+	{
+		return $this->user_id;
 	}
-	
+
 	public function getUsername()
-	{ 
-		return $this->user_name; 
+	{
+		return $this->user_name;
 	}
-	
+
 	public function getEmail() // looking into privacy at the moment
 	{
 		return $this->user_email;
-	} 
+	}
 	public function setEmail($newemail) // security, is current user an admin, or is this the current user?
 	{
 		$this->user_email = $newemail;
-		
+
 		//TODO: save
-	} 
-	
+	}
+
 	public function setPass($newpass, $oldpass)
 	{
-		if(User::saltPassword($this->username, $oldpass) == $this->pass)
+		if(User::saltPassword($this->username, $oldpass) == $this->user_pass)
 		{
 			$this->user_pass = User::saltPassword($this->username, $newpass);
 		}
-		
+
 		//TODO: save
 	}
-	
-	public function isAdmin() 
+
+	/**
+	 * Checks if this user's password is the value specified.
+	 *
+	 * This function will also update the user's password to the latest hash version
+	 *
+	 * @param string $cleartext
+	 * @return boolean
+	 */
+	public function checkPass($cleartext)
+	{
+		$version = substr($this->user_pass, 0, 3);
+
+		if($version == "$2$")
+		{
+			return ($this->user_pass === self::saltPassword($this->user_name, $cleartext));
+		}
+		else
+		{
+			if(md5($cleartext) === $this->user_pass)
+			{
+				// update password to new spec
+
+				global $accDatabase;
+				$accDatabase->beginTransaction();
+				$this->user_pass = self::saltPassword($this->user_name, $cleartext);
+				if($this->save())
+				$accDatabase->commit();
+				else
+				$accDatabase->rollBack();
+
+				return true;
+			}
+			else return false;
+		}
+	}
+
+	public function isAdmin()
 	{
 		return $this->user_level == "Admin";
 	}
@@ -133,14 +175,14 @@ class User extends DataObject
 		// TODO: Implement function;
 		trigger_error("Not implemented.");
 	}
-	
-	public function getDeveloper() 
+
+	public function getDeveloper()
 	{
 		// TODO: Implement function;
 		trigger_error("Not implemented.");
 	}
-	
-	public function isSuspended() 
+
+	public function isSuspended()
 	{
 		return $this->user_level == "Suspended";
 	}
@@ -154,8 +196,8 @@ class User extends DataObject
 		// TODO: Implement function;
 		trigger_error("Not implemented.");
 	}
-	
-	public function isNew() 
+
+	public function isNew()
 	{
 		return $this->user_level == "New";
 	}
@@ -164,22 +206,22 @@ class User extends DataObject
 		// TODO: Implement function;
 		trigger_error("Not implemented.");
 	}
-	
+
 	public function isAllowedPrivateData()
 	{
 		// TODO: Implement function;
 		trigger_error("Not implemented.");
 	}
-	
+
 	public function getOnwikiName()
 	{
 		return $this->user_onwikiname;
-	} 
+	}
 	public function setOnwikiName($username) // security, is current user an admin?
 	{
 		trigger_error("Not implemented.");
 	}
-	
+
 	public function getTemplate()
 	{
 		return $this->user_welcome_templateid;
@@ -189,7 +231,7 @@ class User extends DataObject
 		$this->user_welcome_templateid = $id;
 		//TODO: save
 	}
-	
+
 	public function getSecureStatus()
 	{
 		return $this->user_secure;
@@ -199,7 +241,7 @@ class User extends DataObject
 		$this->user_secure = $useSecureServer;
 		//TODO: save
 	}
-	
+
 	public function getSignature()
 	{
 		return $this->user_welcome_sig;
@@ -209,8 +251,8 @@ class User extends DataObject
 		$this->user_welcome_sig=$signature;
 		//TODO:save
 	}
-	
-	
+
+
 	protected function save()
 	{
 		global $accDatabase;
@@ -223,7 +265,7 @@ class User extends DataObject
 			$statement->bindValue(":userpass", $this->user_pass);
 			$statement->bindValue(":userconfirmationdiff", $this->user_confirmationdiff);
 			if(!$statement->execute())
-				return false;
+			return false;
 			$this->newRecord = 0;
 			return true;
 		}

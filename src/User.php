@@ -35,6 +35,7 @@ class User extends DataObject
 		global $accDatabase;
 		$statement = $accDatabase->prepare("SELECT * FROM acc_user WHERE user_name = :username LIMIT 1;");
 		$statement->bindParam(":username", $username);
+		$statement->execute();
 		$resultUser = $statement->fetchObject("User");
 		echo "auth retrieved\n";
 		
@@ -67,6 +68,7 @@ class User extends DataObject
 		global $accDatabase;
 		$statement = $accDatabase->prepare("SELECT * FROM acc_user WHERE user_name = :username LIMIT 1;");
 		$statement->bindParam(":username",$username);
+		$statement->execute();
 		return $statement->fetchObject("User");
 	}
 
@@ -79,7 +81,7 @@ class User extends DataObject
 	{
 		
 	}
-	
+		
 	public static function create($username, $password, $email, $onwiki)
 	{
 		$instance = new self();

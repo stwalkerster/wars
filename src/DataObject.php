@@ -21,6 +21,7 @@ abstract class DataObject
 		global $accDatabase;
 		$statement = $accDatabase->prepare("SELECT * FROM acc_".strtolower($me)." WHERE ".strtolower($me)."_id = :oid LIMIT 1;");
 		$statement->bindParam(":oid",$id);
+		$statement->execute();
 		return $statement->fetchObject($me);
 	}
 	

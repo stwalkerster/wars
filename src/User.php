@@ -31,25 +31,34 @@ class User extends DataObject
 	 */
 	public static function authenticate($username, $password)
 	{
+		echo "auth start\n";
 		global $accDatabase;
 		$statement = $accDatabase->prepare("SELECT * FROM acc_user WHERE user_name = :username LIMIT 1;");
 		$statement->bindParam(":username", $username);
 		$resultUser = $statement->fetchObject("User");
-
+		echo "auth retrieved\n";
+		
 		if($resultUser != false)
 		{
+					echo "retrieve succeeded\n";
+			
 			if($resultUser->checkPass($password))
 			{
+				echo "check succeeded\n";
 				$_SESSION['currentUser'] = serialize($resultUser);
 				return true;
 			}
 			else
-			{
+			{echo "check failed\n";
 				return false;
 			}
 		}
 		else
+		{
+					echo "retrieve failed\n";
+			
 			return false;
+		}
 
 	}
 

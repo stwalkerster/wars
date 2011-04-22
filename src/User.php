@@ -31,33 +31,26 @@ class User extends DataObject
 	 */
 	public static function authenticate($username, $password)
 	{
-		echo "auth start\n";
 		global $accDatabase;
 		$statement = $accDatabase->prepare("SELECT * FROM acc_user WHERE user_name = :username LIMIT 1;");
 		$statement->bindParam(":username", $username);
 		$statement->execute();
 		$resultUser = $statement->fetchObject("User");
-		echo "auth retrieved\n";
 		
 		if($resultUser != false)
 		{
-					echo "retrieve succeeded\n";
-			
 			if($resultUser->checkPass($password))
 			{
-				echo "check succeeded\n";
 				$_SESSION['currentUser'] = serialize($resultUser);
 				return true;
 			}
 			else
-			{echo "check failed\n";
+			{
 				return false;
 			}
 		}
 		else
 		{
-					echo "retrieve failed\n";
-			
 			return false;
 		}
 
@@ -154,35 +147,26 @@ class User extends DataObject
 	 */
 	public function checkPass($cleartext)
 	{
-		echo "pass-start ";
 		$version = substr($this->user_pass, 0, 3);
-		echo $version;
 		if($version == "$2$")
 		{
-			echo " ver2 ";
 			return ($this->user_pass == self::saltPassword($this->user_name, $cleartext));
 		}
 		else
 		{
-			echo " ver1 ";
-			
 			$calc = md5($cleartext);
-			
-			echo ">$calc<->$this->user_pass<";
 			
 			if(md5($cleartext) == $this->user_pass)
 			{
-				echo "match";
-				
 				// update password to new spec
 
 				global $accDatabase;
 				$accDatabase->beginTransaction();
 				$this->user_pass = self::saltPassword($this->user_name, $cleartext);
 				if($this->save())
-				$accDatabase->commit();
+					$accDatabase->commit();
 				else
-				$accDatabase->rollBack();
+					$accDatabase->rollBack();
 
 				return true;
 			}
@@ -300,7 +284,7 @@ class User extends DataObject
 		}
 		else
 		{ // UPDATE
-			$sqlText = "UPDATE `acc_user` SET `user_name` = :username, `user_email` = :useremail, `user_pass` = :userpass, `user_level` = :userlevel, `user_onwikiname` = :useronwikiname, `user_welcome_sig` = :userwelcomesig, `user_lastactive` = :userlastactive, `user_lastip` = :userlastip, `user_forcelogout` = :userforcelogout, `user_secure` = :usersecure, `user_checkuser` = :usercheckuser, `user_identified` = :useridentified, `user_welcome_templateid` = :userwelcometemplateid, `user_abortpref` = :userabortpref, WHERE `user_id` = :userid;";
+			$sqlText = "UPDATE `acc_user` SET `user_name` = :username, `user_email` = :useremail, `user_pass` = :userpass, `user_level` = :userlevel, `user_onwikiname` = :useronwikiname, `user_welcome_sig` = :userwelcomesig, `user_lastactive` = :userlastactive, `user_lastip` = :userlastip, `user_forcelogout` = :userforcelogout, `user_secure` = :usersecure, `user_checkuser` = :usercheckuser, `user_identified` = :useridentified, `user_welcome_templateid` = :userwelcometemplateid, `user_abortpref` = :userabortpref WHERE `user_id` = :userid;";
 			$statement = $accDatabase->prepare($sqlText);
 			$statement->bindValue(":username", $this->user_name);
 			$statement->bindValue(":useremail", $this->user_email);

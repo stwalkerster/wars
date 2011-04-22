@@ -78,6 +78,7 @@ Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/dc0/classUser.html#acf082b95b344df14b9e8a6c09868dbcd">getEmail</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/dc0/classUser.html#aa6cd30e0c43e7fa5bd9e8b6a13b91089">setEmail</a> ($newemail)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/dc0/classUser.html#a713b775a5c96fe33549a4fdcab029e00">setPass</a> ($newpass, $oldpass)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/dc0/classUser.html#ad6fc0b11a462ba0996528dab3d907058">checkPass</a> ($cleartext)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/dc0/classUser.html#aba5f2c20affd53d979fc7717a746ca6a">isAdmin</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/dc0/classUser.html#a7583280251eb9d15e9d2fa1c8f5f1ec1">promoteAdmin</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/dc0/classUser.html#a96c7c03f152eb8220c17fb817bd5a478">demoteAdmin</a> ($reason)</td></tr>
@@ -216,6 +217,33 @@ Private Attributes</h2></td></tr>
   </dd>
 </dl>
 <dl class="return"><dt><b>Returns:</b></dt><dd>boolean login was successful. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ad6fc0b11a462ba0996528dab3d907058"></a><!-- doxytag: member="User::checkPass" ref="ad6fc0b11a462ba0996528dab3d907058" args="($cleartext)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">User::checkPass </td>
+          <td>(</td>
+          <td class="paramtype">$&nbsp;</td>
+          <td class="paramname"> <em>cleartext</em></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>Checks if this user's password is the value specified.</p>
+<p>This function will also update the user's password to the latest hash version</p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>string</em>&nbsp;</td><td>$cleartext </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>boolean </dd></dl>
 
 </div>
 </div>
@@ -935,7 +963,7 @@ Private Attributes</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Fri Apr 22 2011 00:10:59 for Wikipedia Account Request System by&nbsp;
+<hr class="footer"/><address class="footer"><small>Generated on Fri Apr 22 2011 00:40:15 for Wikipedia Account Request System by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/></a> 1.7.1 </small></address>
 </body>

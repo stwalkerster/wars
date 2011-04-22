@@ -54,6 +54,7 @@ class WebRequest {
 		$pa = explode('/', $page);
 			
 		return $pa[0];
+		
 	}
 	
 	/**
@@ -184,7 +185,7 @@ class WebRequest {
 	 */
 	public static function getCurrentUser()
 	{
-		if(isset($_SESSION['currUser']))
+		if(isset($_SESSION['currentUser']))
 			return unserialize($_SESSION['currentUser']);
 		else
 			return false;

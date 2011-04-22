@@ -160,12 +160,12 @@ class User extends DataObject
 		if($version == "$2$")
 		{
 			echo " ver2 ";
-			return ($this->user_pass === self::saltPassword($this->user_name, $cleartext));
+			return ($this->user_pass == self::saltPassword($this->user_name, $cleartext));
 		}
 		else
 		{
 			echo " ver1 ";
-			if(md5($cleartext) === $this->user_pass)
+			if(md5($cleartext) == $this->user_pass)
 			{
 				echo "match";
 				

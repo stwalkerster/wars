@@ -59,6 +59,12 @@ class PageLogin extends PageBase
 				// redirect to main page
 				WebRequest::redirect('Main');
 			}
+			else
+			{
+				$this->smarty->assign('iserror','1');
+				$this->smarty->assign('error', 'error/AccessDenied.tpl');
+				$this->smarty->assign('subpage', 'page/LoginForm.tpl');
+			}
 		}
 		else
 		{

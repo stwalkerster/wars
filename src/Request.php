@@ -657,11 +657,13 @@ class Request extends DataObject
 						break;
 					case REQUEST_COLUMN_STATUS:
 						if($first){
-							$first = false;}
-							else{
-								$sql.= " AND";}
-								$sql.=" ".REQUEST_COLUMN_STATUS." = ?";
-								break;
+							$first = false;
+						}
+						else{
+							$sql.= " AND";
+						}
+						$sql.=" ".REQUEST_COLUMN_STATUS." = ?";
+						break;
 					case REQUEST_COLUMN_DATE:
 						if($first){
 							$first = false;
@@ -735,13 +737,12 @@ class Request extends DataObject
 			$statement = $accDatabase->prepare($sql);
 
 			$i=1;
-			foreach($vals as $val)
-			{
-				$statement->bindValue($i, $val);
-			}
 		}
 
 		//retrieve resultset
 
+		$statement->execute($vals);
+		
+		return $statement->fetchAll(PDO::FETCH_CLASS, "Request");
 	}
 }

@@ -89,7 +89,14 @@ class Request extends DataObject
 
 	}
 
-	public static function create($name, $email, $comment)
+	/**
+	 * Creates a new request
+	 * @param string $name The requested name
+	 * @param string $email The email address of the requestor
+	 * @param string $comment The comment left by the requestor
+	 * @todo set the proxy IP if available
+	 */
+	public static function create($name, $email, $comment = "")
 	{
 		// get globals needed
 		global $defaultReserver;
@@ -113,7 +120,7 @@ class Request extends DataObject
 		$instance->request_mailconfirm = '';
 		$instance->request_reserved = $defaultReserver;
 		$instance->request_useragent = $_SERVER['HTTP_USER_AGENT'];
-		$instance->request_proxyip = ''; //TODO: set xff header
+		$instance->request_proxyip = '';
 
 		return $instance;
 	}
@@ -508,7 +515,7 @@ class Request extends DataObject
 	 */
 	public function defer($target, $checksum)
 	{
-		//TODO
+		throw new NotImplementedException();
 	}
 	/**
 	 * @todo implement
@@ -518,7 +525,7 @@ class Request extends DataObject
 	 */
 	public function close($emailId, $checksum)
 	{
-		//TODO
+		throw new NotImplementedException();
 	}
 
 	/**
@@ -530,7 +537,7 @@ class Request extends DataObject
 	 */
 	public function customClose($created, $message, $checksum)
 	{
-		//TODO
+		throw new NotImplementedException();
 	}
 
 
@@ -574,8 +581,7 @@ class Request extends DataObject
 	 */
 	private function allowPrivateDataRelease()
 	{
-
-
+		throw new NotImplementedException();
 	}
 
 	/**

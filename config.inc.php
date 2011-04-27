@@ -110,6 +110,9 @@ $s_configDir = $baseScriptPath . '/smartyconfig/';
 
 @ include_once('localconfig.inc.php');
 
+//set up nice error handling
+require_once($baseIncludePath.'errorhandler.php');
+
 // see if the smarty config file needs to be updated
 if( // if it doesn't exist, OR
 	(! file_exists($s_configDir . 'wars.config'))

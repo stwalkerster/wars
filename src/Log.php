@@ -23,5 +23,15 @@ if(!defined("WARS"))
 
 class Log extends DataObject
 {
-	
+	/**
+	 * Saves the current state of the object to the database.
+	 * 
+	 * This is not transaction-based, all calls to it must be wrapped inside a transaction
+	 * 
+	 * @return true on success, false on failure
+	 */
+	protected function save()
+	{
+		
+	}
 }

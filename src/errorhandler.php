@@ -33,10 +33,10 @@ if(!defined("WARS"))
 function error_handler($error_level, $error_message, $error_file = "", 
 							$error_line  = 0, $error_context = array())
 {
-	throw new WarsException($error_message);
+	echo $error_message;
 }
 
-set_error_handler("error_handler");
+//set_error_handler("error_handler");
 
 /**
  * 
@@ -46,6 +46,9 @@ set_error_handler("error_handler");
  */
 function exception_handler($exception)
 {
+	global $baseIncludePath;
+	require_once($baseIncludePath."smarty/Smarty.class.php");
+	
 	$smarty = new Smarty();
 	global $s_templateDir, $s_compileDir, $s_configDir, $s_cacheDir, $s_configFile;
 	
@@ -65,6 +68,8 @@ function exception_handler($exception)
 	{
 		$smarty->assign('subpage', 'page/InternalFatal.tpl');
 		$smarty->assign('pagetitle', 'Whoops!');
+		$smarty->assign("offlineReason", $exception->getMessage());
+		$smarty->assign("offlineCulprit", "Unhandled Exception");
 	}	
 	else
 	{

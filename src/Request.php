@@ -29,13 +29,26 @@ define("REQUEST_STATUS_OPEN", "Open");
 define("REQUEST_STATUS_CHECKUSER", "Checkuser");
 /**
  * @todo check the possible statuses in the database
- * @var unknown_type
  */
 define("REQUEST_STATUS_FLAGGEDUSER", "Flagged User");
 define("REQUEST_STATUS_CLOSED", "Closed");
 
 define("REQUEST_PRIVACY_EMAIL", "email@currently.hidden");
 define("REQUEST_PRIVACY_IP", "127.0.0.1");
+
+define("REQUEST_COLUMN_ID", "request_id");
+define("REQUEST_COLUMN_EMAIL", "request_email");
+define("REQUEST_COLUMN_IP", "request_ip");
+define("REQUEST_COLUMN_NAME", "request_name");
+define("REQUEST_COLUMN_CMT", "request_cmt");
+define("REQUEST_COLUMN_STATUS", "request_status");
+define("REQUEST_COLUMN_DATE", "request_date");
+define("REQUEST_COLUMN_CHECKSUM", "request_checksum");
+define("REQUEST_COLUMN_EMAILSENT", "request_emailsent");
+define("REQUEST_COLUMN_MAILCONFIRM", "request_mailconfirm");
+define("REQUEST_COLUMN_RESERVED", "request_reserved");
+define("REQUEST_COLUMN_USERAGENT", "request_useragent");
+define("REQUEST_COLUMN_PROXYIP", "request_proxyip");
 
 class Request extends DataObject
 {	
@@ -556,6 +569,77 @@ class Request extends DataObject
 	private function allowPrivateDataRelease()
 	{
 		
+		
+	}
+	
+	/**
+	 * Static methods to allow data retrieval
+	 */
+	
+	/**
+	 * Method to retrieve a list of requests which match the specified conditions
+	 * @param array $whereconds Associative array of column name constant to column value
+	 * @return array List of requests which match the conditions
+	 * @todo finish off, including code to figure out when to put AND in the statement etc
+	 */
+	public static function query($whereconds)
+	{
+		// build the basic statement
+		$sql = "SELECT request_id FROM request";
+		
+		$statement = null;
+		
+		global $accDatabase;
+		
+		// add where conditions
+		if(empty($whereconds))
+		{
+			$sql.=";";
+			$statement = $accDatabase->prepare($sql); 
+		}
+		else
+		{
+			$sql.=" WHERE";
+			
+			$vals=array();
+			
+			// iterate through, setting columns up with parameters
+			foreach($whereconds as $col => $val)	
+			{
+				switch($col)
+				{
+					case REQUEST_COLUMN_ID:
+						$sql.=" ".REQUEST_COLUMN_ID." = ?";
+						break;
+					case REQUEST_COLUMN_EMAIL:
+					case REQUEST_COLUMN_IP:
+					case REQUEST_COLUMN_NAME:
+					case REQUEST_COLUMN_CMT:
+					case REQUEST_COLUMN_STATUS:
+					case REQUEST_COLUMN_DATE:
+					case REQUEST_COLUMN_CHECKSUM:
+					case REQUEST_COLUMN_EMAILSENT:
+					case REQUEST_COLUMN_MAILCONFIRM:
+					case REQUEST_COLUMN_RESERVED:
+					case REQUEST_COLUMN_USERAGENT:
+					case REQUEST_COLUMN_PROXYIP:
+					default: // not a column!
+						throw new WarsException("Unknown column!");
+				}
+				
+				$vals[] = $val;
+			}
+			
+			$statement = $accDatabase->prepare($sql);
+			
+			$i=1;
+			foreach($vals as $val)
+			{
+				$statement->bindValue($i, $val);
+			}
+		}
+		
+		//retrieve resultset
 		
 	}
 }

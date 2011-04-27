@@ -1,2 +1,6 @@
 localconfig.inc.php
 .dbpw
+!.gitignore
+smartycache/*
+smartycompile/*
+smartyconfig/*

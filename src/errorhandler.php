@@ -21,6 +21,15 @@ if(!defined("WARS"))
  * including Smarty
  */
 
+	/**
+	 * 
+	 * @param $error_level
+	 * @param $error_message
+	 * @param $error_file
+	 * @param $error_line
+	 * @param $error_context
+	 * @return unknown_type
+	 */
 function error_handler($error_level, $error_message, $error_file = "", 
 							$error_line  = 0, $error_context = array())
 {
@@ -29,6 +38,12 @@ function error_handler($error_level, $error_message, $error_file = "",
 
 set_error_handler("error_handler");
 
+/**
+ * 
+ * @param unknown_type $exception
+ * @return unknown_type
+ * @todo sort out display of the exception if required, maybe logging too
+ */
 function exception_handler($exception)
 {
 	$smarty = new Smarty();

@@ -23,11 +23,12 @@ if(!defined("WARS"))
 
 class PageForward extends PageBase
 {
-	private $linkedRequest;
+	private $linkedRequest = null;
 	
 	function __construct()
 	{
-		$this->linkedRequest = Request::getById(WebRequest::getInt("id"));	
+		if(WebRequest::getInt("id") != 0)
+			$this->linkedRequest = Request::getById();	
 	}
 	
 	function runPage()

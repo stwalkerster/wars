@@ -84,6 +84,9 @@ class WebRequest {
 	 */
 	public static function getInt($name)
 	{
+		if(!isset($_GET[$name]))
+			return 0;
+			
 		$raw = $_GET[$name];
 
 		if(is_numeric($raw) && (int)$raw == $raw)

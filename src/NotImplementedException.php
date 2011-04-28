@@ -11,5 +11,9 @@
 
 class NotImplementedException extends WarsException
 {
-	
+	public function __construct($message = null, $code = 0, Exception $previous = null)
+	{
+		$msg = $message == null ? "The method or function is not implemented." : $message;
+		parent::__construct($msg, $code);
+	}
 }

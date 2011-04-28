@@ -36,7 +36,7 @@ function error_handler($error_level, $error_message, $error_file = "",
 	throw new ErrorException($error_message, 0, $error_level, $error_file, $error_line);
 }
 
-set_error_handler("error_handler", E_ERROR | E_STRICT | E_WARNING | E_USER_ERROR | E_USER_WARNING );
+
 
 /**
  * 
@@ -44,8 +44,9 @@ set_error_handler("error_handler", E_ERROR | E_STRICT | E_WARNING | E_USER_ERROR
  * @return unknown_type
  * @todo sort out display of the exception if required, maybe logging too
  */
-function exception_handler($exception)
+function exception_handler(Exception $exception)
 {
+	ob_end_clean();
 	global $baseIncludePath;
 	require_once($baseIncludePath."smarty/Smarty.class.php");
 	
@@ -60,26 +61,62 @@ function exception_handler($exception)
 	$smarty->config_load("wars.config","global");
 	$smarty->assign('showHeaderInfo',0);
 	$smarty->assign('stylesheet', "cmelbye.css");
-	$smarty->assign('menu', array());
-	
-	$smarty->assign('headertitle', "Wikipeda Account Request System");
+		
+	$smarty->assign('headertitle', "Wikipedia Account Request System");
 	
 	if(strstr($_SERVER['SCRIPT_NAME'], "internal.php"))
 	{
 		$smarty->assign('subpage', 'page/InternalFatal.tpl');
 		$smarty->assign('pagetitle', 'Whoops!');
+				$smarty->assign('menu', array(
+					'menuIrc' => array(
+						'link' => 'Forward?link=irc://irc.freenode.net/#wikipedia-en-accounts',
+						'text' => 'IRC',
+					),
+					'menuMailingList' => array(
+						'link' => 'Forward?link=https://lists.wikimedia.org/mailman/listinfo/accounts-enwiki-l',
+						'text' => 'Mailing list',
+					),
+					'menuJira' => array(
+						'link' => 'Forward?https://jira.toolserver.org/browse/ACC',
+						'text' => 'Bugtracker',
+					),
+					'menuCandles' => array(
+						'link' => 'Forward?http://shop.ebay.com/i.html?_nkw=pillar+candles',
+						'text' => 'Candles',
+					),
+				)
+			);
 		
 		$msg = $exception->getMessage();
-		
-		$smarty->assign("offlineReason", $msg );
-		$smarty->assign("offlineCulprit", "Unhandled Exception");
+		$smarty->assign("offlineType", "error");
+		$smarty->assign("offlineReason", "Unhandled Exception" );
+		$smarty->assign("offlineTechMsg", $msg);
+		$smarty->assign("offlineTechTrace", $exception->getTraceAsString() );
+		$smarty->assign("offlineTechType", get_clasS($exception));
 	}	
 	else
 	{
 		$smarty->assign('subpage', 'page/Fatal.tpl');
 		$smarty->assign('pagetitle', 'Our apologies!');
+		$smarty->assign('menu', array(
+					'menuWikipedia' => array(
+						'link' => 'Forward?link=http://en.wikipedia.org/',
+						'text' => 'Go back to Wikipedia',
+					),
+					'menuMailTeam' => array(
+						'link' => 'Forward?link=mailto:accounts-enwiki-l@lists.wikimedia.org',
+						'text' => 'Email the Team',
+					),
+				)
+			);
 	}
 	
 	$smarty->display('Page.tpl');
 }
-set_exception_handler("exception_handler");
+if($useErrorHandler)
+{
+	set_error_handler("error_handler", E_ERROR | E_USER_ERROR );
+	set_exception_handler("exception_handler");
+	ob_start();
+}

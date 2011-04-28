@@ -97,6 +97,10 @@ $toolUserAgent = "WARS/0.1 (+http://toolserver.org/~acc/; +https://github.com/en
 
 // do admins steal requests when they unreserve someone else's request, or do they simply break the reservation?
 $adminsStealReservations = false;
+
+// Use the pretty error handler
+$useErrorHandler=true;
+
 /*
  * Smarty configuration
  */

@@ -34,7 +34,7 @@ abstract class PageBase
 	 */
 	var $subtitle;
 
-	var $title = "Wikipeda Account Request System";
+	var $title = "Wikipedia Account Request System";
 
 	var $pagetemplate = "Page.tpl";
 	
@@ -59,6 +59,14 @@ abstract class PageBase
 			'link' => 'Messages',
 			'text' => 'Message Management',
 	),
+		'menuTemplates' => array(
+			'link' => 'Templates',
+			'text' => 'Template Management',
+	),
+		'menuUsers' => array(
+			'link' => 'UserManagement',
+			'text' => 'User Management',
+	),
 		'menuSearch' => array(
 			'link' => 'Search',
 			'text' => 'Search',
@@ -73,7 +81,11 @@ abstract class PageBase
 	),
 		'menuDocumentation' => array(
 			'link' => 'Forward?link=http://en.wikipedia.org/wiki/Wikipedia:Request_an_account/Guide',
-			'text' => 'Documentation',
+			'text' => 'Guide',
+	),
+		'menuChat' => array(
+			'link' => 'Forward?link=http://webchat.freenode.net/?channels=wikipedia-en-accounts',
+			'text' => 'Chat',
 	),
 	);
 

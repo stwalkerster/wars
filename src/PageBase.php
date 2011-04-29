@@ -143,10 +143,18 @@ abstract class PageBase
 	 * @param $errorName Name of the error file.
 	 * @return unknown_type
 	 */
-	function error($errorName)
+	function error($errorName, $isfatal =false)
 	{
+		if($isfatal)
+		{
+			$this->smarty->assign('subpage', 'Error.tpl');
+		}
+		else 
+		{
+			$this->smarty->assign('iserror', '1');
+		}
 		$this->smarty->assign('error', 'error/'.$errorName.'.tpl');
-		$this->smarty->assign('subpage', 'Error.tpl');
+		
 	}
 	
 	/**

@@ -61,8 +61,7 @@ class PageLogin extends PageBase
 			}
 			else
 			{
-				$this->smarty->assign('iserror','1');
-				$this->smarty->assign('error', 'error/AccessDenied.tpl');
+				$this->error("AccessDenied");
 				$this->smarty->assign('subpage', 'page/LoginForm.tpl');
 			}
 		}

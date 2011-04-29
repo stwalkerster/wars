@@ -602,12 +602,24 @@ class Request extends DataObject
 	/**
 	 * Checks to see if the current user is able to see the private data associated with this request
 	 *
+	 * Returns true if the user is allowed private data
+	 * Returns true if the request is available for the current user
+	 *
 	 * @return boolean
 	 * @todo implement
 	 */
 	private function allowPrivateDataRelease()
 	{
-		throw new NotImplementedException();
+		if(WebRequest::getCurrentUser()->isAllowedPrivateData())
+		{
+			return true;
+		}
+		if($this->isAvailableForCurrentUser())
+		{
+			return true;
+		}
+		
+		return false;
 	}
 
 	/**

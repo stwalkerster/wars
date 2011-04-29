@@ -239,10 +239,24 @@ class User extends DataObject
 		throw new NotImplementedException();
 	}
 
+	/**
+	 * @return boolean true if the user is allowed to access private data
+	 * Returns true if the user is allowed to access private data, false otherwise
+	 * 
+	 * At the moment, this is a simple check if the user is an admin or checkuser.
+	 */
 	public function isAllowedPrivateData()
 	{
-		// TODO: Implement function;
-		trigger_error("Not implemented.");
+		if($this->isCheckuser())
+		{
+			return true;
+		}
+		if($this->isAdmin())
+		{
+			return true;
+		}
+
+		return false;
 	}
 
 	public function getOnwikiName()

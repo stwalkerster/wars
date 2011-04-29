@@ -31,5 +31,18 @@ class PageMain extends PageBase
 	function runPage()
 	{
 		$this->smarty->assign('subpage', 'page/MainPage.tpl');
+		$this->smarty->assign('req_open', Request::query(array(
+			REQUEST_COLUMN_STATUS => REQUEST_STATUS_OPEN,
+			REQUEST_COLUMN_MAILCONFIRM => "Confirmed"
+			)));
+		$this->smarty->assign('req_flagged', Request::query(array(
+			REQUEST_COLUMN_STATUS => REQUEST_STATUS_FLAGGEDUSER,
+			REQUEST_COLUMN_MAILCONFIRM => "Confirmed"
+			)));
+		$this->smarty->assign('req_checkuser', Request::query(array(
+			REQUEST_COLUMN_STATUS => REQUEST_STATUS_CHECKUSER,
+			REQUEST_COLUMN_MAILCONFIRM => "Confirmed"
+			)));
+				
 	}
 }

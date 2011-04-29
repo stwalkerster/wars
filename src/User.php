@@ -174,10 +174,13 @@ class User extends DataObject
 				$accDatabase->beginTransaction();
 				$this->user_pass = self::saltPassword($this->user_name, $cleartext);
 				if($this->save())
+				{
 					$accDatabase->commit();
+				}
 				else
+				{
 					$accDatabase->rollBack();
-
+				}
 				return true;
 			}
 			else return false;

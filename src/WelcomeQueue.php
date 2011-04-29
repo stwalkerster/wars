@@ -13,7 +13,7 @@
 if(!defined("WARS"))
 	die("Invalid code entry point!");
 	
-class Message extends DataObject
+class WelcomeQueue extends DataObject
 {	
 	/**
 	 * Saves the current state of the object to the database.
@@ -30,5 +30,15 @@ class Message extends DataObject
 	public function getMessage()
 	{
 		trigger_error("Not implemented");
+	}
+	
+	public static function getById($id)
+	{
+		$me = "WelcomeQueue";
+		global $accDatabase;
+		$statement = $accDatabase->prepare("SELECT * FROM acc_".strtolower($me)." WHERE ".strtolower($me)."_id = :oid LIMIT 1;");
+		$statement->bindParam(":oid",$id);
+		$statement->execute();
+		return $statement->fetchObject($me);
 	}
 }

@@ -16,13 +16,5 @@ if(!defined("WARS"))
 abstract class DataObject
 {
 
-	public static function getById($id)
-	{
-		$me = get_class($this);
-		global $accDatabase;
-		$statement = $accDatabase->prepare("SELECT * FROM acc_".strtolower($me)." WHERE ".strtolower($me)."_id = :oid LIMIT 1;");
-		$statement->bindParam(":oid",$id);
-		$statement->execute();
-		return $statement->fetchObject($me);
-	}
+	public abstract static function getById($id);
 }

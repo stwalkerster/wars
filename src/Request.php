@@ -30,7 +30,7 @@ define("REQUEST_STATUS_CHECKUSER", "Checkuser");
 /**
  * @todo check the possible statuses in the database
  */
-define("REQUEST_STATUS_FLAGGEDUSER", "Flagged User");
+define("REQUEST_STATUS_FLAGGEDUSER", "Admin");
 define("REQUEST_STATUS_CLOSED", "Closed");
 
 define("REQUEST_PRIVACY_EMAIL", "email@currently.hidden");
@@ -144,9 +144,9 @@ class Request extends DataObject
 
 	/**
 	 * Saves the current state of the object to the database.
-	 * 
+	 *
 	 * This is not transaction-based, all calls to it must be wrapped inside a transaction
-	 * 
+	 *
 	 * @return true on success, false on failure
 	 */
 	protected function save($checksum)
@@ -198,8 +198,10 @@ class Request extends DataObject
 		else
 		{
 			if($this->request_checksum != $checksum)
-			return false;
-
+			{
+				return false;
+			}
+				
 			// update the checksum
 			$this->request_checksum = md5($this->id . $this->name . $this->email . microtime());
 
@@ -576,10 +578,13 @@ class Request extends DataObject
 	public function isAvailableForCurrentUser()
 	{
 		if($this->getReserved() == 0)
-		return true;
+		{
+			return true;
+		}
 		if($this->getReserved() == WebRequest::getCurrentUser()->getId())
-		return true;
-
+		{
+			return true;
+		}
 		return false;
 	}
 
@@ -602,12 +607,11 @@ class Request extends DataObject
 	 * Method to retrieve a list of requests which match the specified conditions
 	 * @param array $whereconds Associative array of column name constant to column value
 	 * @return array List of requests which match the conditions
-	 * @todo finish off
 	 */
 	public static function query($whereconds)
 	{
 		// build the basic statement
-		$sql = "SELECT request_id FROM request";
+		$sql = "SELECT * FROM acc_request";
 
 		$statement = null;
 
@@ -633,118 +637,144 @@ class Request extends DataObject
 				switch($col)
 				{
 					case REQUEST_COLUMN_ID:
-						if($first){
+						if($first)
+						{
 							$first = false;
 						}
-						else{
+						else
+						{
 							$sql.= " AND";
 						}
 						$sql.=" ".REQUEST_COLUMN_ID." = ?";
 						break;
 					case REQUEST_COLUMN_EMAIL:
-						if($first){
+						if($first)
+						{
 							$first = false;
 						}
-						else{
+						else
+						{
 							$sql.= " AND";
 						}
 						$sql.=" ".REQUEST_COLUMN_EMAIL." = ?";
 						break;
 					case REQUEST_COLUMN_IP:
-						if($first){
+						if($first)
+						{
 							$first = false;
 						}
-						else{
+						else
+						{
 							$sql.= " AND";
 						}
 						$sql.=" ".REQUEST_COLUMN_IP." = ?";
 						break;
 					case REQUEST_COLUMN_NAME:
-						if($first){
+						if($first)
+						{
 							$first = false;
 						}
-						else{
+						else
+						{
 							$sql.= " AND";
 						}
 						$sql.=" ".REQUEST_COLUMN_NAME." = ?";
 						break;
 					case REQUEST_COLUMN_CMT:
-						if($first){
+						if($first)
+						{
 							$first = false;
 						}
-						else{
+						else
+						{
 							$sql.= " AND";
 						}
 						$sql.=" ".REQUEST_COLUMN_CMT." = ?";
 						break;
 					case REQUEST_COLUMN_STATUS:
-						if($first){
+						if($first)
+						{
 							$first = false;
 						}
-						else{
+						else
+						{
 							$sql.= " AND";
 						}
 						$sql.=" ".REQUEST_COLUMN_STATUS." = ?";
 						break;
 					case REQUEST_COLUMN_DATE:
-						if($first){
+						if($first)
+						{
 							$first = false;
 						}
-						else{
+						else
+						{
 							$sql.= " AND";
 						}
 						$sql.=" ".REQUEST_COLUMN_DATE." = ?";
 						break;
 					case REQUEST_COLUMN_CHECKSUM:
-						if($first){
+						if($first)
+						{
 							$first = false;
 						}
-						else{
+						else
+						{
 							$sql.= " AND";
 						}
 						$sql.=" ".REQUEST_COLUMN_CHECKSUM." = ?";
 						break;
 					case REQUEST_COLUMN_EMAILSENT:
-						if($first){
+						if($first)
+						{
 							$first = false;
 						}
-						else{
+						else
+						{
 							$sql.= " AND";
 						}
 						$sql.=" ".REQUEST_COLUMN_EMAILSENT." = ?";
 						break;
 					case REQUEST_COLUMN_MAILCONFIRM:
-						if($first){
+						if($first)
+						{
 							$first = false;
 						}
-						else{
+						else
+						{
 							$sql.= " AND";
 						}
 						$sql.=" ".REQUEST_COLUMN_MAILCONFIRM." = ?";
 						break;
 					case REQUEST_COLUMN_RESERVED:
-						if($first){
+						if($first)
+						{
 							$first = false;
 						}
-						else{
+						else
+						{
 							$sql.= " AND";
 						}
 						$sql.=" ".REQUEST_COLUMN_RESERVED." = ?";
 						break;
 					case REQUEST_COLUMN_USERAGENT:
-						if($first){
+						if($first)
+						{
 							$first = false;
 						}
-						else{
+						else
+						{
 							$sql.= " AND";
 						}
 						$sql.=" ".REQUEST_COLUMN_USERAGENT." = ?";
 						break;
 					case REQUEST_COLUMN_PROXYIP:
-						if($first){
+						if($first)
+						{
 							$first = false;
 						}
-						else{
+						else
+						{
 							$sql.= " AND";
 						}
 						$sql.=" ".REQUEST_COLUMN_PROXYIP." = ?";
@@ -755,7 +785,6 @@ class Request extends DataObject
 
 				$vals[] = $val;
 			}
-
 			$statement = $accDatabase->prepare($sql);
 
 			$i=1;
@@ -764,7 +793,7 @@ class Request extends DataObject
 		//retrieve resultset
 
 		$statement->execute($vals);
-		
+
 		return $statement->fetchAll(PDO::FETCH_CLASS, "Request");
 	}
 }

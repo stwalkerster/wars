@@ -36,7 +36,7 @@ class User extends DataObject
 		$statement->bindParam(":username", $username);
 		$statement->execute();
 		$resultUser = $statement->fetchObject("User");
-		
+
 		if($resultUser != false)
 		{
 			if($resultUser->checkPass($password))
@@ -82,9 +82,9 @@ class User extends DataObject
 
 	public function __construct()
 	{
-		
+
 	}
-		
+
 	public static function create($username, $password, $email, $onwiki)
 	{
 		$instance = new self();
@@ -106,7 +106,7 @@ class User extends DataObject
 		$instance->user_confirmationdiff = 0;
 
 		$instance->newRecord = 1;
-		
+
 		return $instance;
 	}
 
@@ -165,7 +165,7 @@ class User extends DataObject
 		else
 		{
 			$calc = md5($cleartext);
-			
+				
 			if(md5($cleartext) == $this->user_pass)
 			{
 				// update password to new spec
@@ -191,18 +191,18 @@ class User extends DataObject
 	public function promoteAdmin( ) // security, is current user an admin?
 	{
 		// TODO: Implement function;
-		trigger_error("Not implemented.");
+		throw new NotImplementedException();
 	}
 	public function demoteAdmin( $reason ) // security, is current user an admin?
 	{
 		// TODO: Implement function;
-		trigger_error("Not implemented.");
+		throw new NotImplementedException();
 	}
 
 	public function getDeveloper()
 	{
 		// TODO: Implement function;
-		trigger_error("Not implemented.");
+		throw new NotImplementedException();
 	}
 
 	public function isSuspended()
@@ -212,12 +212,12 @@ class User extends DataObject
 	public function suspend( $reason ) // security, is current user an admin?
 	{
 		// TODO: Implement function;
-		trigger_error("Not implemented.");
+		throw new NotImplementedException();
 	}
 	public function unsuspend( ) // security, is current user an admin?
 	{
 		// TODO: Implement function;
-		trigger_error("Not implemented.");
+		throw new NotImplementedException();
 	}
 
 	public function isNew()
@@ -227,7 +227,7 @@ class User extends DataObject
 	public function approve( ) // security, is current user an admin?
 	{
 		// TODO: Implement function;
-		trigger_error("Not implemented.");
+		throw new NotImplementedException();
 	}
 
 	public function isAllowedPrivateData()
@@ -242,7 +242,7 @@ class User extends DataObject
 	}
 	public function setOnwikiName($username) // security, is current user an admin?
 	{
-		trigger_error("Not implemented.");
+		throw new NotImplementedException();
 	}
 
 	public function getTemplate()
@@ -277,9 +277,9 @@ class User extends DataObject
 
 	/**
 	 * Saves the current state of the object to the database.
-	 * 
+	 *
 	 * This is not transaction-based, all calls to it must be wrapped inside a transaction
-	 * 
+	 *
 	 * @return true on success, false on failure
 	 */
 	protected function save()

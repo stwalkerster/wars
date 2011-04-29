@@ -70,7 +70,8 @@ Inheritance diagram for PageBase:</div>
 <area href="../../d7/d68/classPageLogout.html" alt="PageLogout" shape="rect" coords="152,280,294,304"/>
 <area href="../../d5/d6f/classPageMain.html" alt="PageMain" shape="rect" coords="152,336,294,360"/>
 <area href="../../d6/dfa/classPageTeapot.html" alt="PageTeapot" shape="rect" coords="152,392,294,416"/>
-<area href="../../de/ded/classRequestPage.html" alt="RequestPage" shape="rect" coords="152,448,294,472"/>
+<area href="../../d1/d3f/classPageZoom.html" alt="PageZoom" shape="rect" coords="152,448,294,472"/>
+<area href="../../de/ded/classRequestPage.html" alt="RequestPage" shape="rect" coords="152,504,294,528"/>
 </map>
 </div>
 
@@ -80,14 +81,14 @@ Inheritance diagram for PageBase:</div>
 Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/dea/classPageBase.html#a4c6ed5ae0ed3eec06d9b7f4913d57ec3">runPage</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/dea/classPageBase.html#a1be0f115b39792ed3a04edd412705d71">execute</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/dea/classPageBase.html#a130bed52f7fd8a07af4d5b0cbf9615cc">error</a> ($errorName)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/dea/classPageBase.html#a465c75ea41ec9b841e8089f2bef99f5e">error</a> ($errorName, $isfatal=false)</td></tr>
 <tr><td colspan="2"><h2><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/dea/classPageBase.html#af9ac4929f3dcb407f16077b8754e2bcd">create</a> ()</td></tr>
 <tr><td colspan="2"><h2><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/dea/classPageBase.html#aa3255a186892e74844105701d2c1b441">$subtitle</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/dea/classPageBase.html#a9c08dc5217061791e11e1eda1b70ae97">$title</a> = &quot;Wikipeda Account <a class="el" href="../../d9/dbd/classRequest.html">Request</a> System&quot;</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/dea/classPageBase.html#a9c08dc5217061791e11e1eda1b70ae97">$title</a> = &quot;Wikipedia Account <a class="el" href="../../d9/dbd/classRequest.html">Request</a> System&quot;</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/dea/classPageBase.html#a99b97f1c1dabb2a3f10354d362184043">$pagetemplate</a> = &quot;Page.tpl&quot;</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/dea/classPageBase.html#af98240f1eb35ce60520ce804693325a1">$menu</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/dea/classPageBase.html#a1a5de84fdb2ef21b81a2c0a5a9a4ff89">$smarty</a></td></tr>
@@ -114,7 +115,7 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a130bed52f7fd8a07af4d5b0cbf9615cc"></a><!-- doxytag: member="PageBase::error" ref="a130bed52f7fd8a07af4d5b0cbf9615cc" args="($errorName)" -->
+<a class="anchor" id="a465c75ea41ec9b841e8089f2bef99f5e"></a><!-- doxytag: member="PageBase::error" ref="a465c75ea41ec9b841e8089f2bef99f5e" args="($errorName, $isfatal=false)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -122,9 +123,18 @@ Public Attributes</h2></td></tr>
           <td class="memname">PageBase::error </td>
           <td>(</td>
           <td class="paramtype">$&nbsp;</td>
-          <td class="paramname"> <em>errorName</em></td>
-          <td>&nbsp;)&nbsp;</td>
+          <td class="paramname"> <em>errorName</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">$&nbsp;</td>
+          <td class="paramname"> <em>isfatal</em> = <code>false</code></td><td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td><td></td>
         </tr>
       </table>
 </div>
@@ -174,7 +184,7 @@ Public Attributes</h2></td></tr>
 <div class="memdoc">
 <p>Page-specific code, performing the logic required on a page-specific level. </p>
 
-<p>Reimplemented in <a class="el" href="../../db/dd6/classEmailConfirmationPage.html#ae7e5d41b04bc1d12bbb64ba16ec8e5b4">EmailConfirmationPage</a>, <a class="el" href="../../d1/ded/classPageError.html#acee755f571fe6fad0a7315cd4578ba1f">PageError</a>, <a class="el" href="../../d1/d0c/classPageForward.html#a870ae699604105abca77046419e75734">PageForward</a>, <a class="el" href="../../d3/d0a/classPageLogin.html#a0912023726cdb407ac87dde4c0b04551">PageLogin</a>, <a class="el" href="../../d7/d68/classPageLogout.html#ad2b482213661997a0ca13445f214cdcc">PageLogout</a>, <a class="el" href="../../d5/d6f/classPageMain.html#a5ce923111b51dda7b890cf43af6f4805">PageMain</a>, <a class="el" href="../../d6/dfa/classPageTeapot.html#a093169f61ea9a42f9322db3d099df45c">PageTeapot</a>, and <a class="el" href="../../de/ded/classRequestPage.html#a81dbd0fdcc5ab2144b0f72f5eaac3bff">RequestPage</a>.</p>
+<p>Reimplemented in <a class="el" href="../../db/dd6/classEmailConfirmationPage.html#ae7e5d41b04bc1d12bbb64ba16ec8e5b4">EmailConfirmationPage</a>, <a class="el" href="../../d1/ded/classPageError.html#acee755f571fe6fad0a7315cd4578ba1f">PageError</a>, <a class="el" href="../../d1/d0c/classPageForward.html#a870ae699604105abca77046419e75734">PageForward</a>, <a class="el" href="../../d3/d0a/classPageLogin.html#a0912023726cdb407ac87dde4c0b04551">PageLogin</a>, <a class="el" href="../../d7/d68/classPageLogout.html#ad2b482213661997a0ca13445f214cdcc">PageLogout</a>, <a class="el" href="../../d5/d6f/classPageMain.html#a5ce923111b51dda7b890cf43af6f4805">PageMain</a>, <a class="el" href="../../d6/dfa/classPageTeapot.html#a093169f61ea9a42f9322db3d099df45c">PageTeapot</a>, <a class="el" href="../../d1/d3f/classPageZoom.html#a466d0935455c42557688f95e25ea8105">PageZoom</a>, and <a class="el" href="../../de/ded/classRequestPage.html#a81dbd0fdcc5ab2144b0f72f5eaac3bff">RequestPage</a>.</p>
 
 </div>
 </div>
@@ -236,7 +246,7 @@ Public Attributes</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">PageBase::$title = &quot;Wikipeda Account <a class="el" href="../../d9/dbd/classRequest.html">Request</a> System&quot;</td>
+          <td class="memname">PageBase::$title = &quot;Wikipedia Account <a class="el" href="../../d9/dbd/classRequest.html">Request</a> System&quot;</td>
         </tr>
       </table>
 </div>
@@ -262,7 +272,7 @@ Public Attributes</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Wed Apr 27 2011 22:39:09 for Wikipedia Account Request System by&nbsp;
+<hr class="footer"/><address class="footer"><small>Generated on Fri Apr 29 2011 10:34:51 for Wikipedia Account Request System by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/></a> 1.7.1 </small></address>
 </body>

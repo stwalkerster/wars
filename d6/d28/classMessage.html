@@ -57,14 +57,13 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Search');
 <h1>Message Class Reference</h1>  </div>
 </div>
 <div class="contents">
-<!-- doxytag: class="Message" --><!-- doxytag: inherits="DataObject,DataObject" --><div class="dynheader">
+<!-- doxytag: class="Message" --><!-- doxytag: inherits="DataObject" --><div class="dynheader">
 Inheritance diagram for Message:</div>
 <div class="dyncontent">
  <div class="center">
   <img src="../../d6/d28/classMessage.png" usemap="#Message_map" alt=""/>
   <map id="Message_map" name="Message_map">
 <area href="../../de/d1e/classDataObject.html" alt="DataObject" shape="rect" coords="0,0,75,24"/>
-<area href="../../de/d1e/classDataObject.html" alt="DataObject" shape="rect" coords="85,0,160,24"/>
 </map>
 </div>
 
@@ -73,48 +72,31 @@ Inheritance diagram for Message:</div>
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d28/classMessage.html#ad55e0a6e1fc8ddca3d1c1afc211da0e3">getMessage</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d28/classMessage.html#ad55e0a6e1fc8ddca3d1c1afc211da0e3">getMessage</a> ()</td></tr>
 <tr><td colspan="2"><h2><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">static&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d1e/classDataObject.html#a99411338bbac9e3042c1e3485ac7619a">getById</a> ($id)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">static&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d28/classMessage.html#a40c7fcaef1b56ab2dd8ae2e193246eae">getById</a> ($id)</td></tr>
 <tr><td colspan="2"><h2><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d28/classMessage.html#a238d9db97202f918173a59a82d8f48b8">save</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d28/classMessage.html#a238d9db97202f918173a59a82d8f48b8">save</a> ()</td></tr>
 </table>
 <hr/><h2>Member Function Documentation</h2>
-<a class="anchor" id="a99411338bbac9e3042c1e3485ac7619a"></a><!-- doxytag: member="Message::getById" ref="a99411338bbac9e3042c1e3485ac7619a" args="($id)" -->
+<a class="anchor" id="a40c7fcaef1b56ab2dd8ae2e193246eae"></a><!-- doxytag: member="Message::getById" ref="a40c7fcaef1b56ab2dd8ae2e193246eae" args="($id)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">static DataObject::getById </td>
+          <td class="memname">static Message::getById </td>
           <td>(</td>
           <td class="paramtype">$&nbsp;</td>
           <td class="paramname"> <em>id</em></td>
           <td>&nbsp;)&nbsp;</td>
-          <td><code> [static, inherited]</code></td>
+          <td><code> [static]</code></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-</div>
-</div>
-<a class="anchor" id="ad55e0a6e1fc8ddca3d1c1afc211da0e3"></a><!-- doxytag: member="Message::getMessage" ref="ad55e0a6e1fc8ddca3d1c1afc211da0e3" args="()" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">Message::getMessage </td>
-          <td>(</td>
-          <td class="paramname"></td>
-          <td>&nbsp;)&nbsp;</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
+<p>Reimplemented from <a class="el" href="../../de/d1e/classDataObject.html#a99411338bbac9e3042c1e3485ac7619a">DataObject</a>.</p>
 
 </div>
 </div>
@@ -155,29 +137,8 @@ Protected Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a238d9db97202f918173a59a82d8f48b8"></a><!-- doxytag: member="Message::save" ref="a238d9db97202f918173a59a82d8f48b8" args="()" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">Message::save </td>
-          <td>(</td>
-          <td class="paramname"></td>
-          <td>&nbsp;)&nbsp;</td>
-          <td><code> [protected]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-<p>Saves the current state of the object to the database.</p>
-<p>This is not transaction-based, all calls to it must be wrapped inside a transaction</p>
-<dl class="return"><dt><b>Returns:</b></dt><dd>true on success, false on failure </dd></dl>
-
-</div>
-</div>
-<hr/>The documentation for this class was generated from the following files:<ul>
+<hr/>The documentation for this class was generated from the following file:<ul>
 <li>src/<a class="el" href="../../de/dd5/Message_8php.html">Message.php</a></li>
-<li>src/<a class="el" href="../../de/d93/WelcomeQueue_8php.html">WelcomeQueue.php</a></li>
 </ul>
 </div>
 <!--- window showing the filter options -->
@@ -194,7 +155,7 @@ Protected Member Functions</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Wed Apr 27 2011 22:39:08 for Wikipedia Account Request System by&nbsp;
+<hr class="footer"/><address class="footer"><small>Generated on Fri Apr 29 2011 10:34:51 for Wikipedia Account Request System by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/></a> 1.7.1 </small></address>
 </body>

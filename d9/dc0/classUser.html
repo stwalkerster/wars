@@ -80,6 +80,7 @@ Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/dc0/classUser.html#a713b775a5c96fe33549a4fdcab029e00">setPass</a> ($newpass, $oldpass)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/dc0/classUser.html#ad6fc0b11a462ba0996528dab3d907058">checkPass</a> ($cleartext)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/dc0/classUser.html#aba5f2c20affd53d979fc7717a746ca6a">isAdmin</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/dc0/classUser.html#a05c7147dd0ba458707caf9edc226247c">isCheckuser</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/dc0/classUser.html#a7583280251eb9d15e9d2fa1c8f5f1ec1">promoteAdmin</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/dc0/classUser.html#a96c7c03f152eb8220c17fb817bd5a478">demoteAdmin</a> ($reason)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/dc0/classUser.html#a061e30f8392b66b4bc434202bd2fe895">getDeveloper</a> ()</td></tr>
@@ -100,10 +101,10 @@ Public Member Functions</h2></td></tr>
 <tr><td colspan="2"><h2><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/dc0/classUser.html#a7acbb7b4767d60e2304d53f236b6a8db">authenticate</a> ($username, $password)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">static&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/dc0/classUser.html#a595c75d03682a146625e241294d3ab9b">getById</a> ($id)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/dc0/classUser.html#a4d4e968c7855c1403181946a583541ad">getByName</a> ($username)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/dc0/classUser.html#a7e5c6b4139ff1b9517f6b9517d011ddc">saltPassword</a> ($username, $password)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/dc0/classUser.html#aa96f68d2c5112a273a05b391c8fba18d">create</a> ($username, $password, $email, $onwiki)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">static&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d1e/classDataObject.html#a99411338bbac9e3042c1e3485ac7619a">getById</a> ($id)</td></tr>
 <tr><td colspan="2"><h2><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/dc0/classUser.html#a945fb1f1b6996275f08983b909f05e8a">save</a> ()</td></tr>
@@ -283,21 +284,23 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a99411338bbac9e3042c1e3485ac7619a"></a><!-- doxytag: member="User::getById" ref="a99411338bbac9e3042c1e3485ac7619a" args="($id)" -->
+<a class="anchor" id="a595c75d03682a146625e241294d3ab9b"></a><!-- doxytag: member="User::getById" ref="a595c75d03682a146625e241294d3ab9b" args="($id)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">static DataObject::getById </td>
+          <td class="memname">static User::getById </td>
           <td>(</td>
           <td class="paramtype">$&nbsp;</td>
           <td class="paramname"> <em>id</em></td>
           <td>&nbsp;)&nbsp;</td>
-          <td><code> [static, inherited]</code></td>
+          <td><code> [static]</code></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="../../de/d1e/classDataObject.html#a99411338bbac9e3042c1e3485ac7619a">DataObject</a>.</p>
 
 </div>
 </div>
@@ -478,6 +481,25 @@ Private Attributes</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">User::isAllowedPrivateData </td>
+          <td>(</td>
+          <td class="paramname"></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<dl class="return"><dt><b>Returns:</b></dt><dd>boolean true if the user is allowed to access private data Returns true if the user is allowed to access private data, false otherwise</dd></dl>
+<p>At the moment, this is a simple check if the user is an admin or checkuser. </p>
+
+</div>
+</div>
+<a class="anchor" id="a05c7147dd0ba458707caf9edc226247c"></a><!-- doxytag: member="User::isCheckuser" ref="a05c7147dd0ba458707caf9edc226247c" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">User::isCheckuser </td>
           <td>(</td>
           <td class="paramname"></td>
           <td>&nbsp;)&nbsp;</td>
@@ -979,7 +1001,7 @@ Private Attributes</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Wed Apr 27 2011 22:39:09 for Wikipedia Account Request System by&nbsp;
+<hr class="footer"/><address class="footer"><small>Generated on Fri Apr 29 2011 10:34:51 for Wikipedia Account Request System by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/></a> 1.7.1 </small></address>
 </body>

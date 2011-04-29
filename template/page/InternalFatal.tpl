@@ -7,7 +7,7 @@
 <p>Although the tool is dead and the Bot is sleeping, email still works fine. So, we expect a swarm of irate potential editors to bury us in requests shortly. Please keep an eye on the mailing list. Remember to 'cc' or 'bcc' accounts-enwiki-l when you reply to let others know you have replied.</p> 
 <p>For more information, <a href="irc://irc.freenode.net/#wikipedia-en-accounts">join IRC</a>, check the mailing list (<a href="https://lists.wikimedia.org/mailman/listinfo/accounts-enwiki-l">sign up if you need to</a>) or just light candles - they may help too.</p>
 {if $offlineType eq "error"}
-<hr>
+<hr />
 <h3>Technical information about this error</h3>
 <ul>
   <li><strong>Error:</strong> {$offlineTechType}</li>

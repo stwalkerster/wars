@@ -252,8 +252,6 @@ class Request extends DataObject
 
 				$accDatabase->beginTransaction();
 
-				// TODO: add a log entry to the new entries queue
-
 				// override the checksum requirement - this is an external edit
 				$this->save($this->request_checksum);
 			}
@@ -284,8 +282,6 @@ class Request extends DataObject
 		// check reserved status
 		$statement = $accDatabase->prepare("SELECT request_reserved, request_checksum FROM acc_request WHERE request_id = :request_id");
 		$statement->bindParam(":request_id", $this->request_id);
-
-		// TODO: bind other columns to
 
 		if($this->request_reserved != 0)
 		{
@@ -320,7 +316,7 @@ class Request extends DataObject
 		if($this->save($checksum))
 		{
 			$accDatabase->commit();
-			return true; //TODO: define as a constant
+			return true;
 		}
 		else
 		{
@@ -347,7 +343,9 @@ class Request extends DataObject
 
 		// check it's actually reserved
 		if($this->request_reserved == 0)
-		return; // TODO: set sane return codes up
+		{
+			return;
+		}
 
 		// check it's this user who has got it reserved
 		if($this->request_reserved == WebRequest::getCurrentUser()->getId())
@@ -355,7 +353,7 @@ class Request extends DataObject
 			// unreserve
 			$this->request_reserved = 0;
 
-			// TODO: add log entry
+			// add log entry
 
 			// save
 			if($this->save($checksum))
@@ -366,7 +364,7 @@ class Request extends DataObject
 			else
 			{
 				$accDatabase->rollBack();
-				return; //TODO: return code stuff
+				return;
 			}
 		}
 		else

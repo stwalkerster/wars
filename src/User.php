@@ -130,13 +130,27 @@ class User extends DataObject
 	{
 		return $this->user_email;
 	}
+	
+	/**
+	 * 
+	 * Enter description here ...
+	 * @param unknown_type $newemail
+	 * @todo save
+	 */
 	public function setEmail($newemail) // security, is current user an admin, or is this the current user?
 	{
 		$this->user_email = $newemail;
 
-		//TODO: save
 	}
 
+	
+	/**
+	 * 
+	 * Enter description here ...
+	 * @param unknown_type $newpass
+	 * @param unknown_type $oldpass
+	 * @todo save
+	 */
 	public function setPass($newpass, $oldpass)
 	{
 		if(User::saltPassword($this->username, $oldpass) == $this->user_pass)
@@ -144,7 +158,6 @@ class User extends DataObject
 			$this->user_pass = User::saltPassword($this->username, $newpass);
 		}
 
-		//TODO: save
 	}
 
 	/**
@@ -197,20 +210,35 @@ class User extends DataObject
 		return $this->user_checkuser == "1";	
 	}
 	
-	public function promoteAdmin( ) // security, is current user an admin?
+	/**
+	 * 
+	 * Enter description here ...
+	 * @todo Implement function
+	 */
+	public function promoteAdmin( ) 
 	{
-		// TODO: Implement function;
+		//security, is current user an admin?
 		throw new NotImplementedException();
 	}
-	public function demoteAdmin( $reason ) // security, is current user an admin?
+	/**
+	 * 
+	 * Enter description here ...
+	 * @param unknown_type $reason
+	 * @todo implement function
+	 */
+	public function demoteAdmin( $reason )
 	{
-		// TODO: Implement function;
+		//security, is current user an admin?
 		throw new NotImplementedException();
 	}
 
-	public function getDeveloper()
+	/**
+	 * 
+	 * @returns boolean
+	 * @todo implement
+	 */
+	public function isDeveloper()
 	{
-		// TODO: Implement function;
 		throw new NotImplementedException();
 	}
 
@@ -218,14 +246,26 @@ class User extends DataObject
 	{
 		return $this->user_level == "Suspended";
 	}
-	public function suspend( $reason ) // security, is current user an admin?
+	
+	/**
+	 * 
+	 * Enter description here ...
+	 * @param unknown_type $reason
+	 * @todo implement
+	 */
+	public function suspend( $reason ) 
 	{
-		// TODO: Implement function;
+		// security, is current user an admin?
 		throw new NotImplementedException();
 	}
-	public function unsuspend( ) // security, is current user an admin?
+	
+	/**
+	 * 
+	 * @todo implement
+	 */
+	public function unsuspend( ) 
 	{
-		// TODO: Implement function;
+		// security, is current user an admin?
 		throw new NotImplementedException();
 	}
 
@@ -233,9 +273,15 @@ class User extends DataObject
 	{
 		return $this->user_level == "New";
 	}
-	public function approve( ) // security, is current user an admin?
+	
+	/**
+	 * 
+	 * Enter description here ...
+	 * @todo implement
+	 */
+	public function approve( ) 
 	{
-		// TODO: Implement function;
+		// security, is current user an admin?
 		throw new NotImplementedException();
 	}
 
@@ -263,8 +309,16 @@ class User extends DataObject
 	{
 		return $this->user_onwikiname;
 	}
-	public function setOnwikiName($username) // security, is current user an admin?
+	
+	/**
+	 * 
+	 * Enter description here ...
+	 * @param string $username
+	 * @todo implement
+	 */
+	public function setOnwikiName($username) 
 	{
+		// security, is current user an admin?
 		throw new NotImplementedException();
 	}
 
@@ -272,30 +326,45 @@ class User extends DataObject
 	{
 		return $this->user_welcome_templateid;
 	}
+	
+	/**
+	 * Sets the welcome template the user is using
+	 * @param int $id
+	 * @todo save
+	 */
 	public function setTemplate($id)
 	{
 		$this->user_welcome_templateid = $id;
-		//TODO: save
 	}
 
 	public function getSecureStatus()
 	{
 		return $this->user_secure;
 	}
+	
+	/**
+	 * Sets if the user is using the secure server or not
+	 * @param boolean $useSecureServer
+	 * @todo save
+	 */
 	public function setSecureStatus($useSecureServer)
 	{
 		$this->user_secure = $useSecureServer;
-		//TODO: save
 	}
 
 	public function getSignature()
 	{
 		return $this->user_welcome_sig;
 	}
+	
+	/**
+	 * Sets the user's signature
+	 * @param boolean $signature
+	 * @todo save
+	 */
 	public function setSignature($signature)
 	{
 		$this->user_welcome_sig=$signature;
-		//TODO:save
 	}
 
 	/**

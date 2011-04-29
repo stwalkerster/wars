@@ -498,9 +498,20 @@ class Request extends DataObject
 	{
 		return $this->request_mailconfirm;
 	}
+	/**
+	 * Returns the user who has reserved this request
+	 * @return User the user who has reserved this request, null if unreserved
+	 */
 	public function getReserved()
 	{
-		return $this->request_reserved;
+		if($this->request_reserved == 0)
+		{
+			return null;
+		}
+		else 
+		{
+			return User::getById($this->request_reserved);
+		}
 	}
 
 	/**

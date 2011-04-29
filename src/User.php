@@ -191,6 +191,12 @@ class User extends DataObject
 	{
 		return $this->user_level == "Admin";
 	}
+	
+	public function isCheckuser()
+	{
+		return $this->user_checkuser == "1";	
+	}
+	
 	public function promoteAdmin( ) // security, is current user an admin?
 	{
 		// TODO: Implement function;

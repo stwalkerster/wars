@@ -604,9 +604,8 @@ class Request extends DataObject
 	 * Returns true if the request is available for the current user
 	 *
 	 * @return boolean
-	 * @todo implement
 	 */
-	private function allowPrivateDataRelease()
+	public function allowPrivateDataRelease()
 	{
 		if(WebRequest::getCurrentUser()->isAllowedPrivateData())
 		{

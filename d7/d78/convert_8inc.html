@@ -173,36 +173,7 @@ Variables</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
-<b>Initial value:</b><div class="fragment"><pre class="fragment"> array(
-<span class="stringliteral">&quot;ALTER TABLE $olddatabase.acc_log ADD COLUMN `log_user_id` INT NULL  AFTER `log_cmt` , ADD COLUMN `log_user_text` VARCHAR(255) NULL  AFTER `log_user_id` , ADD COLUMN `log_target_id` INT NULL  AFTER `log_user_text` , ADD COLUMN `log_target_object` VARCHAR(45) NULL  AFTER `log_target_id` , ADD COLUMN `log_target_text` VARCHAR(255) NULL  AFTER `log_target_object` ;&quot;</span>,
-<span class="stringliteral">&quot;SET SQL_SAFE_UPDATES=0;&quot;</span>,
-<span class="stringliteral">&quot;update $olddatabase.acc_log set log_user_text = log_user;&quot;</span>,
-<span class="stringliteral">&quot;update $olddatabase.acc_log set log_target_object = &#39;user&#39;, log_target_id = log_pend where log_action = &#39;Approved&#39;;&quot;</span>,
-<span class="stringliteral">&quot;update $olddatabase.acc_log set log_target_object = &#39;ban&#39;, log_target_text = log_pend where log_action = &#39;Banned&#39;;&quot;</span>,
-<span class="stringliteral">&quot;delete from $olddatabase.acc_log where log_action = &#39;Blacklist Hit&#39;;&quot;</span>,
-<span class="stringliteral">&quot;update $olddatabase.acc_log set log_target_object = &#39;request&#39;, log_target_id = log_pend where log_action = &#39;BreakReserve&#39;;&quot;</span>,
-<span class="stringliteral">&quot;delete from $olddatabase.acc_log where log_action = &#39;Closed&#39;;&quot;</span>,
-<span class="stringliteral">&quot;update $olddatabase.acc_log set log_target_object = &#39;request&#39;, log_target_id = log_pend where log_action  like &#39;Closed %&#39;;&quot;</span>,
-<span class="stringliteral">&quot;update $olddatabase.acc_log set log_action = &#39;Deferred to flagged users&#39; where log_action = &#39;Deferred to admins&#39;;&quot;</span>,
-<span class="stringliteral">&quot;update $olddatabase.acc_log set log_target_object = &#39;request&#39;, log_target_id = log_pend where log_action like &#39;Deferred to%&#39;;&quot;</span>,
-<span class="stringliteral">&quot;update $olddatabase.acc_log set log_target_object = &#39;request&#39;, log_target_id = log_pend where log_action = &#39;Email Confirmed&#39;;&quot;</span>,
-<span class="stringliteral">&quot;delete from $olddatabase.acc_log where log_action = &#39;DNSBL Hit&#39;;&quot;</span>,
-<span class="stringliteral">&quot;update $olddatabase.acc_log set log_target_object = &#39;request&#39;, log_target_id = log_pend where log_action = &#39;Reserved&#39;;&quot;</span>,
-<span class="stringliteral">&quot;update $olddatabase.acc_log set log_target_object = &#39;request&#39;, log_target_id = log_pend where log_action = &#39;Unreserved&#39;;&quot;</span>,
-<span class="stringliteral">&quot;delete from $olddatabase.acc_log where log_action = &#39;badpass&#39;;&quot;</span>,
-<span class="stringliteral">&quot;update $olddatabase.acc_log set log_target_object = &#39;user&#39;, log_target_id = log_pend where log_action = &#39;Declined&#39;;&quot;</span>,
-<span class="stringliteral">&quot;update $olddatabase.acc_log set log_target_object = &#39;user&#39;, log_target_id = log_pend where log_action = &#39;Demoted&#39;;&quot;</span>,
-<span class="stringliteral">&quot;update $olddatabase.acc_log set log_target_object = &#39;user&#39;, log_target_id = log_pend where log_action = &#39;Promoted&#39;;&quot;</span>,
-<span class="stringliteral">&quot;update $olddatabase.acc_log set log_target_object = &#39;user&#39;, log_target_id = log_pend where log_action = &#39;Suspended&#39;;&quot;</span>,
-<span class="stringliteral">&quot;update $olddatabase.acc_log set log_target_object = &#39;message&#39;, log_target_id = log_pend where log_action = &#39;Edited&#39;;&quot;</span>,
-<span class="stringliteral">&quot;update $olddatabase.acc_log set log_target_object = &#39;ban&#39;, log_target_id = log_pend where log_action = &#39;Unbanned&#39;;&quot;</span>,
-<span class="stringliteral">&quot;update $olddatabase.acc_log set log_target_object = &#39;user&#39;, log_target_id = log_pend where log_action = &#39;Prefchange&#39;;&quot;</span>,
-<span class="stringliteral">&quot;update $olddatabase.acc_log set log_target_object = &#39;user&#39;, log_target_id = log_pend where log_action = &#39;Renamed&#39;;&quot;</span>,
-<span class="stringliteral">&quot;update $olddatabase.acc_log set log_target_object = &#39;template&#39;, log_target_id = log_pend where log_action = &#39;CreatedTemplate&#39;;&quot;</span>,
-<span class="stringliteral">&quot;update $olddatabase.acc_log set log_target_object = &#39;template&#39;, log_target_id = log_pend where log_action = &#39;DeletedTemplate&#39;;&quot;</span>,
-<span class="stringliteral">&quot;update $olddatabase.acc_log set log_target_object = &#39;template&#39;, log_target_id = log_pend where log_action = &#39;EditedTemplate&#39;;&quot;</span>,
-)
-</pre></div>
+
 </div>
 </div>
 <a class="anchor" id="aea35e359534cf1576e7c9984fa38de09"></a><!-- doxytag: member="convert.inc::$querycount" ref="aea35e359534cf1576e7c9984fa38de09" args="" -->
@@ -246,7 +217,7 @@ Variables</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Fri Apr 29 2011 10:34:50 for Wikipedia Account Request System by&nbsp;
+<hr class="footer"/><address class="footer"><small>Generated on Sat Apr 30 2011 22:28:49 for Wikipedia Account Request System by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/></a> 1.7.1 </small></address>
 </body>

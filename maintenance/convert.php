@@ -187,6 +187,9 @@ pause();
  */
 out("Stage eleven: Add indices, foreign keys, and other assorted produce");
 
+/**
+ * @todo add indices, foreign keys, etc
+ */
 out(" Done!");
 
 out("Conversion Complete. $querycount queries were executed.");

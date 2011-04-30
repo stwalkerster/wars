@@ -198,6 +198,14 @@ $pre_transform = array(
 "update $olddatabase.acc_log set log_target_object = 'template', log_target_id = log_pend where log_action = 'CreatedTemplate';",
 "update $olddatabase.acc_log set log_target_object = 'template', log_target_id = log_pend where log_action = 'DeletedTemplate';",
 "update $olddatabase.acc_log set log_target_object = 'template', log_target_id = log_pend where log_action = 'EditedTemplate';",
+"update $olddatabase.acc_log set log_action = 'Closed Dropped' where log_action = 'Closed 0';",
+"update $olddatabase.acc_log set log_action = 'Closed Created' where log_action = 'Closed 1';",
+"update $olddatabase.acc_log set log_action = 'Closed Similar' where log_action = 'Closed 2';",
+"update $olddatabase.acc_log set log_action = 'Closed Taken' where log_action = 'Closed 3';",
+"update $olddatabase.acc_log set log_action = 'Closed UPolicy' where log_action = 'Closed 4';",
+"update $olddatabase.acc_log set log_action = 'Closed Technical' where log_action = 'Closed 5';",
+"update $olddatabase.acc_log set log_action = 'Closed SUL Taken' where log_action = 'Closed 26';",
+"update $olddatabase.acc_log set log_action = 'Closed Password Reset' where log_action = 'Closed 30';",
 );
 
 $post_transform = array(

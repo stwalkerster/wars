@@ -23,6 +23,24 @@ class PageUserManagement extends PageBase
 
 	function runPage()
 	{
+		$id = WebRequest::getInt("id");
+		if($id == 0)
+		{
+			$this->defaultPage();
+		}
+		else
+		{
+			$this->userDetailPage($id);
+		}
+	}
+	
+	private function userDetailPage($id)
+	{
+		
+	}
+	
+	private function defaultPage()
+	{
 		$users = array(
 			"new" => User::query(array(
 					USER_COLUMN_LEVEL => USER_LEVEL_NEW,

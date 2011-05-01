@@ -23,19 +23,33 @@ class PageUserManagement extends PageBase
 
 	function runPage()
 	{
-		$users = array();
-		for ($i = 0; $i < 50; $i++) {
-			$u = User::getById($i);
-			if($u)
-			$users[]=$u;
-		}
+		$users = array(
+			"new" => User::query(array(
+					USER_COLUMN_LEVEL => USER_LEVEL_NEW,
+				)),
+			"user" => User::query(array(
+					USER_COLUMN_LEVEL => USER_LEVEL_USER,
+				)),
+			"admin" => User::query(array(
+					USER_COLUMN_LEVEL => USER_LEVEL_ADMIN,
+				)),
+			"suspended" => User::query(array(
+					USER_COLUMN_LEVEL => USER_LEVEL_SUSPENDED,
+				)),
+			"declined" => User::query(array(
+					USER_COLUMN_LEVEL => USER_LEVEL_DECLINED,
+				)),
+			"checkuser" => User::query(array(
+					USER_COLUMN_CHECKUSER => 1,
+				)),
+		);
 		
-		$this->smarty->assign('user_new', $users);
-		$this->smarty->assign('user_user', $users);
-		$this->smarty->assign('user_admin', $users);
-		$this->smarty->assign('user_checkuser', $users);
-		$this->smarty->assign('user_suspended', $users);
-		$this->smarty->assign('user_declined', $users);
+		$this->smarty->assign('user_new', $users['new']);
+		$this->smarty->assign('user_user', $users['user']);
+		$this->smarty->assign('user_admin', $users['admin']);
+		$this->smarty->assign('user_checkuser', $users['checkuser']);
+		$this->smarty->assign('user_suspended', $users['suspended']);
+		$this->smarty->assign('user_declined', $users['declined']);
 		$this->smarty->assign('subpage', 'page/UserManagement.tpl');
 	}
 }

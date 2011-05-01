@@ -228,14 +228,26 @@ tr:hover	{
     visibility: hidden;
 }
 
-#usermgmt-users {
-width: 50%;
-float: left;
+.floatleft, #usermgmt-users {
+	width: 50%;
+	float: left;
 }
 
-#usermgmt-admins {
-width: 50%;
-float: right;
+.floatright, #usermgmt-admins, #usermgmt-checkusers {
+	width: 50%;
+	float: right;
+}
+
+#usermgmt-suspended, #usermgmt-declined {
+	clear: both;
+}
+
+.usermgmt-toolname {
+	color:red;
+}
+
+.usermgmt-wikiname {
+	color:green;
 }
 
 /* request styles */

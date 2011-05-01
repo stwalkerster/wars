@@ -81,16 +81,29 @@ if($accDatabase->beginTransaction())
 		$statement->bindParam(1, $rregex);
 		$statement->bindParam(2, $rquery);
 		
-		$success2 = $statement->execute();
-		if($success2 === FALSE )
+		try 
 		{
-			print_r($statement->errorInfo());
-			if($strictMode == 1)
+			$success2 = $statement->execute();
+			if($success2 === FALSE )
 			{
-				$accDatabase->rollBack();
-				echo "Error in transaction.\n";
-				die;
+				print_r($statement->errorInfo());
+				if($strictMode == 1)
+				{
+					$accDatabase->rollBack();
+					echo "Error in transaction.\n";
+					die;
+				}
 			}
+		} 
+		catch (PDOException $e)
+		{
+				print_r($statement->errorInfo());
+				if($strictMode == 1)
+				{
+					$accDatabase->rollBack();
+					echo "Error in transaction.\n";
+					die;
+				}
 		}
 	}
 	

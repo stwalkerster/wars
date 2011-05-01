@@ -429,4 +429,231 @@ class User extends DataObject
 			return $statement->execute();
 		}
 	}
+	
+	/**
+	 * Method to retrieve a list of users which match the specified conditions
+	 * @param array $whereconds Associative array of column name constant to column value
+	 * @return array List of users which match the conditions
+	 */
+	public static function query($whereconds)
+	{
+		// build the basic statement
+		$sql = "SELECT * FROM acc_user";
+
+		$statement = null;
+
+		global $accDatabase;
+
+		// add where conditions
+		if(empty($whereconds))
+		{
+			$sql.=";";
+			$statement = $accDatabase->prepare($sql);
+		}
+		else
+		{
+			$sql.=" WHERE";
+
+			$vals=array();
+
+			$first =true;
+
+			// iterate through, setting columns up with parameters
+			foreach($whereconds as $col => $val)
+			{
+				switch($col)
+				{
+					case USER_COLUMN_ID:
+						if($first)
+						{
+							$first = false;
+						}
+						else
+						{
+							$sql.= " AND";
+						}
+						$sql.=" ".USER_COLUMN_ID." = ?";
+						break;
+					case USER_COLUMN_NAME:
+						if($first)
+						{
+							$first = false;
+						}
+						else
+						{
+							$sql.= " AND";
+						}
+						$sql.=" ".USER_COLUMN_NAME." = ?";
+						break;
+					case USER_COLUMN_EMAIL:
+						if($first)
+						{
+							$first = false;
+						}
+						else
+						{
+							$sql.= " AND";
+						}
+						$sql.=" ".USER_COLUMN_EMAIL." = ?";
+						break;
+					case USER_COLUMN_PASS:
+						if($first)
+						{
+							$first = false;
+						}
+						else
+						{
+							$sql.= " AND";
+						}
+						$sql.=" ".USER_COLUMN_PASS." = ?";
+						break;
+					case USER_COLUMN_LEVEL:
+						if($first)
+						{
+							$first = false;
+						}
+						else
+						{
+							$sql.= " AND";
+						}
+						$sql.=" ".USER_COLUMN_LEVEL." = ?";
+						break;
+					case USER_COLUMN_ONWIKINAME:
+						if($first)
+						{
+							$first = false;
+						}
+						else
+						{
+							$sql.= " AND";
+						}
+						$sql.=" ".USER_COLUMN_ONWIKINAME." = ?";
+						break;
+					case USER_COLUMN_WELCOMESIG:
+						if($first)
+						{
+							$first = false;
+						}
+						else
+						{
+							$sql.= " AND";
+						}
+						$sql.=" ".USER_COLUMN_WELCOMESIG." = ?";
+						break;
+					case USER_COLUMN_LASTACTIVE:
+						if($first)
+						{
+							$first = false;
+						}
+						else
+						{
+							$sql.= " AND";
+						}
+						$sql.=" ".USER_COLUMN_LASTACTIVE." = ?";
+						break;
+					case USER_COLUMN_LASTIP:
+						if($first)
+						{
+							$first = false;
+						}
+						else
+						{
+							$sql.= " AND";
+						}
+						$sql.=" ".USER_COLUMN_LASTIP." = ?";
+						break;
+					case USER_COLUMN_FORCELOGOUT:
+						if($first)
+						{
+							$first = false;
+						}
+						else
+						{
+							$sql.= " AND";
+						}
+						$sql.=" ".USER_COLUMN_FORCELOGOUT." = ?";
+						break;
+					case USER_COLUMN_SECURE:
+						if($first)
+						{
+							$first = false;
+						}
+						else
+						{
+							$sql.= " AND";
+						}
+						$sql.=" ".USER_COLUMN_SECURE." = ?";
+						break;
+					case USER_COLUMN_CHECKUSER:
+						if($first)
+						{
+							$first = false;
+						}
+						else
+						{
+							$sql.= " AND";
+						}
+						$sql.=" ".USER_COLUMN_CHECKUSER." = ?";
+						break;
+					case USER_COLUMN_IDENTIFIED:
+						if($first)
+						{
+							$first = false;
+						}
+						else
+						{
+							$sql.= " AND";
+						}
+						$sql.=" ".USER_COLUMN_IDENTIFIED." = ?";
+						break;
+					case USER_COLUMN_WELCOMETEMPLATEID:
+						if($first)
+						{
+							$first = false;
+						}
+						else
+						{
+							$sql.= " AND";
+						}
+						$sql.=" ".USER_COLUMN_WELCOMETEMPLATEID." = ?";
+						break;
+					case USER_COLUMN_ABORTPREF:
+						if($first)
+						{
+							$first = false;
+						}
+						else
+						{
+							$sql.= " AND";
+						}
+						$sql.=" ".USER_COLUMN_ABORTPREF." = ?";
+						break;
+					case USER_COLUMN_CONFIRMATIONDIFF:
+						if($first)
+						{
+							$first = false;
+						}
+						else
+						{
+							$sql.= " AND";
+						}
+						$sql.=" ".USER_COLUMN_CONFIRMATIONDIFF." = ?";
+						break;
+					default: // not a column!
+						throw new WarsException("Unknown column!");
+				}
+
+				$vals[] = $val;
+			}
+			$statement = $accDatabase->prepare($sql);
+
+			$i=1;
+		}
+
+		//retrieve resultset
+
+		$statement->execute($vals);
+
+		return $statement->fetchAll(PDO::FETCH_CLASS, "User");
+	}
 }

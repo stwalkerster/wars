@@ -1,1 +1,1 @@
-[({$useruserid}) {$username} | <a href="">User:{$useronwikiname}</a> ] links!
+<li>[ <a href="{$smarty.config.baselink}/UserManagement?id={$useruserid}">{$username}</a> | <a href="{$smarty.config.baselink}/Forward?link=http://en.wikipedia.org/wiki/User:{$useronwikiname}">User:{$useronwikiname}</a> ]</li>

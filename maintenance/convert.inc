@@ -267,6 +267,6 @@ function query($q)
 }
 function pause()
 {
-	out("Press enter to continue...");
-	fgets(STDIN);	
+	//out("Press enter to continue...");
+	//fgets(STDIN);	
 }

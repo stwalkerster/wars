@@ -93,7 +93,7 @@ function exception_handler(Exception $exception)
 		$smarty->assign("offlineReason", "Unhandled Exception" );
 		$smarty->assign("offlineTechMsg", $msg);
 		$smarty->assign("offlineTechTrace", $exception->getTraceAsString() );
-		$smarty->assign("offlineTechType", get_clasS($exception));
+		$smarty->assign("offlineTechType", get_class($exception));
 	}	
 	else
 	{

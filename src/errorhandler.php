@@ -118,5 +118,10 @@ if($useErrorHandler)
 {
 	set_error_handler("error_handler", E_ERROR | E_USER_ERROR | E_RECOVERABLE_ERROR | E_COMPILE_ERROR | E_CORE_ERROR );
 	set_exception_handler("exception_handler");
-	ob_start();
+	
+	// only enable output buffering if we have a remote client (ie: requested via http)
+	if(isset($_SERVER['REMOTE_ADDR']))
+	{
+		ob_start();
+	}
 }

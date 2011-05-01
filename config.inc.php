@@ -33,12 +33,14 @@ $db_host_a = "dbmaster.helpmebot.org.uk";
 $db_user_a = "wars";
 $db_pass_a = trim(file_get_contents(".dbpw")); // grab the password from this file.
 $db_name_a = 'wars';
+$db_port_a = 3306;
 
 // Wikipedia database
 $db_host_w = "dbmaster.helpmebot.org.uk";
 $db_user_w = "stwalkerster";
 $db_pass_w = trim(file_get_contents(".dbpw")); // grab the password from this file.
 $db_name_w = 'helpmebot_wiki';
+$db_port_a = 3306;
 
 /*
  * Paths and stuff
@@ -140,7 +142,7 @@ if( // if it doesn't exist, OR
 }
 
 // set up the environment
-$accDatabase = new Database("mysql:dbname=".$db_name_a.";host=".$db_host_a, $db_user_a, $db_pass_a);
+$accDatabase = new Database("mysql:dbname=".$db_name_a.";host=".$db_host_a.";port=".$db_port_a, $db_user_a, $db_pass_a);
 $accDatabase->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); // Set Errorhandling to Exception
 
 // autoload classes that have not been defined in the current script.

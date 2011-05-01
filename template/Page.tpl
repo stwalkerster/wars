@@ -21,7 +21,11 @@
 			{else}
 				{include file="Error.tpl"}
 			{/if}
-			{include file=$subpage}
+			{if $subpage neq ""}
+				{include file=$subpage}
+			{else}
+				{include file="Error.tpl" error="error/UndefinedPage.tpl"}
+			{/if}
 		</div>
 		<br class="clearall" />
 		<div id="menu">

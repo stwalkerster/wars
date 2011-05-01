@@ -37,7 +37,7 @@ class PageUserManagement extends PageBase
 	
 	private function userDetailPage($id)
 	{
-		
+		$this->smarty->assign('subpage', 'page/UserManagementDetail.tpl');
 	}
 	
 	private function defaultPage()

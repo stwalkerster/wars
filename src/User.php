@@ -21,6 +21,23 @@
 if(!defined("WARS"))
 die("Invalid code entry point!");
 
+define('USER_COLUMN_ID','user_id');
+define('USER_COLUMN_NAME','user_name');
+define('USER_COLUMN_EMAIL','user_email');
+define('USER_COLUMN_PASS','user_pass');
+define('USER_COLUMN_LEVEL','user_level');
+define('USER_COLUMN_ONWIKINAME','user_onwikiname');
+define('USER_COLUMN_WELCOMESIG','user_welcome_sig');
+define('USER_COLUMN_LASTACTIVE','user_lastactive');
+define('USER_COLUMN_LASTIP','user_lastip');
+define('USER_COLUMN_FORCELOGOUT','user_forcelogout');
+define('USER_COLUMN_SECURE','user_secure');
+define('USER_COLUMN_CHECKUSER','user_checkuser');
+define('USER_COLUMN_IDENTIFIED','user_identified');
+define('USER_COLUMN_WELCOMETEMPLATEID','user_welcome_templateid');
+define('USER_COLUMN_ABORTPREF','user_abortpref');
+define('USER_COLUMN_CONFIRMATIONDIFF','user_confirmationdiff');
+
 class User extends DataObject
 {
 	/**

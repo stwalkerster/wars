@@ -35,7 +35,7 @@
 				<input type="text" name="sig" size="40" id="sig" />
 			</div>
 			<div class="optional">
-				<label for="template">Template you would like the bot to welcome with?<br /><i>If you'd like more templates added, please contact <a href="http://en.wikipedia.org/wiki/User_talk:SQL">SQL</a>, <a href="http://en.wikipedia.org/wiki/User_talk:Cobi">Cobi</a>, or <a href="http://en.wikipedia.org/wiki/User_talk:FastLizard4">FastLizard4</a>.</i>  Not needed if you left the checkbox above unchecked.</label>
+				<label for="template">Template you would like the bot to welcome with?<br />  Not needed if you left the checkbox above unchecked.</label>
 				{html_options options=$welcometemplates name="template" id="template"}
 			</div>
 			<div class="required">

@@ -38,7 +38,7 @@
 		{if $showHeaderInfo eq '1'}
 			<div id="header-info">
 				{if $userid eq 0}
-					Not logged in
+					Not logged in | <a href="{$smarty.config.baselink}/Login">Log in</a>
 				{else}
 					Logged in as <a href="{$smarty.config.baselink}/Statistics/Users/{$username}">{$username}</a>&nbsp;|&nbsp;<a href="{$smarty.config.baselink}/Logout">Logout</a>
 				{/if}

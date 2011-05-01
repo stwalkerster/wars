@@ -89,16 +89,38 @@ abstract class PageBase
 	),
 	);
 
+	/**
+	 * Protect the page from anonymous users.
+	 * 
+	 * Defaults to true to protect all pages.
+	 * 
+	 * Some exceptions to this protection mechanism are 
+	 * * PageForward - can be used from anywhere via index.php
+	 * * RequestPage - outside the main page load area, so can never be loaded this way
+	 * * PageConfirm - done via index.php as well, which does not use this access check.
+	 * 
+	 * @var boolean
+	 */
+	var $protectPage = true;
+	
 	var $smarty;
 	/**
 	 * Page-specific code, performing the logic required on a page-specific level.
 	 */
-	abstract function runPage();
+	protected abstract function runPage();
 
+	/**
+	 * Returns a boolean value determining whether or not to protect this page from logged-out users
+	 */
+	public function isProtected()
+	{
+		return $this->protectPage;
+	}
+	
 	/**
 	 * Actually runs the page.
 	 */
-	function execute()
+	public function execute()
 	{
 		$this->smarty = new Smarty();
 
@@ -162,15 +184,33 @@ abstract class PageBase
 	 */
 	static function create()
 	{
-		global $baseIncludePath;
+		
 
 		// calculate the name that the page definition should be at.
 		$pageName = "Page" . WebRequest::getPageName();
 
+		$page = self::loadPageClass($pageName);
 		
-		if(WebRequest::getCurrentUser() == false)
-			$pageName = "PageLogin";
-
+		if($page->isProtected())
+		{
+			if(WebRequest::getCurrentUser() == false)
+			{
+				$page = self::loadPageClass("PageLogin");
+			}
+		}
+		
+		return $page;
+	}
+	
+	/**
+	 * Loads a page from the filesystem, and creates a new instance of it.
+	 * @param string $pageName Name of the page to load
+	 * @throws PageLoadException
+	 */
+	private static function loadPageClass($pageName)
+	{
+		global $baseIncludePath;
+		
 		// check the page definition actually exists...
 		if(file_exists( $baseIncludePath .'page/' . $pageName . ".php"))
 		{	// ... and include it. If I'd not checked it existed, all code from this point on would fail.
@@ -199,13 +239,13 @@ abstract class PageBase
 			else
 			{
 				// oops. this is our class, named correctly, but it's a bad definition.
-				die();
+				throw new PageLoadException();
 			}
 		}
 		else
 		{
 			// file exists, but no definition of the class
-			die();
+			throw new PageLoadException();
 		}
 
 	}

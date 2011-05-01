@@ -19,6 +19,7 @@ class PageUserManagement extends PageBase
 	function __construct()
 	{
 		$this->subtitle = "User Management";
+		$this->protectPage = false;
 	}
 
 	function runPage()

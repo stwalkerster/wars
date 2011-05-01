@@ -1,0 +1,1 @@
+[({$useruserid}) {$username} | <a href="">User:{$useronwikiname}</a> ] links!

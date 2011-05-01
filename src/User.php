@@ -38,6 +38,12 @@ define('USER_COLUMN_WELCOMETEMPLATEID','user_welcome_templateid');
 define('USER_COLUMN_ABORTPREF','user_abortpref');
 define('USER_COLUMN_CONFIRMATIONDIFF','user_confirmationdiff');
 
+define('USER_LEVEL_NEW', "New");
+define('USER_LEVEL_USER', "User");
+define('USER_LEVEL_ADMIN', "Admin");
+define('USER_LEVEL_SUSPENDED', "Suspended");
+define('USER_LEVEL_DECLINED', "Declined");
+
 class User extends DataObject
 {
 	/**
